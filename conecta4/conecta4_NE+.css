@@ -40,6 +40,9 @@ body {
     background-color: #4843b7;
     padding: 0.2rem;
 
+    border: 1px black solid;
+    border-radius: 0.5rem;
+
     display: flex;
     flex-flow: column-reverse nowrap;
     justify-content: center;
