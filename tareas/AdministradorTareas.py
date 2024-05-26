@@ -6,7 +6,7 @@ from Tarea import Tarea
 class AdministradorTareas:
     def __init__(self):
         self.tareas: list[Tarea] = []
-        self.filename: str = 'lista.json'
+        self.filename: str = os.path.dirname(os.path.abspath(__file__)) + '/lista.json'
 
     def agregar_tarea(self):
         print("\nIngresa el nombre de la nueva tarea:")
