@@ -5,7 +5,7 @@ from Tarea import Tarea
 
 class AdministradorTareas:
     def __init__(self):
-        self.tareas: list[Tarea] = []
+        self.tareas= []
         self.filename: str = os.path.dirname(os.path.abspath(__file__)) + '/lista.json'
 
     def agregar_tarea(self):
@@ -16,11 +16,11 @@ class AdministradorTareas:
         try:
             # Cargar la lista de tareas existente
             with open(self.filename, 'r') as file:
-                self.tareas: list[Tarea] = json.load(file)
+                self.tareas = json.load(file)
         except FileNotFoundError:
-            self.tareas: list[Tarea]  = []
+            self.tareas = []
         except json.decoder.JSONDecodeError:
-            self.tareas: list[Tarea]  = []
+            self.tareas = []
 
         input_data = {"name": nombre, "completed": estado}
         self.tareas.append(input_data)
@@ -36,11 +36,11 @@ class AdministradorTareas:
         try:
             # Cargar la lista de tareas existente
             with open(self.filename, 'r') as file:
-                self.tareas: list[Tarea] = json.load(file)
+                self.tareas = json.load(file)
         except FileNotFoundError:
-            self.tareas: list[Tarea] = []
+            self.tareas = []
         except json.decoder.JSONDecodeError:
-            self.tareas: list[Tarea] = []
+            self.tareas = []
         
         if len(self.tareas) == 0:
             print("\nNo se encontraron tareas\n")
@@ -143,11 +143,11 @@ class AdministradorTareas:
             try:
                 # Cargar la lista de tareas existente
                 with open(self.filename, 'r') as file:
-                    self.tareas: list[Tarea] = json.load(file)
+                    self.tareas = json.load(file)
             except FileNotFoundError:
-                self.tareas: list[Tarea] = []
+                self.tareas = []
             except json.decoder.JSONDecodeError:
-                self.tareas: list[Tarea] = []
+                self.tareas = []
 
         if len(self.tareas) == 0:
             print("\nNo se encontraron tareas\n")
