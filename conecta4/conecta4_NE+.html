@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡CONECTA 4!</title>
+    <link rel="stylesheet" href="conecta4_NE+.css">
+    <script src="conecta4_NE+.js"></script>
+</head>
+<body>
+    <div class="tablero" id="tablero">
+        <div class="fichero">
+            <div class="columnas columna1" id="columna1" onclick="jugada(1)">
+                <div class="fichas fichas_c1 fichac1_1" id="fichac1f1"> </div>
+                <div class="fichas fichas_c1 fichac1_2" id="fichac1f2"> </div>
+                <div class="fichas fichas_c1 fichac1_3" id="fichac1f3"> </div>
+                <div class="fichas fichas_c1 fichac1_4" id="fichac1f4"> </div>
+                <div class="fichas fichas_c1 fichac1_5" id="fichac1f5"> </div>
+                <div class="fichas fichas_c1 fichac1_6" id="fichac1f6"> </div>
+            </div>
+            <div class="columnas columna2" id="columna2" onclick="jugada(2)">
+                <div class="fichas fichas_c2 fichac2_1" id="fichac2f1"></div>
+                <div class="fichas fichas_c2 fichac2_2" id="fichac2f2"></div>
+                <div class="fichas fichas_c2 fichac2_3" id="fichac2f3"></div>
+                <div class="fichas fichas_c2 fichac2_4" id="fichac2f4"></div>
+                <div class="fichas fichas_c2 fichac2_5" id="fichac2f5"></div>
+                <div class="fichas fichas_c2 fichac2_6" id="fichac2f6"></div>
+            </div>
+            <div class="columnas columna3" id="columna3" onclick="jugada(3)">
+                <div class="fichas fichas_c3 fichac3_1" id="fichac3f1"></div>
+                <div class="fichas fichas_c3 fichac3_2" id="fichac3f2"></div>
+                <div class="fichas fichas_c3 fichac3_3" id="fichac3f3"></div>
+                <div class="fichas fichas_c3 fichac3_4" id="fichac3f4"></div>
+                <div class="fichas fichas_c3 fichac3_5" id="fichac3f5"></div>
+                <div class="fichas fichas_c3 fichac3_6" id="fichac3f6"></div>
+            </div>
+            <div class="columnas columna4" id="columna4" onclick="jugada(4)">
+                <div class="fichas fichas_c4 fichac4_1" id="fichac4f1"></div>
+                <div class="fichas fichas_c4 fichac4_2" id="fichac4f2"></div>
+                <div class="fichas fichas_c4 fichac4_3" id="fichac4f3"></div>
+                <div class="fichas fichas_c4 fichac4_4" id="fichac4f4"></div>
+                <div class="fichas fichas_c4 fichac4_5" id="fichac4f5"></div>
+                <div class="fichas fichas_c4 fichac4_6" id="fichac4f6"></div>
+            </div>
+            <div class="columnas columna5" id="columna5" onclick="jugada(5)">
+                <div class="fichas fichas_c5 fichac5_1" id="fichac5f1"></div>
+                <div class="fichas fichas_c5 fichac5_2" id="fichac5f2"></div>
+                <div class="fichas fichas_c5 fichac5_3" id="fichac5f3"></div>
+                <div class="fichas fichas_c5 fichac5_4" id="fichac5f4"></div>
+                <div class="fichas fichas_c5 fichac5_5" id="fichac5f5"></div>
+                <div class="fichas fichas_c5 fichac5_6" id="fichac5f6"></div>
+            </div>
+            <div class="columnas columna6" id="columna6" onclick="jugada(6)">
+                <div class="fichas fichas_c6 fichac6_1" id="fichac6f1"></div>
+                <div class="fichas fichas_c6 fichac6_2" id="fichac6f2"></div>
+                <div class="fichas fichas_c6 fichac6_3" id="fichac6f3"></div>
+                <div class="fichas fichas_c6 fichac6_4" id="fichac6f4"></div>
+                <div class="fichas fichas_c6 fichac6_5" id="fichac6f5"></div>
+                <div class="fichas fichas_c6 fichac6_6" id="fichac6f6"></div>
+            </div>
+            <div class="columnas columna7" id="columna7" onclick="jugada(7)">
+                <div class="fichas fichas_c7 fichac7_1" id="fichac7f1"></div>
+                <div class="fichas fichas_c7 fichac7_2" id="fichac7f2"></div>
+                <div class="fichas fichas_c7 fichac7_3" id="fichac7f3"></div>
+                <div class="fichas fichas_c7 fichac7_4" id="fichac7f4"></div>
+                <div class="fichas fichas_c7 fichac7_5" id="fichac7f5"></div>
+                <div class="fichas fichas_c7 fichac7_6" id="fichac7f6"></div>
+            </div>
+        </div>
+        <div class="jugadores">
+            <div class="jugador jugador1" id="jugador1">PLAYER 1</div>
+            <button class="jugar" id="jugar" onclick="jugar()">¡JUGAR!</button>
+            <div class="jugador jugador2" id="jugador2">PLAYER 2</div>
+        </div>
+    </div>
+</body>
+</html>
