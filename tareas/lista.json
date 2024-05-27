@@ -8,7 +8,15 @@
         "completed": true
     },
     {
-        "name": "Dar pollito a la Noa",
+        "name": "Escuchar m\u00fasica un buen rato",
+        "completed": false
+    },
+    {
+        "name": "Corregir los problemas del programa",
+        "completed": false
+    },
+    {
+        "name": "Hablar con Elena un rato",
         "completed": true
     }
 ]

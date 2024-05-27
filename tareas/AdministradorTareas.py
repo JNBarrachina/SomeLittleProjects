@@ -1,5 +1,8 @@
 import json
 import os
+from colorama import Fore, Style, init  #Componentes de la biblioteca colorama, para aplicar colores y estilos al programa.
+
+init(autoreset=True)
 
 """
 Dado que el objetivo de un administrador de tareas es que recuerde las tareas por ti, 
@@ -43,19 +46,36 @@ class AdministradorTareas:
     """
 
     def inicio_administrador(self): 
-        print("""\nBIENVENIDO AL ADMINISTRADOR DE TAREAS
+        print(Fore.CYAN + Style.BRIGHT + """\nBIENVENIDO AL ADMINISTRADOR DE TAREAS
         (Donde usar la memoria es cosa del pasado)
         ==============================================
               \n""")
-        print("1. Agregar Tarea")
-        print("2. Mostrar Tareas")
-        print("3. Borrar Tarea")
-        print("4. Editar Tarea")
-        print("5. Completar Tarea")
-        print("6. Salir")
+        print(Fore.YELLOW +"1. Agregar Tarea.")
+        print(Fore.YELLOW +"2. Mostrar Tareas.")
+        print(Fore.YELLOW +"3. Borrar Tarea.")
+        print(Fore.YELLOW +"4. Editar Tarea.")
+        print(Fore.YELLOW +"5. Completar Tarea.")
+        print(Fore.YELLOW +"6. Salir.")
 
-        print("\nElige una opción:")
-        numero = int(input())
+        try:
+            print(Fore.CYAN +"\nElige una opción:")
+            numero = int(input())
+
+        except ValueError:
+            print(Fore.RED +"\nPor favor, introduce un número valido.\n")
+
+            print(Fore.CYAN +"Pulsa la tecla enter tecla para volver al menú:")
+            input()
+            self.inicio_administrador()
+            return
+        
+        if numero > 6 or numero < 1:
+            print(Fore.RED +"\nPor favor, introduce un número entre 1 y 6.\n")
+
+            print(Fore.CYAN +"Pulsa la tecla enter tecla para volver al menú:")
+            input()
+            self.inicio_administrador()
+            return
 
         match numero:
             case 1:
@@ -69,13 +89,11 @@ class AdministradorTareas:
             case 5:
                 self.completar_tarea()
             case 6:
-                print("\nHasta pronto :)\n")
+                print(Fore.GREEN +"\nHASTA PRONTO :)\n")
                 exit()
-            case _:
-                print("\nNo se ha encontrado la función solicitada\n")
 
     def agregar_tarea(self):
-        print("\nIngresa el nombre de la nueva tarea:")
+        print(Fore.CYAN +"\nIngresa el nombre de la nueva tarea:")
         nombre = input()
         estado = False
 
@@ -86,9 +104,9 @@ class AdministradorTareas:
 
         self.modificar_json_simple(self.tareas)
 
-        print(f"\nTarea '{nombre}' agregada correctamente\n")
+        print(Fore.GREEN +f"\nTarea '{nombre}' agregada correctamente\n")
 
-        print("Pulsa la tecla enter tecla para volver al menú:")
+        print(Fore.CYAN +"Pulsa la tecla enter tecla para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -97,18 +115,19 @@ class AdministradorTareas:
         self.comprobar_json()
         
         if len(self.tareas) == 0:   # Verificar si la lista de tareas esta vacia
-            print("\nNo se encontraron tareas que mostrar\n")
+            print(Fore.CYAN +"\nNo se encontraron tareas que mostrar\n")
             self.inicio_administrador()
             return
         else:
             i = 0   # Variable para iterar en la lista de tareas
             for tarea in self.tareas:     
                 i += 1  #Se asigna el valor de la variable i + 1 a cada elemento de la lista
-                print(f"{i}. {tarea['name']} - {'Completada' if tarea['completed'] else 'Pendiente'}")
+                estado = Fore.GREEN +'Completada' if tarea['completed'] else Fore.RED +'Pendiente'
+                print(f"{Fore.YELLOW}{i}. {Fore.WHITE}{tarea['name']} - {estado}")
         
-        print("\nEstas son todas las tareas de la lista\n")
+        print(Fore.CYAN +"\nEstas son todas las tareas de la lista\n")
 
-        print("Pulsa la tecla enter tecla para volver al menú:")
+        print(Fore.CYAN +"Pulsa la tecla enter tecla para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -116,7 +135,7 @@ class AdministradorTareas:
 
         self.mostrar_tareas_simple()
 
-        print("\nElige una tarea para borrar:")
+        print(Fore.CYAN +"\nElige una tarea para borrar:")
         id = int(input())   # El usuario elige la tarea que desea borrar
 
         self.validar_seleccion_tarea(id)
@@ -125,9 +144,9 @@ class AdministradorTareas:
         
         self.modificar_json_simple(self.tareas)
 
-        print("\nTarea borrada correctamente\n")
+        print(Fore.GREEN +"\nTarea borrada correctamente\n")
 
-        print("Pulsa la tecla enter para volver al menú:")
+        print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -135,12 +154,12 @@ class AdministradorTareas:
 
         self.mostrar_tareas_simple()
 
-        print("\nElige una tarea para editar:")
+        print(Fore.CYAN +"\nElige una tarea para editar:")
         id = int(input())
 
         self.validar_seleccion_tarea(id)
         
-        print("\nIngresa el nuevo nombre de la tarea:")
+        print(Fore.CYAN +"\nIngresa el nuevo nombre de la tarea:")
         nombre = input()
 
         i = 0
@@ -150,9 +169,9 @@ class AdministradorTareas:
                 self.modificar_json_simple(self.tareas)
             i += 1
 
-        print("\nTarea actualizada correctamente\n")
+        print(Fore.GREEN +"\nTarea actualizada correctamente\n")
 
-        print("Pulsa la tecla enter para volver al menú:")
+        print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -160,7 +179,7 @@ class AdministradorTareas:
 
         self.mostrar_tareas_simple()
 
-        print("\nElige una tarea para completar:")
+        print(Fore.CYAN +"\nElige una tarea para completar:")
         id = int(input())
 
         self.validar_seleccion_tarea(id)
@@ -171,16 +190,16 @@ class AdministradorTareas:
                 self.tareas[i].update({'completed': True})
                 self.modificar_json_simple(self.tareas)
             elif i == (id - 1) and self.tareas[i].get('completed') == True:
-                print("\nEsa tarea ya ha sido completada\n")
-                
-                print("Pulsa la tecla enter para volver al menú:")
+                print(Fore.CYAN +"\nEsa tarea ya ha sido completada\n")
+
+                print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
                 input()
                 self.inicio_administrador()
             i += 1
         
-        print("\nTarea completada correctamente\n")
+        print(Fore.GREEN +"\nTarea completada correctamente\n")
         
-        print("Pulsa la tecla enter para volver al menú:")
+        print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -189,16 +208,17 @@ class AdministradorTareas:
             self.comprobar_json()
 
         if len(self.tareas) == 0:
-            print("\nNo se encontraron tareas\n")
+            print(Fore.CYAN +"\nNo se encontraron tareas\n")
             
-            print("Pulsa la tecla enter para volver al menú:")
+            print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
             input()
             self.inicio_administrador()
         
         i = 0
-        for tarea in self.tareas:
-            i += 1
-            print(f"{i}. {tarea['name']} - {'Completada' if tarea['completed'] else 'Pendiente'}")
+        for tarea in self.tareas:     
+            i += 1  #Se asigna el valor de la variable i + 1 a cada elemento de la lista
+            estado = Fore.GREEN +'Completada' if tarea['completed'] else Fore.RED +'Pendiente'
+            print(f"{Fore.YELLOW}{i}. {Fore.WHITE}{tarea['name']} - {estado}")
 
     def modificar_json_simple(self, data):
         with open(self.filename, 'w') as file:
@@ -206,14 +226,22 @@ class AdministradorTareas:
 
     
     def validar_seleccion_tarea(self, id):
+        
         try:
             if id > len(self.tareas) or id < 1: # De nuevo, excepcion para el caso de que el usuario elija una tarea que no existe
-                print("\nTarea no encontrada\n")
-                self.completar_tarea()
+                print(Fore.RED +"\nTarea no encontrada\n")
+
+                print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
+                input()
+                self.inicio_administrador()
                 return
+                
         except ValueError:
-            print("\nIntroduce un número asociado a la tarea\n")
-            self.completar_tarea()
+            print(Fore.RED +"\nNo has introducido un número\n")
+
+            print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
+            input()
+            self.inicio_administrador()
             return
 
     def comprobar_json(self):
