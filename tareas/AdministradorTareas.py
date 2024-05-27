@@ -45,7 +45,13 @@ class AdministradorTareas:
     
     """
 
-    def inicio_administrador(self): 
+    def inicio_administrador(self):
+
+        """
+        Muestra el menú principal del administrador de tareas.
+
+        """
+
         print(Fore.CYAN + Style.BRIGHT + """\nBIENVENIDO AL ADMINISTRADOR DE TAREAS
         (Donde usar la memoria es cosa del pasado)
         ==============================================
@@ -92,7 +98,14 @@ class AdministradorTareas:
                 print(Fore.GREEN +"\nHASTA PRONTO :)\n")
                 exit()
 
+
     def agregar_tarea(self):
+
+        """
+        Agrega una nueva tarea a la lista de tareas.
+
+        """
+
         print(Fore.CYAN +"\nIngresa el nombre de la nueva tarea:")
         nombre = input()
         estado = False
@@ -110,7 +123,13 @@ class AdministradorTareas:
         input()
         self.inicio_administrador()
 
+
     def mostrar_tareas(self):
+
+        """
+        Muestra todas las tareas guardadas en el archivo JSON.
+
+        """
         
         self.comprobar_json()
         
@@ -131,7 +150,13 @@ class AdministradorTareas:
         input()
         self.inicio_administrador()
 
+
     def borrar_tarea(self):
+
+        """
+        Borra una tarea de la lista de tareas.
+
+        """
 
         self.mostrar_tareas_simple()
 
@@ -150,7 +175,13 @@ class AdministradorTareas:
         input()
         self.inicio_administrador()
 
+
     def editar_tarea(self):
+
+        """
+        Edita el nombre (descripción) de una tarea.
+
+        """
 
         self.mostrar_tareas_simple()
 
@@ -175,7 +206,13 @@ class AdministradorTareas:
         input()
         self.inicio_administrador()
 
+
     def completar_tarea(self):
+
+        """
+        Marca una tarea como completada.
+
+        """
 
         self.mostrar_tareas_simple()
 
@@ -204,6 +241,12 @@ class AdministradorTareas:
         self.inicio_administrador()
 
     def mostrar_tareas_simple(self):
+
+        """
+        Muestra las tareas mientras se da la ejecución de otros métodos (borrar, editar, completar).
+
+        """
+
         if len(self.tareas) == 0:
             self.comprobar_json()
 
@@ -226,6 +269,13 @@ class AdministradorTareas:
 
     
     def validar_seleccion_tarea(self, id):
+
+        """
+        Verifica que el usuario introduzca un valor numérico válido para la selección de una tarea.
+
+        """
+
+        self.comprobar_json()
         
         try:
             if id > len(self.tareas) or id < 1: # De nuevo, excepcion para el caso de que el usuario elija una tarea que no existe
