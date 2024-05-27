@@ -1,14 +1,14 @@
 [
     {
-        "name": "La primera tarea es dar la bienvenida",
-        "completed": true
-    },
-    {
         "name": "Retocar el administrador de tareas",
         "completed": true
     },
     {
-        "name": "Detallar lo que va ocurriendo durante el programa",
-        "completed": false
+        "name": "Hacer el programa visualmente atractivo para el usuario",
+        "completed": true
+    },
+    {
+        "name": "Dar pollito a la Noa",
+        "completed": true
     }
 ]

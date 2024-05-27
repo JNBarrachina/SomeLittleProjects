@@ -31,13 +31,14 @@ class AdministradorTareas:
         2. agregar_tarea(self): agrega una nueva tarea a la lista de tareas.
         3. mostrar_tareas(self): muestra todas las tareas guardadas en el archivo JSON.
         4. borrar_tarea(self): elimina una tarea de la lista de tareas.
-        5. editar_nombre_tarea(self): edita el nombre (descripción) de una tarea.
+        5. editar_tarea(self): edita el nombre (descripción) de una tarea.
         6. completar_tarea(self): marca una tarea como completada en el caso de que no lo esté.
 
-    Se añaden tres métodos auxiliares adicionales, con el objetivo de no hacer uso de código redundante:
+    Se añaden cuatro métodos auxiliares adicionales, con el objetivo de no hacer uso de código redundante:
         1. mostrar_tareas_simple(self): muestra las tareas guardadas en el archivo JSON para las funciones de borrar, editar y completar, de forma que puedan seguir ejecutándose dichas funciones sin que se tenga que salir al menú del administrador.
         2. modificar_json_simple(self, tareas): actualiza el archivo JSON con las modificaciones hechas en la lista de tareas.
-        3. comprobar_json(self): crea el archivo JSON si no existe.
+        3. validar_seleccion_tarea(self, id): comprueba que el usuario introduzca un número asociado a una tarea.
+        4. comprobar_json(self): crea el archivo JSON si no existe.
     
     """
 
@@ -64,7 +65,7 @@ class AdministradorTareas:
             case 3:
                 self.borrar_tarea()
             case 4:
-                self.editar_nombre_tarea()
+                self.editar_tarea()
             case 5:
                 self.completar_tarea()
             case 6:
@@ -116,59 +117,42 @@ class AdministradorTareas:
         self.mostrar_tareas_simple()
 
         print("\nElige una tarea para borrar:")
-        numero = int(input())   # El usuario elige la tarea que desea borrar
+        id = int(input())   # El usuario elige la tarea que desea borrar
 
-        try:
-            if numero > len(self.tareas) or numero < 1: # Excepcion para el caso de que el usuario elija una tarea que no existe
-                print("\nTarea no encontrada\n")
-                self.borrar_tarea()
-                return
-        except ValueError:
-            print("\nIntroduce el número asociado a la tarea que deseas borrar\n")
-            self.borrar_tarea()
-            return
+        self.validar_seleccion_tarea(id)
         
-        
-        self.tareas.pop(numero - 1) # self.tareas está organizada a partir del indice 0, de manera que se debe restar 1 al número introducido por el usuario para que coincida con el indice de la lista
+        self.tareas.pop(id - 1) # self.tareas está organizada a partir del indice 0, de manera que se debe restar 1 al número introducido por el usuario para que coincida con el indice de la lista
         
         self.modificar_json_simple(self.tareas)
 
         print("\nTarea borrada correctamente\n")
 
-        print("Pulsa la tecla enter tecla para volver al menú:")
+        print("Pulsa la tecla enter para volver al menú:")
         input()
         self.inicio_administrador()
 
-    def editar_nombre_tarea(self):
+    def editar_tarea(self):
 
         self.mostrar_tareas_simple()
 
         print("\nElige una tarea para editar:")
-        id = int(input()) - 1
+        id = int(input())
 
-        try:
-            if id > len(self.tareas) or id < 0: # De nuevo, excepcion para el caso de que el usuario elija una tarea que no existe
-                print("\nTarea no encontrada\n")
-                self.editar_nombre_tarea()
-                return
-        except ValueError:
-            print("\nIntroduce un número asociado a la tarea\n")
-            self.editar_nombre_tarea()
-            return
+        self.validar_seleccion_tarea(id)
         
         print("\nIngresa el nuevo nombre de la tarea:")
         nombre = input()
 
         i = 0
         while (i < len(self.tareas)):   #Buscamos la tarea que el usuario elija y actualizamos su nombre (descripción)
-            if i == id:
+            if i == id - 1:
                 self.tareas[i].update({'name': nombre})
                 self.modificar_json_simple(self.tareas)
             i += 1
 
         print("\nTarea actualizada correctamente\n")
 
-        print("Pulsa la tecla enter tecla para volver al menú:")
+        print("Pulsa la tecla enter para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -177,31 +161,26 @@ class AdministradorTareas:
         self.mostrar_tareas_simple()
 
         print("\nElige una tarea para completar:")
-        id = int(input()) - 1
+        id = int(input())
 
-        try:
-            if id > len(self.tareas) or id < 0: # De nuevo, excepcion para el caso de que el usuario elija una tarea que no existe
-                print("\nTarea no encontrada\n")
-                self.completar_tarea()
-                return
-        except ValueError:
-            print("\nIntroduce un número asociado a la tarea\n")
-            self.completar_tarea()
-            return
+        self.validar_seleccion_tarea(id)
 
         i = 0
         while (i <= len(self.tareas)):   #Buscamos la tarea que el usuario elija y actualizamos su estado (de pendiente a completada)
-            if i == id and self.tareas[i].get('completed') == False:
+            if i == (id - 1) and self.tareas[i].get('completed') == False:
                 self.tareas[i].update({'completed': True})
                 self.modificar_json_simple(self.tareas)
-            elif i == id and self.tareas[i].get('completed') == True:
-                print("\nLa tarea ya ha sido completada\n")
-                self.completar_tarea()
+            elif i == (id - 1) and self.tareas[i].get('completed') == True:
+                print("\nEsa tarea ya ha sido completada\n")
+                
+                print("Pulsa la tecla enter para volver al menú:")
+                input()
+                self.inicio_administrador()
             i += 1
         
         print("\nTarea completada correctamente\n")
         
-        print("Pulsa la tecla enter tecla para volver al menú:")
+        print("Pulsa la tecla enter para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -212,7 +191,7 @@ class AdministradorTareas:
         if len(self.tareas) == 0:
             print("\nNo se encontraron tareas\n")
             
-            print("Pulsa la tecla enter tecla para volver al menú:")
+            print("Pulsa la tecla enter para volver al menú:")
             input()
             self.inicio_administrador()
         
@@ -225,12 +204,22 @@ class AdministradorTareas:
         with open(self.filename, 'w') as file:
             json.dump(data, file, indent=4)
 
+    
+    def validar_seleccion_tarea(self, id):
+        try:
+            if id > len(self.tareas) or id < 1: # De nuevo, excepcion para el caso de que el usuario elija una tarea que no existe
+                print("\nTarea no encontrada\n")
+                self.completar_tarea()
+                return
+        except ValueError:
+            print("\nIntroduce un número asociado a la tarea\n")
+            self.completar_tarea()
+            return
 
     def comprobar_json(self):
 
         """
         Esta función se encarga de comprobar si el archivo JSON que contiene la lista de tareas existe o no.
-        Si no existe, se crea un archivo JSON con una lista vacía. Si existe, se carga la lista de tareas.
 
         """
         try:   
@@ -244,6 +233,7 @@ class AdministradorTareas:
 
 """
 Por último, el if __name__ == "__main__" es el punto de entrada del programa.
+
 """
         
 if __name__ == "__main__":
