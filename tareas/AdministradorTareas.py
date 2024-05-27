@@ -60,7 +60,7 @@ class AdministradorTareas:
         # Imprimir el título centrado con bordes.
         print("=" * terminal_width)
         print("|" + " " * (terminal_width - 2) + "|")
-        print("|" + " " * left_padding + Fore.CYAN + Style.BRIGHT + "BIENVENIDO AL ADMINISTRADOR DE TAREAS (Hecho por Juan Narros Barrachina)" + " " * (terminal_width - title_width - left_padding - 2) + "|")
+        print("|" + " " * left_padding + Fore.CYAN + Style.BRIGHT + "BIENVENIDO AL ADMINISTRADOR DE TAREAS (Desarrollado por Juan Narros Barrachina)" + " " * (terminal_width - title_width - left_padding - 2) + "|")
         print("|" + " " * (terminal_width - 2) + "|")
         print("=" * terminal_width + "\n")
 
@@ -79,7 +79,7 @@ class AdministradorTareas:
         except ValueError:
             print(Fore.RED +"\nPor favor, introduce un número valido.\n")
 
-            print(Fore.CYAN +"Pulsa la tecla enter tecla para volver al menú:")
+            print(Fore.CYAN +"Pulsa la tecla ENTER para volver al menú:")
             input()
             self.inicio_administrador()
             return
@@ -87,7 +87,7 @@ class AdministradorTareas:
         if numero > 6 or numero < 1:
             print(Fore.RED +"\nPor favor, introduce un número entre 1 y 6.\n")
 
-            print(Fore.CYAN +"Pulsa la tecla enter tecla para volver al menú:")
+            print(Fore.CYAN +"Pulsa la tecla ENTER para volver al menú:")
             input()
             self.inicio_administrador()
             return
@@ -117,6 +117,7 @@ class AdministradorTareas:
 
         print(Fore.CYAN +"\nIngresa el nombre de la nueva tarea:")
         nombre = input()
+
         estado = False
 
         self.comprobar_json()
@@ -128,7 +129,7 @@ class AdministradorTareas:
 
         print(Fore.GREEN +f"\nTarea '{nombre}' agregada correctamente\n")
 
-        print(Fore.CYAN +"Pulsa la tecla enter tecla para volver al menú:")
+        print(Fore.CYAN +"Pulsa la tecla ENTER para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -145,7 +146,7 @@ class AdministradorTareas:
         if len(self.tareas) == 0:   # Verificar si la lista de tareas esta vacia
             print(Fore.CYAN +"\nNo se encontraron tareas que mostrar.\n")
 
-            print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
+            print(Fore.CYAN +"Pulsa la tecla ENTER para volver al menú:")
             input()
             self.inicio_administrador()
             return
@@ -159,7 +160,7 @@ class AdministradorTareas:
         
         print(Fore.CYAN +"\nEstas son todas las tareas de la lista\n")
 
-        print(Fore.CYAN +"Pulsa la tecla enter tecla para volver al menú:")
+        print(Fore.CYAN +"Pulsa la tecla ENTER para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -186,7 +187,7 @@ class AdministradorTareas:
 
         print(Fore.GREEN +"\nTarea borrada correctamente\n")
 
-        print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
+        print(Fore.CYAN +"Pulsa la tecla ENTER para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -219,7 +220,7 @@ class AdministradorTareas:
 
         print(Fore.GREEN +"\nTarea actualizada correctamente\n")
 
-        print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
+        print(Fore.CYAN +"Pulsa la tecla ENTER para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -249,14 +250,14 @@ class AdministradorTareas:
             elif i == (id - 1) and self.tareas[i].get('completed') == True:
                 print(Fore.CYAN +"\nEsa tarea ya ha sido completada\n")
 
-                print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
+                print(Fore.CYAN +"Pulsa la tecla ENTER para volver al menú:")
                 input()
                 self.inicio_administrador()
             i += 1
         
         print(Fore.GREEN +"\nTarea completada correctamente\n")
         
-        print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
+        print(Fore.CYAN +"Pulsa la tecla ENTER para volver al menú:")
         input()
         self.inicio_administrador()
 
@@ -272,7 +273,7 @@ class AdministradorTareas:
         if len(self.tareas) == 0:
             print(Fore.CYAN +"\nNo se encontraron tareas que mostrar.\n")
             
-            print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
+            print(Fore.CYAN +"Pulsa la tecla ENTER para volver al menú:")
             input()
             self.inicio_administrador()
         
@@ -299,7 +300,7 @@ class AdministradorTareas:
         if not id.strip():  # Si la cadena está vacía después de eliminar espacios en blanco.
             print(Fore.RED + "\nNo has introducido nada.\n")
 
-            input(Fore.CYAN + "Pulsa la tecla enter para volver al menú:")
+            input(Fore.CYAN + "Pulsa la tecla ENTER para volver al menú:")
             self.inicio_administrador()
             return None
 
@@ -309,7 +310,7 @@ class AdministradorTareas:
             if id > len(self.tareas) or id < 1:  # Verifica si el número está fuera del rango. válido
                 print(Fore.RED + "\nTarea no encontrada.\n")
 
-                input(Fore.CYAN + "Pulsa la tecla enter para volver al menú:")
+                input(Fore.CYAN + "Pulsa la tecla ENTER para volver al menú:")
                 self.inicio_administrador()
                 return None
             
@@ -318,7 +319,7 @@ class AdministradorTareas:
         except ValueError:
             print(Fore.RED + "\nNo has introducido un número.\n")
 
-            input(Fore.CYAN + "Pulsa la tecla enter para volver al menú:")
+            input(Fore.CYAN + "Pulsa la tecla ENTER para volver al menú:")
             self.inicio_administrador()
             return None
 
