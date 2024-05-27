@@ -18,7 +18,7 @@ class AdministradorTareas:
 
     """
     Sus dos atributos son tanto una lista vacía (donde se listarán las tareas), 
-    como el nombre del archivo donde se van a guardar estas mediante la estructura de datos JSON.
+    como el archivo donde se van a guardar estas, mediante la estructura de datos JSON.
 
     """
 
@@ -33,7 +33,7 @@ class AdministradorTareas:
         2. agregar_tarea(self): agrega una nueva tarea a la lista de tareas.
         3. mostrar_tareas(self): muestra todas las tareas guardadas en el archivo JSON.
         4. borrar_tarea(self): elimina una tarea de la lista de tareas.
-        5. editar_nombre_tarea(self): edita el nombre de una tarea.
+        5. editar_nombre_tarea(self): edita el nombre (descripción) de una tarea.
         6. completar_tarea(self): marca una tarea como completada.
 
         Se añaden dos métodos adicionales:
@@ -79,8 +79,7 @@ class AdministradorTareas:
         nombre = input()
         estado = False
 
-        try:
-        # Cargar la lista de tareas existente
+        try:    # leer la lista de tareas si ya existe
             with open(self.filename, 'r') as file:
                 self.tareas = json.load(file)
         except FileNotFoundError:
@@ -88,19 +87,21 @@ class AdministradorTareas:
         except json.decoder.JSONDecodeError:
             self.tareas = []
 
-        input_data = {"name": nombre, "completed": estado}
-        self.tareas.append(input_data)
+        nueva_tarea = {"name": nombre, "completed": estado}
+        self.tareas.append(nueva_tarea)
 
         # Guardar la lista de tareas actualizada
         with open(self.filename, 'w') as file:
             json.dump(self.tareas, file, indent=4)
 
         print(f"\nTarea '{nombre}' agregada correctamente\n")
+
+        print("Pulsa la tecla enter tecla para volver al menú:")
+        input()
         self.inicio_administrador()
 
     def mostrar_tareas(self):
-        try:
-            # Cargar la lista de tareas existente
+        try:    # leer la lista de tareas si ya existe
             with open(self.filename, 'r') as file:
                 self.tareas = json.load(file)
         except FileNotFoundError:
@@ -108,35 +109,39 @@ class AdministradorTareas:
         except json.decoder.JSONDecodeError:
             self.tareas = []
         
-        if len(self.tareas) == 0:
-            print("\nNo se encontraron tareas\n")
+        if len(self.tareas) == 0:   # Verificar si la lista de tareas esta vacia
+            print("\nNo se encontraron tareas que mostrar\n")
             self.inicio_administrador()
             return
         else:
-            i = 0
-            for tarea in self.tareas:
-                i += 1
+            i = 0   # Variable para iterar en la lista de tareas
+            for tarea in self.tareas:     
+                i += 1  #Se asigna el valor de la variable i + 1 a cada elemento de la lista
                 print(f"{i}. {tarea['name']} - {'Completada' if tarea['completed'] else 'Pendiente'}")
         
+        print("\nEstas son todas las tareas de la lista\n")
+
+        print("Pulsa la tecla enter tecla para volver al menú:")
+        input()
         self.inicio_administrador()
 
     def borrar_tarea(self):
         self.mostrar_tareas_simple()
         print("\nElige una tarea para borrar:")
-        numero = int(input())
+        numero = int(input())   # El usuario elige la tarea que desea borrar
 
         try:
-            if numero > len(self.tareas) or numero < 1:
+            if numero > len(self.tareas) or numero < 1: # Excepcion para el caso de que el usuario elija una tarea que no existe
                 print("\nTarea no encontrada\n")
                 self.borrar_tarea()
                 return
         except ValueError:
-            print("\nIntroduce un número asociado a la tarea\n")
+            print("\nIntroduce el número asociado a la tarea que deseas borrar\n")
             self.borrar_tarea()
             return
         
         
-        self.tareas.pop(numero - 1)
+        self.tareas.pop(numero - 1) # self.tareas está organizada a partir del indice 0, de manera que se debe restar 1 al número introducido por el usuario para que coincida con el indice de la lista
         with open(self.filename, 'w') as file:
             json.dump(self.tareas, file, indent=4)
 
@@ -146,8 +151,9 @@ class AdministradorTareas:
         with open(self.filename, 'w') as file:
             json.dump(self.tareas, file, indent=4)
 
+        print("Pulsa la tecla enter tecla para volver al menú:")
+        input()
         self.inicio_administrador()
-        
 
     def editar_nombre_tarea(self):
         self.mostrar_tareas_simple()
@@ -155,7 +161,7 @@ class AdministradorTareas:
         id = int(input()) - 1
 
         try:
-            if id > len(self.tareas) or id < 0:
+            if id > len(self.tareas) or id < 0: # De nuevo, excepcion para el caso de que el usuario elija una tarea que no existe
                 print("\nTarea no encontrada\n")
                 self.editar_nombre_tarea()
                 return
@@ -168,12 +174,16 @@ class AdministradorTareas:
         nombre = input()
 
         i = 0
-        while (i < len(self.tareas)):
+        while (i < len(self.tareas)):   #Buscamos la tarea que el usuario elija y actualizamos su nombre (descripción)
             if i == id:
                 self.tareas[i].update({'name': nombre})
                 self.modificar_json_simple(self.tareas)
             i += 1
 
+        print("\nTarea actualizada correctamente\n")
+
+        print("Pulsa la tecla enter tecla para volver al menú:")
+        input()
         self.inicio_administrador()
 
     def completar_tarea(self):
@@ -182,7 +192,7 @@ class AdministradorTareas:
         id = int(input()) - 1
 
         try:
-            if id > len(self.tareas) or id < 0:
+            if id > len(self.tareas) or id < 0: # De nuevo, excepcion para el caso de que el usuario elija una tarea que no existe
                 print("\nTarea no encontrada\n")
                 self.completar_tarea()
                 return
@@ -192,22 +202,24 @@ class AdministradorTareas:
             return
 
         i = 0
-        while (i <= len(self.tareas)):
+        while (i <= len(self.tareas)):   #Buscamos la tarea que el usuario elija y actualizamos su estado (de pendiente a completada)
             if i == id and self.tareas[i].get('completed') == False:
                 self.tareas[i].update({'completed': True})
                 self.modificar_json_simple(self.tareas)
             elif i == id and self.tareas[i].get('completed') == True:
-                print("\nTarea ya completada\n")
+                print("\nLa tarea ya ha sido completada\n")
                 self.completar_tarea()
             i += 1
         
         print("\nTarea completada correctamente\n")
+        
+        print("Pulsa la tecla enter tecla para volver al menú:")
+        input()
         self.inicio_administrador()
 
     def mostrar_tareas_simple(self):
         if len(self.tareas) == 0:
-            try:
-                # Cargar la lista de tareas existente
+            try:    # leer la lista de tareas si ya existe
                 with open(self.filename, 'r') as file:
                     self.tareas = json.load(file)
             except FileNotFoundError:

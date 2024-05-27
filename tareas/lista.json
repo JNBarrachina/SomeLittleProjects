@@ -2,5 +2,17 @@
     {
         "name": "La primera tarea es dar la bienvenida",
         "completed": true
+    },
+    {
+        "name": "La segunda tarea",
+        "completed": true
+    },
+    {
+        "name": "La tercera tarea",
+        "completed": true
+    },
+    {
+        "name": "Pasear a la Noa",
+        "completed": false
     }
 ]
