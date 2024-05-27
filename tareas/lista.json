@@ -4,15 +4,11 @@
         "completed": true
     },
     {
-        "name": "La segunda tarea",
+        "name": "Retocar el administrador de tareas",
         "completed": true
     },
     {
-        "name": "La tercera tarea",
-        "completed": true
-    },
-    {
-        "name": "Pasear a la Noa",
+        "name": "Detallar lo que va ocurriendo durante el programa",
         "completed": false
     }
 ]

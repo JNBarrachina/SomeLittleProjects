@@ -3,7 +3,7 @@ import os
 from Tarea import Tarea
 
 """
-Dado que el objetivo de un administrador de tareas es que recuerde las tareas por tí, 
+Dado que el objetivo de un administrador de tareas es que recuerde las tareas por ti, 
 se guarda la lista de tareas en un archivo JSON, sobre el cual se pueden agregar, borrar,
 editar y completar tareas.
 
@@ -17,8 +17,8 @@ El primer paso es crear una clase llamada AdministradorTareas.
 class AdministradorTareas:
 
     """
-    Sus dos atributos son tanto una lista vacía (donde se listarán las tareas), 
-    como el archivo donde se van a guardar estas, mediante la estructura de datos JSON.
+    Sus dos atributos son tanto una lista vacía (donde se listarán las tareas cada vez que se lea el archivo JSON), 
+    como el archivo JSON donde se van a guardar dichas tareas.
 
     """
 
@@ -26,19 +26,19 @@ class AdministradorTareas:
         self.tareas= []
         self.filename: str = os.path.dirname(os.path.abspath(__file__)) + '/lista.json'
 
-
     """
-    Los métodos de la clase AdministradorTareas son los siguientes:
+    Los métodos principales de la clase AdministradorTareas son los siguientes:
         1. inicio_administrador(self): devuelve el menu de inicio del administrador de tareas.
         2. agregar_tarea(self): agrega una nueva tarea a la lista de tareas.
         3. mostrar_tareas(self): muestra todas las tareas guardadas en el archivo JSON.
         4. borrar_tarea(self): elimina una tarea de la lista de tareas.
         5. editar_nombre_tarea(self): edita el nombre (descripción) de una tarea.
-        6. completar_tarea(self): marca una tarea como completada.
+        6. completar_tarea(self): marca una tarea como completada en el caso de que no lo esté.
 
-        Se añaden dos métodos adicionales:
-        1. mostrar_tareas_simple(self): muestra solo las tareas guardadas en el archivo JSON.
-        2. modificar_json_simple(self, tareas): actualiza el archivo JSON con las tareas modificadas.
+    Se añaden tres métodos auxiliares adicionales, con el objetivo de no hacer uso de código redundante:
+        1. mostrar_tareas_simple(self): muestra las tareas guardadas en el archivo JSON para las funciones de borrar, editar y completar, de forma que puedan seguir ejecutándose dichas funciones sin que se tenga que salir al menú del administrador.
+        2. modificar_json_simple(self, tareas): actualiza el archivo JSON con las modificaciones hechas en la lista de tareas.
+        3. comprobar_json(self): crea el archivo JSON si no existe.
     
     """
 
@@ -79,20 +79,12 @@ class AdministradorTareas:
         nombre = input()
         estado = False
 
-        try:    # leer la lista de tareas si ya existe
-            with open(self.filename, 'r') as file:
-                self.tareas = json.load(file)
-        except FileNotFoundError:
-            self.tareas = []
-        except json.decoder.JSONDecodeError:
-            self.tareas = []
+        self.comprobar_json()
 
         nueva_tarea = {"name": nombre, "completed": estado}
         self.tareas.append(nueva_tarea)
 
-        # Guardar la lista de tareas actualizada
-        with open(self.filename, 'w') as file:
-            json.dump(self.tareas, file, indent=4)
+        self.modificar_json_simple(self.tareas)
 
         print(f"\nTarea '{nombre}' agregada correctamente\n")
 
@@ -101,13 +93,8 @@ class AdministradorTareas:
         self.inicio_administrador()
 
     def mostrar_tareas(self):
-        try:    # leer la lista de tareas si ya existe
-            with open(self.filename, 'r') as file:
-                self.tareas = json.load(file)
-        except FileNotFoundError:
-            self.tareas = []
-        except json.decoder.JSONDecodeError:
-            self.tareas = []
+        
+        self.comprobar_json()
         
         if len(self.tareas) == 0:   # Verificar si la lista de tareas esta vacia
             print("\nNo se encontraron tareas que mostrar\n")
@@ -126,7 +113,9 @@ class AdministradorTareas:
         self.inicio_administrador()
 
     def borrar_tarea(self):
+
         self.mostrar_tareas_simple()
+
         print("\nElige una tarea para borrar:")
         numero = int(input())   # El usuario elige la tarea que desea borrar
 
@@ -142,21 +131,19 @@ class AdministradorTareas:
         
         
         self.tareas.pop(numero - 1) # self.tareas está organizada a partir del indice 0, de manera que se debe restar 1 al número introducido por el usuario para que coincida con el indice de la lista
-        with open(self.filename, 'w') as file:
-            json.dump(self.tareas, file, indent=4)
+        
+        self.modificar_json_simple(self.tareas)
 
         print("\nTarea borrada correctamente\n")
-
-        # Guardar la lista de tareas actualizada
-        with open(self.filename, 'w') as file:
-            json.dump(self.tareas, file, indent=4)
 
         print("Pulsa la tecla enter tecla para volver al menú:")
         input()
         self.inicio_administrador()
 
     def editar_nombre_tarea(self):
+
         self.mostrar_tareas_simple()
+
         print("\nElige una tarea para editar:")
         id = int(input()) - 1
 
@@ -187,7 +174,9 @@ class AdministradorTareas:
         self.inicio_administrador()
 
     def completar_tarea(self):
+
         self.mostrar_tareas_simple()
+
         print("\nElige una tarea para completar:")
         id = int(input()) - 1
 
@@ -219,16 +208,13 @@ class AdministradorTareas:
 
     def mostrar_tareas_simple(self):
         if len(self.tareas) == 0:
-            try:    # leer la lista de tareas si ya existe
-                with open(self.filename, 'r') as file:
-                    self.tareas = json.load(file)
-            except FileNotFoundError:
-                self.tareas = []
-            except json.decoder.JSONDecodeError:
-                self.tareas = []
+            self.comprobar_json()
 
         if len(self.tareas) == 0:
             print("\nNo se encontraron tareas\n")
+            
+            print("Pulsa la tecla enter tecla para volver al menú:")
+            input()
             self.inicio_administrador()
         
         i = 0
@@ -239,6 +225,22 @@ class AdministradorTareas:
     def modificar_json_simple(self, data):
         with open(self.filename, 'w') as file:
             json.dump(data, file, indent=4)
+
+
+    def comprobar_json(self):
+
+        """
+        Esta función se encarga de comprobar si el archivo JSON que contiene la lista de tareas existe o no.
+        Si no existe, se crea un archivo JSON con una lista vacía. Si existe, se carga la lista de tareas.
+
+        """
+        try:   
+            with open(self.filename, 'r') as file:
+                self.tareas = json.load(file)
+        except FileNotFoundError:
+            self.tareas = []
+        except json.decoder.JSONDecodeError:
+            self.tareas = []
 
 
 """
