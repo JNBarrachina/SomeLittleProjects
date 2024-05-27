@@ -1,6 +1,5 @@
 import json
 import os
-from Tarea import Tarea
 
 """
 Dado que el objetivo de un administrador de tareas es que recuerde las tareas por ti, 
