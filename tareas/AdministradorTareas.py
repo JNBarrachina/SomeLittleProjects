@@ -31,16 +31,16 @@ class AdministradorTareas:
     """
     Los métodos principales de la clase AdministradorTareas son los siguientes:
         1. inicio_administrador(self): devuelve el menu de inicio del administrador de tareas.
-        2. agregar_tarea(self): agrega una nueva tarea a la lista de tareas.
+        2. agregar_tarea(self): agrega una nueva tarea.
         3. mostrar_tareas(self): muestra todas las tareas guardadas en el archivo JSON.
-        4. borrar_tarea(self): elimina una tarea de la lista de tareas.
+        4. borrar_tarea(self): elimina una tarea.
         5. editar_tarea(self): edita el nombre (descripción) de una tarea.
         6. completar_tarea(self): marca una tarea como completada en el caso de que no lo esté.
 
     Se añaden cuatro métodos auxiliares adicionales, con el objetivo de no hacer uso de código redundante:
-        1. mostrar_tareas_simple(self): muestra las tareas guardadas en el archivo JSON para las funciones de borrar, editar y completar, de forma que puedan seguir ejecutándose dichas funciones sin que se tenga que salir al menú del administrador.
+        1. mostrar_tareas_simple(self): muestra las tareas guardadas en el archivo JSON para las funciones de borrar, editar y completar, de forma que puedan seguir ejecutándose sin que se tenga que salir al menú de inicio del administrador.
         2. modificar_json_simple(self, tareas): actualiza el archivo JSON con las modificaciones hechas en la lista de tareas.
-        3. validar_seleccion_tarea(self, id): comprueba que el usuario introduzca un número asociado a una tarea.
+        3. validar_seleccion_tarea(self, id): La función en la que se desarrollan las excepciones. Trata de verificar que el usuario introduce un valor numérico válido. Si introduce un valor no numérico o no introduce nada, se muestra un mensaje de error.
         4. comprobar_json(self): crea el archivo JSON si no existe.
     
     """
@@ -51,11 +51,20 @@ class AdministradorTareas:
         Muestra el menú principal del administrador de tareas.
 
         """
+        # Obtener el ancho del titulo para centrarlo.
 
-        print(Fore.CYAN + Style.BRIGHT + """\nBIENVENIDO AL ADMINISTRADOR DE TAREAS
-        (Donde usar la memoria es cosa del pasado)
-        ==============================================
-              \n""")
+        terminal_width = os.get_terminal_size().columns
+        title_width = len("BIENVENIDO AL ADMINISTRADOR DE TAREAS (Desarrollado por Juan Narros Barrachina)")
+        left_padding = (terminal_width - title_width) // 2
+
+        # Imprimir el título centrado con bordes.
+        print("=" * terminal_width)
+        print("|" + " " * (terminal_width - 2) + "|")
+        print("|" + " " * left_padding + Fore.CYAN + Style.BRIGHT + "BIENVENIDO AL ADMINISTRADOR DE TAREAS (Hecho por Juan Narros Barrachina)" + " " * (terminal_width - title_width - left_padding - 2) + "|")
+        print("|" + " " * (terminal_width - 2) + "|")
+        print("=" * terminal_width + "\n")
+
+        # Mostrar el menú principal.
         print(Fore.YELLOW +"1. Agregar Tarea.")
         print(Fore.YELLOW +"2. Mostrar Tareas.")
         print(Fore.YELLOW +"3. Borrar Tarea.")
@@ -134,10 +143,14 @@ class AdministradorTareas:
         self.comprobar_json()
         
         if len(self.tareas) == 0:   # Verificar si la lista de tareas esta vacia
-            print(Fore.CYAN +"\nNo se encontraron tareas que mostrar\n")
+            print(Fore.CYAN +"\nNo se encontraron tareas que mostrar.\n")
+
+            print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
+            input()
             self.inicio_administrador()
             return
         else:
+            print(Fore.YELLOW +"\nLISTADO DE TAREAS:")
             i = 0   # Variable para iterar en la lista de tareas
             for tarea in self.tareas:     
                 i += 1  #Se asigna el valor de la variable i + 1 a cada elemento de la lista
@@ -157,13 +170,15 @@ class AdministradorTareas:
         Borra una tarea de la lista de tareas.
 
         """
-
+        print(Fore.YELLOW +"\nLISTADO DE TAREAS:")
         self.mostrar_tareas_simple()
 
         print(Fore.CYAN +"\nElige una tarea para borrar:")
-        id = int(input())   # El usuario elige la tarea que desea borrar
+        id = input().strip()   # El usuario elige la tarea que desea borrar
 
-        self.validar_seleccion_tarea(id)
+        id = self.validar_seleccion_tarea(id)
+        if id == None:
+            return
         
         self.tareas.pop(id - 1) # self.tareas está organizada a partir del indice 0, de manera que se debe restar 1 al número introducido por el usuario para que coincida con el indice de la lista
         
@@ -182,13 +197,15 @@ class AdministradorTareas:
         Edita el nombre (descripción) de una tarea.
 
         """
-
+        print(Fore.YELLOW +"\nLISTADO DE TAREAS:")
         self.mostrar_tareas_simple()
 
         print(Fore.CYAN +"\nElige una tarea para editar:")
-        id = int(input())
+        id = input().strip()
 
-        self.validar_seleccion_tarea(id)
+        id = self.validar_seleccion_tarea(id)
+        if id == None:
+            return
         
         print(Fore.CYAN +"\nIngresa el nuevo nombre de la tarea:")
         nombre = input()
@@ -214,12 +231,15 @@ class AdministradorTareas:
 
         """
 
+        print(Fore.YELLOW +"\nLISTADO DE TAREAS:")
         self.mostrar_tareas_simple()
 
         print(Fore.CYAN +"\nElige una tarea para completar:")
-        id = int(input())
+        id = input().strip()
 
-        self.validar_seleccion_tarea(id)
+        id = self.validar_seleccion_tarea(id)
+        if id == None:
+            return
 
         i = 0
         while (i <= len(self.tareas)):   #Buscamos la tarea que el usuario elija y actualizamos su estado (de pendiente a completada)
@@ -247,11 +267,10 @@ class AdministradorTareas:
 
         """
 
-        if len(self.tareas) == 0:
-            self.comprobar_json()
+        self.comprobar_json()
 
         if len(self.tareas) == 0:
-            print(Fore.CYAN +"\nNo se encontraron tareas\n")
+            print(Fore.CYAN +"\nNo se encontraron tareas que mostrar.\n")
             
             print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
             input()
@@ -277,22 +296,31 @@ class AdministradorTareas:
 
         self.comprobar_json()
         
-        try:
-            if id > len(self.tareas) or id < 1: # De nuevo, excepcion para el caso de que el usuario elija una tarea que no existe
-                print(Fore.RED +"\nTarea no encontrada\n")
+        if not id.strip():  # Si la cadena está vacía después de eliminar espacios en blanco.
+            print(Fore.RED + "\nNo has introducido nada.\n")
 
-                print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
-                input()
-                self.inicio_administrador()
-                return
-                
-        except ValueError:
-            print(Fore.RED +"\nNo has introducido un número\n")
-
-            print(Fore.CYAN +"Pulsa la tecla enter para volver al menú:")
-            input()
+            input(Fore.CYAN + "Pulsa la tecla enter para volver al menú:")
             self.inicio_administrador()
-            return
+            return None
+
+        try:
+            id = int(id)  # Intenta convertir el input a un número entero.
+
+            if id > len(self.tareas) or id < 1:  # Verifica si el número está fuera del rango. válido
+                print(Fore.RED + "\nTarea no encontrada.\n")
+
+                input(Fore.CYAN + "Pulsa la tecla enter para volver al menú:")
+                self.inicio_administrador()
+                return None
+            
+            return id   # Si el valor introducido es correcto, se retorna el valor.
+            
+        except ValueError:
+            print(Fore.RED + "\nNo has introducido un número.\n")
+
+            input(Fore.CYAN + "Pulsa la tecla enter para volver al menú:")
+            self.inicio_administrador()
+            return None
 
     def comprobar_json(self):
 

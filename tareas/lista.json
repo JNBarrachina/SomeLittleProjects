@@ -1,22 +1,6 @@
 [
     {
-        "name": "Retocar el administrador de tareas",
-        "completed": true
-    },
-    {
-        "name": "Hacer el programa visualmente atractivo para el usuario",
-        "completed": true
-    },
-    {
-        "name": "Escuchar m\u00fasica un buen rato",
-        "completed": false
-    },
-    {
-        "name": "Corregir los problemas del programa",
-        "completed": false
-    },
-    {
-        "name": "Hablar con Elena un rato",
+        "name": "Comprobando el correcto funcionamiento del programa.",
         "completed": true
     }
 ]
