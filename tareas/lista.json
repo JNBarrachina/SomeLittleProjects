@@ -1,6 +1,10 @@
 [
     {
-        "name": "Comprobando el funcionamiento del programa.",
+        "name": "Realizando los \u00faltimos ajustes.",
+        "completed": true
+    },
+    {
+        "name": "Commit y push a Github de los \u00faltimos ajustes.",
         "completed": true
     }
 ]

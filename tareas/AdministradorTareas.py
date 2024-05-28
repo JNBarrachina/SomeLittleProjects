@@ -40,7 +40,7 @@ class AdministradorTareas:
     Se añaden cuatro métodos auxiliares adicionales, con el objetivo de no hacer uso de código redundante:
         1. mostrar_tareas_simple(self): muestra las tareas guardadas en el archivo JSON para las funciones de borrar, editar y completar, de forma que puedan seguir ejecutándose sin que se tenga que salir al menú de inicio del administrador.
         2. modificar_json_simple(self, tareas): actualiza el archivo JSON con las modificaciones hechas en la lista de tareas.
-        3. validar_seleccion_tarea(self, id): La función en la que se desarrollan las excepciones. Trata de verificar que el usuario introduce un valor numérico válido. Si introduce un valor no numérico o no introduce nada, se muestra un mensaje de error.
+        3. validar_seleccion_tarea(self, id): La función en la que se desarrollan las excepciones. Trata de verificar que el usuario introduce un valor numérico válido, correspondiente a una tarea existente. Si introduce un valor no numérico o no introduce nada, se muestra un mensaje de error.
         4. comprobar_json(self): crea el archivo JSON si no existe.
     
     """
