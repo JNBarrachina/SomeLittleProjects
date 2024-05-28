@@ -191,6 +191,13 @@ function jugar() {
     document.getElementById("jugar").innerHTML = "¡VS!"
 }
 
+//Resaltado de la ficha que va a ser pintada, según la columna donde se encuentre el cursor.
+
+
+
+
+
+
 function victoria() {
     if(ficha_bucle == "yellow") {
         alert("Ganaste" + " " + document.getElementById("jugador1").innerHTML + "!!")
@@ -383,5 +390,3 @@ function vdiagonal_ascendente() {
         }
 
 }
-
-

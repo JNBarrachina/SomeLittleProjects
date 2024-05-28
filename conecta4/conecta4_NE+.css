@@ -126,3 +126,6 @@ body {
     font-size: 2rem;
 }
 
+.resaltado {
+    border: 2px black solid;
+}
