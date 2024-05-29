@@ -200,11 +200,15 @@ function jugar() {
 
 function victoria() {
     if(ficha_bucle == "yellow") {
-        alert("Ganaste" + " " + document.getElementById("jugador1").innerHTML + "!!")
+        setTimeout(function() {
+            alert("Ganaste" + " " + document.getElementById("jugador1").innerHTML + "!!")
+        }, 2000);
     }
 
     else if (ficha_bucle == "red") {
-        alert("Ganaste" + " " + document.getElementById("jugador2").innerHTML + "!!")
+        setTimeout(function() {
+            alert("Ganaste" + " " + document.getElementById("jugador2").innerHTML + "!!")
+        }, 2000);
     }
 
     document.getElementById("jugar").innerHTML = "¿Otra partida?"
