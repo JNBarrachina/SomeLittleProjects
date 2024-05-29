@@ -9,7 +9,7 @@ Pequeños proyectos desarrollados en pequeños pasos.
 
     -1.3. ¡Jaque! - Cuando un jugador esté cerca de la victoria (con tres fichas consecutivas de su color en algún punto del tablero), se mostrará una alerta visual indicándolo.
 
-    -2.0. Un listado que registre las victorias de los jugadores. Se tendrá que mostrar dicho listado a través de un botón y al final de cada partida. Cuando alguno de los jugadores que gane la partida, se mostrará su posición en una clasificación. Si el usuario ya ha jugado más veces, el programa deberá sumarle una victoria a las que ya hubiera obtenido.
+    -2.0. Un listado que registre las victorias de los jugadores. Se tendrá que mostrar dicho listado a través de un botón y al final de cada partida. Cuando alguno de los jugadores gane la partida, se mostrará su posición en una clasificación. Si el usuario ya ha jugado más veces, el programa deberá sumarle una victoria a las que ya hubiera obtenido.
     
 
 2. Lista de tareas: Este pequeño proyecto nace de mis primeros pasos con Python. Su nombre ya describe por sí solo cuál es su propósito, y si bien ya es funcional, es tan solo un esqueleto sobre el que se podrán ir añadiendo nuevas mejoras. 

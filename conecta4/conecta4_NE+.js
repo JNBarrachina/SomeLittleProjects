@@ -193,9 +193,39 @@ function jugar() {
 
 //Resaltado de la ficha que va a ser pintada, según la columna donde se encuentre el cursor.
 
+function resaltar_ficha() {
+    const columnas = document.querySelectorAll('.columnas');
 
+    columnas.forEach(columna => {
+        columna.addEventListener('mouseover', () => {
+            let ficha = 1;
 
+            while (ficha < 6) (
 
+                if (document.getElementById("fichac"+columna.id+"f"+ficha).style.backgroundColor == "white") {
+
+                    document.getElementById("fichac"+columna.id+"f"+ficha).classList.add('resaltado');
+
+                } 
+                
+                else if (document.getElementById("fichac"+columna.id+"f"+ ficha).style.backgroundColor == "red" || document.getElementById("fichac"+columna.id+"f"+ficha).style.backgroundColor == "yellow") {
+
+                    ficha++
+
+                }
+
+         }
+                    
+            
+
+            );
+        }
+
+        columna.addEventListener('mouseout', () => {
+            document.getElementById("fichac"+columna.id+"f"+(ficha+1)).classList.remove('resaltado');
+        });
+    });
+}
 
 
 function victoria() {
@@ -394,3 +424,7 @@ function vdiagonal_ascendente() {
         }
 
 }
+
+// Funcion para resaltar la ficha.
+
+document.addEventListener('DOMContentLoaded', resaltar_ficha);
