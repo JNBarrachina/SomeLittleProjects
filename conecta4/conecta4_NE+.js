@@ -199,46 +199,45 @@ function resaltar_ficha() {
     columnas.forEach(columna => {
         columna.addEventListener('mouseover', () => {
             let ficha = 1;
+            let columnaID = columna.id.replace("columna", "");
+            let fichaEncontrada = false;
 
-            while (ficha < 6) (
+            while (ficha <= 6 && !fichaEncontrada) {
+                let fichita = document.getElementById("fichac" + columnaID + "f" + ficha);
 
-                if (document.getElementById("fichac"+columna.id+"f"+ficha).style.backgroundColor == "white") {
-
-                    document.getElementById("fichac"+columna.id+"f"+ficha).classList.add('resaltado');
-
-                } 
-                
-                else if (document.getElementById("fichac"+columna.id+"f"+ ficha).style.backgroundColor == "red" || document.getElementById("fichac"+columna.id+"f"+ficha).style.backgroundColor == "yellow") {
-
-                    ficha++
-
+                if (fichita.style.backgroundColor == "") {
+                    fichita.classList.add('resaltado');
+                    fichaEncontrada = true; // Salimos del bucle una vez encontrada la ficha blanca
                 }
 
-         }
-                    
-            
-
-            );
-        }
+                ficha++;
+            }
+        });
 
         columna.addEventListener('mouseout', () => {
-            document.getElementById("fichac"+columna.id+"f"+(ficha+1)).classList.remove('resaltado');
+            let columnaID = columna.id.replace("columna", "");
+            for (let i = 1; i <= 6; i++) {
+                let fichaElement = document.getElementById("fichac" + columnaID + "f" + i);
+                fichaElement.classList.remove('resaltado');
+            }
         });
     });
 }
+
+document.addEventListener('DOMContentLoaded', resaltar_ficha);
 
 
 function victoria() {
     if(ficha_bucle == "yellow") {
         setTimeout(function() {
             alert("Ganaste" + " " + document.getElementById("jugador1").innerHTML + "!!")
-        }, 2000);
+        }, 800);
     }
 
     else if (ficha_bucle == "red") {
         setTimeout(function() {
             alert("Ganaste" + " " + document.getElementById("jugador2").innerHTML + "!!")
-        }, 2000);
+        }, 800);
     }
 
     document.getElementById("jugar").innerHTML = "¿Otra partida?"
@@ -289,6 +288,11 @@ function vhorizontal() {
             else  {
 
                 contador++
+            }
+
+            if (contador == 3) {
+                
+                
             }
 
             if (contador == 4) {
@@ -425,6 +429,3 @@ function vdiagonal_ascendente() {
 
 }
 
-// Funcion para resaltar la ficha.
-
-document.addEventListener('DOMContentLoaded', resaltar_ficha);
