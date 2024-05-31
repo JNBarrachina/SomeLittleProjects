@@ -238,10 +238,6 @@ function resaltar_ficha() {
 
 document.addEventListener('DOMContentLoaded', resaltar_ficha);
 
-function jaque() {
-    
-}
-
 
 function victoria() {
     if(ficha_bucle == "yellow") {
@@ -267,6 +263,8 @@ function vvertical() {
     for (x=1; x<=5; x++) {
         ficha_bucle = document.getElementById("fichac"+y+"f"+x).style.backgroundColor
 
+        alert(x)
+
         if (ficha_bucle == "yellow" || ficha_bucle == "red") {
 
             if ((document.getElementById("fichac"+y+"f"+(x+1)).style.backgroundColor != ficha_bucle)) {
@@ -277,6 +275,10 @@ function vvertical() {
             else  {
 
                 contador++
+            }
+
+            if (contador == 3) {
+                jaque(1)
             }
 
             if (contador == 4) {
@@ -307,8 +309,7 @@ function vhorizontal() {
             }
 
             if (contador == 3) {
-                
-                
+                jaque(2)
             }
 
             if (contador == 4) {
@@ -368,6 +369,10 @@ function vdiagonal_descendente() {
                 else  {
 
                     contador++
+                }
+
+                if (contador == 3) {
+                    jaque(3)
                 }
 
                 if (contador == 4) {
@@ -433,6 +438,10 @@ function vdiagonal_ascendente() {
                     contador++
                 }
 
+                if (contador == 3) {
+                    jaque(4)
+                }
+
                 if (contador == 4) {
                     victoria()
                 }
@@ -446,3 +455,23 @@ function vdiagonal_ascendente() {
 }
 
 
+function jaque(j) {
+    switch (j) {
+        case 1:
+                
+            alert("La ficha del jaque es la ficha "+x)
+                alert("Jaque vertical")
+            
+            break
+        case 2:
+            alert("Jaque horizontal")
+            break
+        case 3:
+            alert("Jaque diagonal descendente")
+            break
+        case 4:
+            alert("Jaque diagonal ascendente")
+            break
+      
+    }
+}
