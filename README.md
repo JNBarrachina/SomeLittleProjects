@@ -3,7 +3,7 @@ Pequeños proyectos desarrollados en pequeños pasos.
 
 1. Conecta-4: El primer proyecto es algo sencillo: un conecta-4. La idea es ir mejorando el juego dede la funcionalidad base (que un jugador conecte 4 fichas de su color, ya sea en fila, en columna, o en diagonal) hacia un programa más atractivo y con más features. Algunas de ellas pueden ser:
 
-    - 1.1. Que en cada jugada que se vaya a realizar se destaque la ficha que va a ser pintada. Esto sucederá cuando el usuario desplace el cursor del ratón por las diferentes columnas, momento en el que se destacará la posible ficha a pintar en cada columna.
+    - <span style=color:green> 1.1. Que en cada jugada que se vaya a realizar se destaque la ficha que va a ser pintada. Esto sucederá cuando el usuario desplace el cursor del ratón por las diferentes columnas, momento en el que se destacará la posible ficha a pintar en cada columna.
 
     - 1.2. ¡Jaque! - Cuando un jugador esté cerca de la victoria (con tres fichas consecutivas de su color en algún punto del tablero), se mostrará una alerta visual indicándolo.
 

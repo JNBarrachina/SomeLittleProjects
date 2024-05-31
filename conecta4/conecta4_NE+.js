@@ -1,9 +1,6 @@
-
 let color = "yellow"
 
-let c1fila = 1; let c2fila = 1; let c3fila = 1
-let c4fila = 1; let c5fila = 1; let c6fila = 1
-let c7fila = 1
+let c1fila = 1, c2fila = 1, c3fila = 1, c4fila = 1, c5fila = 1, c6fila = 1, c7fila = 1
 
 function jugada(columna) {
 
@@ -16,6 +13,7 @@ function jugada(columna) {
         alert("¿Otra partida?")
         return
     }
+
 
     switch (columna) {
         case 1:
@@ -165,6 +163,8 @@ function jugada(columna) {
 
 cambiar_color()
 
+guiar_color()
+
 }
 
 function cambiar_color() {
@@ -176,6 +176,16 @@ function cambiar_color() {
     }
 }
 
+function guiar_color() {
+    if (color == "yellow") {
+        document.getElementById("fichero").style.borderColor = "yellow"
+    }
+    else if (color == "red") {
+        document.getElementById("fichero").style.borderColor = "red"
+    }
+}
+
+
 function jugar() {
     if (document.getElementById("jugador1").innerHTML != "PLAYER 1") {
         location.reload()
@@ -186,9 +196,11 @@ function jugar() {
 
     document.getElementById("jugador1").innerHTML = p1.toUpperCase()
     document.getElementById("jugador2").innerHTML = p2.toUpperCase()
+    
     document.getElementById("jugador1").style.backgroundColor = "yellow"
     document.getElementById("jugador2").style.backgroundColor = "red"
     document.getElementById("jugar").innerHTML = "¡VS!"
+    document.getElementById("fichero").style.borderColor = "yellow"
 }
 
 //Resaltado de la ficha que va a ser pintada, según la columna donde se encuentre el cursor.
@@ -225,6 +237,10 @@ function resaltar_ficha() {
 }
 
 document.addEventListener('DOMContentLoaded', resaltar_ficha);
+
+function jaque() {
+    
+}
 
 
 function victoria() {
@@ -428,4 +444,5 @@ function vdiagonal_ascendente() {
         }
 
 }
+
 
