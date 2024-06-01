@@ -20,9 +20,11 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c1fila).style.backgroundColor = color;
 
             y = columna
+            x_ficha = c1fila
             vvertical(y)
 
             x = c1fila
+            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -40,9 +42,11 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c2fila).style.backgroundColor = color;
 
             y = columna
+            x_ficha = c2fila
             vvertical(y)
 
             x = c2fila
+            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -60,9 +64,11 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c3fila).style.backgroundColor = color;
 
             y = columna
+            x_ficha = c3fila
             vvertical(y)
 
             x = c3fila
+            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -80,9 +86,11 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c4fila).style.backgroundColor = color;
 
             y = columna
+            x_ficha = c4fila
             vvertical(y)
 
             x = c4fila
+            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -100,9 +108,11 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c5fila).style.backgroundColor = color; 
 
             y = columna
+            x_ficha = c5fila
             vvertical(y)
 
             x = c5fila
+            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -121,9 +131,11 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c6fila).style.backgroundColor = color;
 
             y = columna
+            x_ficha = c6fila
             vvertical(y)
 
             x = c6fila
+            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -142,9 +154,11 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c7fila).style.backgroundColor = color;
 
             y = columna
+            x_ficha = c7fila
             vvertical(y)
 
             x = c7fila
+            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -262,8 +276,6 @@ function vvertical() {
         
     for (x=1; x<=5; x++) {
         ficha_bucle = document.getElementById("fichac"+y+"f"+x).style.backgroundColor
-
-        alert(x)
 
         if (ficha_bucle == "yellow" || ficha_bucle == "red") {
 
@@ -458,13 +470,28 @@ function vdiagonal_ascendente() {
 function jaque(j) {
     switch (j) {
         case 1:
-                
-            alert("La ficha del jaque es la ficha "+x)
-                alert("Jaque vertical")
-            
+            document.getElementById("jugar").style.color = color
+            document.getElementById("jugar").innerHTML = "¡Jaque!"
             break
         case 2:
-            alert("Jaque horizontal")
+            alert("La fila es:" + x)
+            alert("La columna es:" + y_ficha)
+
+            if ((y_ficha + 1) <= 7) {
+                if (document.getElementById("fichac"+(y_ficha+1)+"f"+x).style.backgroundColor == "") {
+                
+                jaque = alert("Jaqueh1")
+                }
+
+            }
+
+            else if (((y_ficha - 1) >= 1) || (y_ficha )) {
+                if (document.getElementById("fichac"+(y_ficha - 3)+"f"+x).style.backgroundColor == "") {
+
+                jaque = alert("Jaqueh2")
+                }
+            }
+
             break
         case 3:
             alert("Jaque diagonal descendente")
