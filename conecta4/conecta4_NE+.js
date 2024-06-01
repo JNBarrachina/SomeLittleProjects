@@ -20,11 +20,9 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c1fila).style.backgroundColor = color;
 
             y = columna
-            x_ficha = c1fila
             vvertical(y)
 
             x = c1fila
-            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -42,11 +40,9 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c2fila).style.backgroundColor = color;
 
             y = columna
-            x_ficha = c2fila
             vvertical(y)
 
             x = c2fila
-            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -64,11 +60,9 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c3fila).style.backgroundColor = color;
 
             y = columna
-            x_ficha = c3fila
             vvertical(y)
 
             x = c3fila
-            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -86,11 +80,9 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c4fila).style.backgroundColor = color;
 
             y = columna
-            x_ficha = c4fila
             vvertical(y)
 
             x = c4fila
-            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -108,11 +100,9 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c5fila).style.backgroundColor = color; 
 
             y = columna
-            x_ficha = c5fila
             vvertical(y)
 
             x = c5fila
-            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -131,11 +121,9 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c6fila).style.backgroundColor = color;
 
             y = columna
-            x_ficha = c6fila
             vvertical(y)
 
             x = c6fila
-            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -154,11 +142,9 @@ function jugada(columna) {
             document.getElementById("fichac"+columna+"f"+c7fila).style.backgroundColor = color;
 
             y = columna
-            x_ficha = c7fila
             vvertical(y)
 
             x = c7fila
-            y_ficha = columna
             vhorizontal(x)
 
             y = columna
@@ -321,6 +307,7 @@ function vhorizontal() {
             }
 
             if (contador == 3) {
+                y_jaque = y + 1
                 jaque(2)
             }
 
@@ -469,34 +456,36 @@ function vdiagonal_ascendente() {
 
 function jaque(j) {
     switch (j) {
-        case 1:
+        case 1:  //Si el jaque es horizontal
+            alert("La ficha de jaque es la" + x)
             document.getElementById("jugar").style.color = color
             document.getElementById("jugar").innerHTML = "¡Jaque!"
             break
-        case 2:
-            alert("La fila es:" + x)
-            alert("La columna es:" + y_ficha)
+        case 2:  //Si el jaque es vertical
+            alert("La ficha de jaque es la:" + " " + y_jaque)
 
-            if ((y_ficha + 1) <= 7) {
-                if (document.getElementById("fichac"+(y_ficha+1)+"f"+x).style.backgroundColor == "") {
-                
-                jaque = alert("Jaqueh1")
-                }
-
+            switch (y_jaque) {
+                case (y_jaque == 3):
+                    if (document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor != "red" && document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor != "yellow") {
+                        alert("Jaque")
+                    }
+                    break
+                case (3 < y_jaque < 7):
+                    if (document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor == "white") {
+                        
+                    }
+                    break
+                case (y_jaque == 7):
+                    if (document.getElementById("fichac"+(y_jaque - 3)+"f"+x).style.backgroundColor == " ") {
+                        alert("Jaque")
+                        
+                    }    
             }
-
-            else if (((y_ficha - 1) >= 1) || (y_ficha )) {
-                if (document.getElementById("fichac"+(y_ficha - 3)+"f"+x).style.backgroundColor == "") {
-
-                jaque = alert("Jaqueh2")
-                }
-            }
-
             break
-        case 3:
+        case 3:  //Si el jaque es diagonal descendente
             alert("Jaque diagonal descendente")
             break
-        case 4:
+        case 4:  //Si el jaque es diagonal ascendente
             alert("Jaque diagonal ascendente")
             break
       

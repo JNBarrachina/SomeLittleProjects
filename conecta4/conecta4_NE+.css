@@ -98,18 +98,18 @@ body {
     font-weight: 600;
     font-style: italic;
 
-    border: 2px red solid;
+    border: 2px #4843b7 solid;
     border-radius: 4rem;
 
     padding: 1rem;
 
     background-color: black;
-    color: red;
+    color: white;
 }
 
 .jugar:hover {
-    background-color: red;
-    color: yellow;
+    background-color: white;
+    color: #4843b7;
 }
 
 .fichas {
