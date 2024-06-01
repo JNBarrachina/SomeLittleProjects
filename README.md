@@ -5,11 +5,19 @@ Pequeños proyectos desarrollados en pequeños pasos.
 
     - <span style=color:green> 1.1. Que en cada jugada que se vaya a realizar se destaque la ficha que va a ser pintada. Esto sucederá cuando el usuario desplace el cursor del ratón por las diferentes columnas, momento en el que se destacará la posible ficha a pintar en cada columna.
 
-    - 1.2. ¡Jaque! - Cuando un jugador esté cerca de la victoria (con tres fichas consecutivas de su color en algún punto del tablero), se mostrará una alerta visual indicándolo.
+    - 1.2. Efectos visuales para la victoria (sustituir los alerts por algo más atractivo).
 
     - 1.3. Simular la caída de la ficha que va a ser pintada cuando el usuario interactúe con la columna en la que va a pintar.
 
-    - 2.0. Un listado que registre las victorias de los jugadores. Se tendrá que mostrar dicho listado a través de un botón y al final de cada partida. Cuando alguno de los jugadores gane la partida, se mostrará su posición en una clasificación. Si el usuario ya ha jugado más veces, el programa deberá sumarle una victoria a las que ya hubiera obtenido.
+    - 1.4. Empate: detectar cuando una partida se resuelve con empate técnico.
+
+    - 1.5. Temportizador: añadir un temporizador para cada jugada que se muestre en pantalla (20s).
+
+    - 1.5. Deshacer el ultimo movimiento: permitir al usuario deshacer la último ficha colocada.
+
+    - 2.0. Estadisticas de los jugadores en forma de listado. Se tendrá que mostrar dicho listado a través de un botón y al final de cada partida (partidas jugadas, partidas ganadas, empates). Cuando alguno de los jugadores gane la partida, se mostrará su posición en una clasificación. Si el usuario ya ha jugado más veces, el programa deberá sumarle una victoria a las que ya hubiera obtenido.
+
+    - 3.0. (A futuro) Personalización del tablero y las fichas, IA...
     
 
 2. Lista de tareas: Este pequeño proyecto nace de mis primeros pasos con Python. Su nombre ya describe por sí solo cuál es su propósito, y si bien ya es funcional, es tan solo un esqueleto sobre el que se podrán ir añadiendo nuevas mejoras. 
