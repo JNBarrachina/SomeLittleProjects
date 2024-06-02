@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡CONECTA 4!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="conecta4_NE+.css">
     <script src="conecta4_NE+.js"></script>
 </head>
-<body>
+<body id="body">
     <div class="tablero" id="tablero">
         <div class="fichero" id="fichero">
             <div class="columnas columna1" id="columna1" onclick="jugada(1)">
@@ -66,10 +67,11 @@
                 <div class="fichas fichas_c7 fichac7_5" id="fichac7f5"></div>
                 <div class="fichas fichas_c7 fichac7_6" id="fichac7f6"></div>
             </div>
+            <div class="victoria" id="victoria"></div>
         </div>
         <div class="jugadores">
             <div class="jugador jugador1" id="jugador1">PLAYER 1</div>
-            <button class="jugar" id="jugar" onclick="jugar()">¡JUGAR!</button>
+            <button class="jugar" id="jugar" onclick="iniciarPartida()">¡JUGAR!</button>
             <div class="jugador jugador2" id="jugador2">PLAYER 2</div>
         </div>
     </div>

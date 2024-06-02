@@ -4,16 +4,9 @@ let c1fila = 1, c2fila = 1, c3fila = 1, c4fila = 1, c5fila = 1, c6fila = 1, c7fi
 
 function jugada(columna) {
 
-    if (document.getElementById("jugar").innerHTML == "¡JUGAR!") {
-        alert("Pulsa el boton de JUGAR para comenzar.")
+    if (!alertas()) {
         return
     }
-
-    else if (document.getElementById("jugar").innerHTML == "¿Otra partida?") {
-        alert("¿Otra partida?")
-        return
-    }
-
 
     switch (columna) {
         case 1:
@@ -162,7 +155,6 @@ function jugada(columna) {
     }
 
 cambiar_color()
-
 guiar_color()
 
 }
@@ -186,7 +178,7 @@ function guiar_color() {
 }
 
 
-function jugar() {
+function iniciarPartida() {
     if (document.getElementById("jugador1").innerHTML != "PLAYER 1") {
         location.reload()
     }
@@ -237,24 +229,6 @@ function resaltar_ficha() {
 }
 
 document.addEventListener('DOMContentLoaded', resaltar_ficha);
-
-
-function victoria() {
-    if(ficha_bucle == "yellow") {
-        setTimeout(function() {
-            alert("Ganaste" + " " + document.getElementById("jugador1").innerHTML + "!!")
-        }, 800);
-    }
-
-    else if (ficha_bucle == "red") {
-        setTimeout(function() {
-            alert("Ganaste" + " " + document.getElementById("jugador2").innerHTML + "!!")
-        }, 800);
-    }
-
-    document.getElementById("jugar").innerHTML = "¿Otra partida?"
-
-}
 
 
 function vvertical() {
@@ -451,6 +425,50 @@ function vdiagonal_ascendente() {
             }
         }
 
+}
+
+function victoria() {
+
+    if(ficha_bucle == "yellow") {
+        setTimeout(function() {
+            document.getElementById("victoria").style.visibility = "visible"
+            
+            document.getElementById("victoria").innerHTML = " <span style='color: yellow;'>" + "Ganaste" + " " + document.getElementById("jugador1").innerHTML + "!!" + "</span>"
+        }, 800);
+    }
+
+    else if (ficha_bucle == "red") {
+        setTimeout(function() {
+            document.getElementById("victoria").style.visibility = "visible"
+
+            document.getElementById("victoria").innerHTML = " <span style='color: red;'>" + "Ganaste" + " " + document.getElementById("jugador2").innerHTML + "!!" + "</span>"
+        }, 800);
+    }
+
+    document.getElementById("jugar").innerHTML = "¿Otra partida?"
+
+}
+
+
+function alertas() {
+
+    jugar = document.getElementById("jugar")
+
+    if (document.getElementById("jugar").innerHTML == "¡JUGAR!" || document.getElementById("jugar").innerHTML == "¿Otra partida?") {
+
+        jugar.disabled = true
+
+        jugar.classList.add("alerta")
+
+        setTimeout(() => {
+            jugar.classList.remove("alerta")
+            jugar.disabled = false
+        }, 1000)
+
+    return false
+    }
+
+return true
 }
 
 
