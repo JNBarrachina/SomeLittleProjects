@@ -133,11 +133,6 @@ body {
     border-radius: 4rem;
 
     background-color: white;
-
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
 }
 
 .resaltado {
@@ -157,7 +152,7 @@ body {
     border-radius: 2rem;
     background-color: #9f9ed1;
 
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 600;
 
     display: flex;

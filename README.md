@@ -3,15 +3,15 @@ Pequeños proyectos desarrollados en pequeños pasos.
 
 1. Conecta-4: El primer proyecto es algo sencillo: un conecta-4. La idea es ir mejorando el juego dede la funcionalidad base (que un jugador conecte 4 fichas de su color, ya sea en fila, en columna, o en diagonal) hacia un programa más atractivo y con más features. Algunas de ellas pueden ser:
 
-    - 1.1. Que en cada jugada que se vaya a realizar se destaque la ficha que va a ser pintada. Esto sucederá cuando el usuario desplace el cursor del ratón por las diferentes columnas, momento en el que se destacará la posible ficha a pintar en cada columna. <span style=color:green> (HECHO) </span>
+    - 1.1. Que en cada jugada que se vaya a realizar se destaque la ficha que va a ser pintada. Esto sucederá cuando el usuario desplace el cursor del ratón por las diferentes columnas, momento en el que se destacará la posible ficha a pintar en cada columna. <span style="color:green"> (HECHO) </span>
 
-    - 1.2. Nueva ventana para la victoria y animación para el botón principal (para empezar la partida y para reiniciar el juego). <span style=color:green> (HECHO) </span>
+    - 1.2. Nueva ventana para la victoria y animación para el botón principal (para empezar la partida y para reiniciar el juego). <span style="color:green"> (HECHO) </span>
 
-    - 1.3. Simular la caída de la ficha que va a ser pintada cuando el usuario interactúe con la columna en la que va a pintar.
+    - 1.3. Temporizador: añadir un temporizador para cada jugada que se muestre en pantalla (15s). <span style="color:green"> (HECHO) </span>
 
-    - 1.4. Empate: detectar cuando una partida se resuelve con empate técnico.
+    - 1.4. Simular la caída de la ficha que va a ser pintada cuando el usuario interactúe con la columna en la que va a pintar.
 
-    - 1.5. Temporizador: añadir un temporizador para cada jugada que se muestre en pantalla (20s).
+    - 1.5. Empate: detectar cuando una partida se resuelve con empate técnico.
 
     - 1.6. Deshacer el ultimo movimiento: permitir al usuario deshacer la último ficha colocada.
 

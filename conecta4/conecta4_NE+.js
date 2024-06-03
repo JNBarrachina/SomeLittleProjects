@@ -1,5 +1,6 @@
 let color = "yellow"
-
+let turno
+let tiempo
 let c1fila = 1, c2fila = 1, c3fila = 1, c4fila = 1, c5fila = 1, c6fila = 1, c7fila = 1
 
 function jugada(columna) {
@@ -156,6 +157,8 @@ function jugada(columna) {
 
 cambiar_color()
 guiar_color()
+reset_temporizador()
+temporizador()
 
 }
 
@@ -191,11 +194,12 @@ function iniciarPartida() {
     
     document.getElementById("jugador1").style.backgroundColor = "yellow"
     document.getElementById("jugador2").style.backgroundColor = "red"
-    document.getElementById("jugar").innerHTML = "¡VS!"
+
     document.getElementById("fichero").style.borderColor = "yellow"
+    
+    temporizador()
 }
 
-//Resaltado de la ficha que va a ser pintada, según la columna donde se encuentre el cursor.
 
 function resaltar_ficha() {
     const columnas = document.querySelectorAll('.columnas');
@@ -229,6 +233,37 @@ function resaltar_ficha() {
 }
 
 document.addEventListener('DOMContentLoaded', resaltar_ficha);
+
+function reset_temporizador() {
+    clearInterval(turno)
+}
+
+function temporizador() {
+
+    if (document.getElementById("jugar").innerHTML == "¿Otra partida?") {
+        return
+    }
+        
+    tiempo = 15
+
+    document.getElementById("jugar").style.backgroundColor = color
+    document.getElementById("jugar").style.color = "black"
+    document.getElementById("jugar").innerHTML = tiempo
+
+    turno = setInterval(function() {
+        tiempo--
+
+        document.getElementById("jugar").innerHTML = tiempo
+            
+        if (tiempo === 0) {
+            cambiar_color()
+            guiar_color()
+            document.getElementById("jugar").style.backgroundColor = color
+            tiempo = 16
+        }
+
+    }, 1000) 
+}
 
 
 function vvertical() {
@@ -429,6 +464,10 @@ function vdiagonal_ascendente() {
 
 function victoria() {
 
+    document.getElementById("jugar").innerHTML = "¿Otra partida?"
+    document.getElementById("jugar").style.backgroundColor = "black"
+    document.getElementById("jugar").style.color = "white"
+
     if(ficha_bucle == "yellow") {
         setTimeout(function() {
             document.getElementById("victoria").style.visibility = "visible"
@@ -444,8 +483,6 @@ function victoria() {
             document.getElementById("victoria").innerHTML = " <span style='color: red;'>" + "Ganaste" + " " + document.getElementById("jugador2").innerHTML + "!!" + "</span>"
         }, 800);
     }
-
-    document.getElementById("jugar").innerHTML = "¿Otra partida?"
 
 }
 
