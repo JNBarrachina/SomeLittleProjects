@@ -89,8 +89,8 @@ body {
     font-style: italic;
 
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -124,6 +124,14 @@ body {
     animation: tada 1s;
 }
 
+.alerta2 {
+    animation: jello 1s;
+}
+
+.alerta3 {
+    animation: flip 1s;
+}
+
 
 .fichas {
     width: 100%;
@@ -137,6 +145,26 @@ body {
 
 .resaltado {
     border: 6px black solid;
+}
+
+
+.deshacer {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #4843b7;
+
+    border: 2px #4843b7 solid;
+    border-radius: 2rem;
+    background-color: white;
+
+    padding: 0.4rem;
+
+    display: none;
+}
+
+.deshacer:hover {
+    background-color: #4843b7;
+    color: white;
 }
 
 

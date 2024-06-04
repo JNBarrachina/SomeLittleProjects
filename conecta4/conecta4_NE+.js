@@ -2,6 +2,8 @@ let color = "yellow"
 let turno
 let tiempo
 let c1fila = 1, c2fila = 1, c3fila = 1, c4fila = 1, c5fila = 1, c6fila = 1, c7fila = 1
+let deshacer_y
+let deshacer_x
 
 function jugada(columna) {
 
@@ -12,6 +14,9 @@ function jugada(columna) {
     switch (columna) {
         case 1:
             document.getElementById("fichac"+columna+"f"+c1fila).style.backgroundColor = color;
+
+            deshacer_y = columna
+            deshacer_x = c1fila
 
             y = columna
             vvertical(y)
@@ -33,6 +38,9 @@ function jugada(columna) {
         case 2:
             document.getElementById("fichac"+columna+"f"+c2fila).style.backgroundColor = color;
 
+            deshacer_y = columna
+            deshacer_x = c2fila
+
             y = columna
             vvertical(y)
 
@@ -52,6 +60,9 @@ function jugada(columna) {
             break
         case 3:
             document.getElementById("fichac"+columna+"f"+c3fila).style.backgroundColor = color;
+
+            deshacer_y = columna
+            deshacer_x = c3fila
 
             y = columna
             vvertical(y)
@@ -73,6 +84,9 @@ function jugada(columna) {
         case 4:
             document.getElementById("fichac"+columna+"f"+c4fila).style.backgroundColor = color;
 
+            deshacer_y = columna
+            deshacer_x = c4fila
+
             y = columna
             vvertical(y)
 
@@ -92,6 +106,9 @@ function jugada(columna) {
             break
         case 5:
             document.getElementById("fichac"+columna+"f"+c5fila).style.backgroundColor = color; 
+
+            deshacer_y = columna
+            deshacer_x = c5fila
 
             y = columna
             vvertical(y)
@@ -114,6 +131,9 @@ function jugada(columna) {
         case 6:
             document.getElementById("fichac"+columna+"f"+c6fila).style.backgroundColor = color;
 
+            deshacer_y = columna
+            deshacer_x = c6fila
+
             y = columna
             vvertical(y)
 
@@ -135,6 +155,9 @@ function jugada(columna) {
         case 7:
             document.getElementById("fichac"+columna+"f"+c7fila).style.backgroundColor = color;
 
+            deshacer_y = columna
+            deshacer_x = c7fila
+
             y = columna
             vvertical(y)
 
@@ -155,12 +178,95 @@ function jugada(columna) {
 
     }
 
-cambiar_color()
-guiar_color()
-reset_temporizador()
-temporizador()
+    mostrar_deshacer()
+    resaltar_botonPrincipal(1)
+}
+
+
+function botonPrincipal() {
+
+    if (tiempo != undefined) {  // Cuando el botón es pulsado durante la partida
+        ocultar_deshacer()
+        resaltar_botonPrincipal(2)
+        alertas()
+
+        cambiar_color()
+        guiar_color()
+        reset_temporizador()
+        temporizador()
+    }
+
+
+    if (document.getElementById("jugar").innerHTML == "¡JUGAR!") {  // INICIAR PARTIDA
+        player1 = prompt("¿Quién juega amarillo?", "Jugador 1")
+        player2 = prompt("¿Quién juega rojo?", "Jugador 2")
+
+        document.getElementById("p1").innerHTML = player1.toUpperCase()
+        document.getElementById("p2").innerHTML = player2.toUpperCase()
+    
+        document.getElementById("jugador1").style.backgroundColor = "yellow"
+        document.getElementById("jugador2").style.backgroundColor = "red"
+
+        document.getElementById("fichero").style.borderColor = "yellow"
+    
+        temporizador()
+    }
+
+
+    if (document.getElementById("jugar").innerHTML == "¿Otra partida?") {  // REINICIAR PARTIDA
+        location.reload();
+    }
 
 }
+
+function resaltar_botonPrincipal(bp) {
+
+    if (bp == 1) {
+        document.getElementById("jugar").style.padding = "1.4rem"
+        document.getElementById("jugar").style.border = "6px solid #4843b7"
+    }
+
+    else if (bp == 2) {
+        document.getElementById("jugar").style.padding = "1rem"
+        document.getElementById("jugar").style.border = "2px solid #4843b7"
+    }
+
+}
+
+
+function resaltar_ficha() {
+    const columnas = document.querySelectorAll('.columnas');
+
+    columnas.forEach(columna => {
+        columna.addEventListener('mouseover', () => {
+            let ficha = 1;
+            let columnaID = columna.id.replace("columna", "");
+            let fichaEncontrada = false;
+
+            while (ficha <= 6 && !fichaEncontrada) {
+                let fichita = document.getElementById("fichac" + columnaID + "f" + ficha);
+
+                if (fichita.style.backgroundColor == "") {
+                    fichita.classList.add('resaltado');
+                    fichaEncontrada = true; 
+                }
+
+                ficha++;
+            }
+        });
+
+        columna.addEventListener('mouseout', () => {
+            let columnaID = columna.id.replace("columna", "");
+            for (let i = 1; i <= 6; i++) {
+                let fichaElement = document.getElementById("fichac" + columnaID + "f" + i);
+                fichaElement.classList.remove('resaltado');
+            }
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', resaltar_ficha);
+
 
 function cambiar_color() {
     if (color == "yellow") {
@@ -181,68 +287,51 @@ function guiar_color() {
 }
 
 
-function iniciarPartida() {
-    if (document.getElementById("jugador1").innerHTML != "PLAYER 1") {
-        location.reload()
+function mostrar_deshacer() {
+    if (color == "yellow") {
+        document.getElementById("deshacerp1").style.display = "block"
     }
 
-    p1 = prompt("¿Quién juega amarillo?", "Jugador 1")
-    p2 = prompt("¿Quién juega rojo?", "Jugador 2")
-
-    document.getElementById("jugador1").innerHTML = p1.toUpperCase()
-    document.getElementById("jugador2").innerHTML = p2.toUpperCase()
-    
-    document.getElementById("jugador1").style.backgroundColor = "yellow"
-    document.getElementById("jugador2").style.backgroundColor = "red"
-
-    document.getElementById("fichero").style.borderColor = "yellow"
-    
-    temporizador()
+    else if (color == "red") {
+        document.getElementById("deshacerp2").style.display = "block"
+    }
 }
 
 
-function resaltar_ficha() {
-    const columnas = document.querySelectorAll('.columnas');
+function ocultar_deshacer() {
+    if (color == "yellow") {
+        document.getElementById("deshacerp1").style.display = "none"
+    }
 
-    columnas.forEach(columna => {
-        columna.addEventListener('mouseover', () => {
-            let ficha = 1;
-            let columnaID = columna.id.replace("columna", "");
-            let fichaEncontrada = false;
-
-            while (ficha <= 6 && !fichaEncontrada) {
-                let fichita = document.getElementById("fichac" + columnaID + "f" + ficha);
-
-                if (fichita.style.backgroundColor == "") {
-                    fichita.classList.add('resaltado');
-                    fichaEncontrada = true; // Salimos del bucle una vez encontrada la ficha blanca
-                }
-
-                ficha++;
-            }
-        });
-
-        columna.addEventListener('mouseout', () => {
-            let columnaID = columna.id.replace("columna", "");
-            for (let i = 1; i <= 6; i++) {
-                let fichaElement = document.getElementById("fichac" + columnaID + "f" + i);
-                fichaElement.classList.remove('resaltado');
-            }
-        });
-    });
+    if (color == "red") {
+        document.getElementById("deshacerp2").style.display = "none"
+    }
 }
 
-document.addEventListener('DOMContentLoaded', resaltar_ficha);
+
+function deshacer_jugada(d) {
+
+    resaltar_botonPrincipal(2)
+
+    switch(d) {
+        case 1:
+            document.getElementById("fichac"+deshacer_y+"f"+deshacer_x).style.backgroundColor = "";
+            document.getElementById("fichac"+deshacer_y+"f"+deshacer_x).classList.remove("resaltado");
+            break
+
+        case 2:
+            document.getElementById("fichac"+deshacer_y+"f"+deshacer_x).style.backgroundColor = "";
+            document.getElementById("fichac"+deshacer_y+"f"+deshacer_x).classList.remove("resaltado");
+            break
+    }
+    
+}
 
 function reset_temporizador() {
     clearInterval(turno)
 }
 
 function temporizador() {
-
-    if (document.getElementById("jugar").innerHTML == "¿Otra partida?") {
-        return
-    }
         
     tiempo = 15
 
@@ -256,13 +345,44 @@ function temporizador() {
         document.getElementById("jugar").innerHTML = tiempo
             
         if (tiempo === 0) {
+            ocultar_deshacer()
+            alertas()
             cambiar_color()
             guiar_color()
             document.getElementById("jugar").style.backgroundColor = color
-            tiempo = 16
+            tiempo = 15
         }
 
     }, 1000) 
+}
+
+
+function victoria() {
+
+    reset_temporizador()
+    tiempo = undefined
+
+    document.getElementById("jugar").innerHTML = "¿Otra partida?"
+    document.getElementById("jugar").style.backgroundColor = "black"
+    document.getElementById("jugar").style.color = "white"
+
+
+    if(ficha_bucle == "yellow") {
+        setTimeout(function() {
+            document.getElementById("victoria").style.visibility = "visible"
+            
+            document.getElementById("victoria").innerHTML = " <span style='color: yellow;'>" + "Ganaste" + " " + document.getElementById("p1").innerHTML + "!!" + "</span>"
+        }, 800);
+    }
+
+    else if (ficha_bucle == "red") {
+        setTimeout(function() {
+            document.getElementById("victoria").style.visibility = "visible"
+
+            document.getElementById("victoria").innerHTML = " <span style='color: red;'>" + "Ganaste" + " " + document.getElementById("p2").innerHTML + "!!" + "</span>"
+        }, 800);
+    }
+
 }
 
 
@@ -297,6 +417,7 @@ function vvertical() {
 
 }
 
+
 function vhorizontal() {
     contador = 1
 
@@ -328,6 +449,7 @@ function vhorizontal() {
     }
     
 }
+
 
 function vdiagonal_descendente() {
 
@@ -462,30 +584,6 @@ function vdiagonal_ascendente() {
 
 }
 
-function victoria() {
-
-    document.getElementById("jugar").innerHTML = "¿Otra partida?"
-    document.getElementById("jugar").style.backgroundColor = "black"
-    document.getElementById("jugar").style.color = "white"
-
-    if(ficha_bucle == "yellow") {
-        setTimeout(function() {
-            document.getElementById("victoria").style.visibility = "visible"
-            
-            document.getElementById("victoria").innerHTML = " <span style='color: yellow;'>" + "Ganaste" + " " + document.getElementById("jugador1").innerHTML + "!!" + "</span>"
-        }, 800);
-    }
-
-    else if (ficha_bucle == "red") {
-        setTimeout(function() {
-            document.getElementById("victoria").style.visibility = "visible"
-
-            document.getElementById("victoria").innerHTML = " <span style='color: red;'>" + "Ganaste" + " " + document.getElementById("jugador2").innerHTML + "!!" + "</span>"
-        }, 800);
-    }
-
-}
-
 
 function alertas() {
 
@@ -503,9 +601,39 @@ function alertas() {
         }, 1000)
 
     return false
+    
     }
 
-return true
+    if ((document.getElementById("jugar").innerHTML == tiempo) && (tiempo === 0)) {
+        
+        jugar.disabled = true
+
+        jugar.classList.add("alerta3")
+
+        setTimeout(() => {
+            jugar.classList.remove("alerta3")
+            jugar.disabled = false
+        }, 1000)
+
+    return true
+
+    }
+
+    if (document.getElementById("jugar").innerHTML == tiempo) {
+        
+        jugar.disabled = true
+
+        jugar.classList.add("alerta2")
+
+        setTimeout(() => {
+            jugar.classList.remove("alerta2")
+            jugar.disabled = false
+        }, 1000)
+
+    return true
+
+    }
+
 }
 
 

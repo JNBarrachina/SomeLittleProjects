@@ -70,9 +70,15 @@
             <div class="victoria" id="victoria"></div>
         </div>
         <div class="jugadores">
-            <div class="jugador jugador1" id="jugador1">PLAYER 1</div>
-            <button class="jugar" id="jugar" onclick="iniciarPartida()">¡JUGAR!</button>
-            <div class="jugador jugador2" id="jugador2">PLAYER 2</div>
+            <div class="jugador jugador1" id="jugador1">
+                <p class="p1" id="p1">PLAYER 1</p>
+                <button class="deshacer" id="deshacerp1" onclick="deshacer_jugada(1)"> D </button>
+            </div>
+            <button class="jugar" id="jugar" onclick="botonPrincipal()">¡JUGAR!</button>
+            <div class="jugador jugador2" id="jugador2">
+                <p class="p2" id="p2">PLAYER 2</p>
+                <button class="deshacer" id="deshacerp2" onclick="deshacer_jugada(2)"> D </button>
+            </div>
         </div>
     </div>
 </body>
