@@ -11,7 +11,7 @@ Pequeños proyectos desarrollados en pequeños pasos.
 
     - 1.4. Deshacer el ultimo movimiento: permitir al usuario deshacer la ficha pintada durante su turno. Añadir alertas visuales durante la partida para el botón principal. <span style="color:green;"> (HECHO) </span>
 
-    - 1.5. Cae la ficha: simular la caída de la ficha que va a ser pintada.
+    - 1.5. Cae la ficha: simular la caída de la ficha que va a ser pintada (o la entrada de la misma en el tablero de juego ;D). Añadir una animación para la retirada de la ficha. <span style="color:green;"> (HECHO) </span>
 
     - 1.6. Empate: detectar cuando una partida se resuelve con empate técnico.
 

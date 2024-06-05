@@ -2,8 +2,8 @@ let color = "yellow"
 let turno
 let tiempo
 let c1fila = 1, c2fila = 1, c3fila = 1, c4fila = 1, c5fila = 1, c6fila = 1, c7fila = 1
-let deshacer_columna = null
-let deshacer_fila = null
+let ficha_columna = null
+let ficha_fila = null
 
 function jugada(columna) {
 
@@ -15,8 +15,8 @@ function jugada(columna) {
         case 1:
             document.getElementById("fichac"+columna+"f"+c1fila).style.backgroundColor = color;
             
-            deshacer_columna = columna
-            deshacer_fila = c1fila
+            ficha_columna = columna
+            ficha_fila = c1fila
 
             y = columna
             vvertical(y)
@@ -38,8 +38,8 @@ function jugada(columna) {
         case 2:
             document.getElementById("fichac"+columna+"f"+c2fila).style.backgroundColor = color;
 
-            deshacer_columna = columna
-            deshacer_fila = c2fila
+            ficha_columna = columna
+            ficha_fila = c2fila
 
             y = columna
             vvertical(y)
@@ -61,8 +61,8 @@ function jugada(columna) {
         case 3:
             document.getElementById("fichac"+columna+"f"+c3fila).style.backgroundColor = color;
 
-            deshacer_columna = columna
-            deshacer_fila = c3fila
+            ficha_columna = columna
+            ficha_fila = c3fila
 
             y = columna
             vvertical(y)
@@ -84,8 +84,8 @@ function jugada(columna) {
         case 4:
             document.getElementById("fichac"+columna+"f"+c4fila).style.backgroundColor = color;
 
-            deshacer_columna = columna
-            deshacer_fila = c4fila
+            ficha_columna = columna
+            ficha_fila = c4fila
 
             y = columna
             vvertical(y)
@@ -107,8 +107,8 @@ function jugada(columna) {
         case 5:
             document.getElementById("fichac"+columna+"f"+c5fila).style.backgroundColor = color; 
 
-            deshacer_columna = columna
-            deshacer_fila = c5fila
+            ficha_columna = columna
+            ficha_fila = c5fila
 
             y = columna
             vvertical(y)
@@ -131,8 +131,8 @@ function jugada(columna) {
         case 6:
             document.getElementById("fichac"+columna+"f"+c6fila).style.backgroundColor = color;
 
-            deshacer_columna = columna
-            deshacer_fila = c6fila
+            ficha_columna = columna
+            ficha_fila = c6fila
 
             y = columna
             vvertical(y)
@@ -155,8 +155,8 @@ function jugada(columna) {
         case 7:
             document.getElementById("fichac"+columna+"f"+c7fila).style.backgroundColor = color;
 
-            deshacer_columna = columna
-            deshacer_fila = c7fila
+            ficha_columna = columna
+            ficha_fila = c7fila
 
             y = columna
             vvertical(y)
@@ -178,6 +178,7 @@ function jugada(columna) {
 
     }
 
+    caida()
     mostrar_deshacer()
     resaltar_botonPrincipal(1)
 }
@@ -216,7 +217,6 @@ function botonPrincipal() {
     if (document.getElementById("jugar").innerHTML == "¿Otra?") {  // REINICIAR PARTIDA
         location.reload();
     }
-
 }
 
 function resaltar_botonPrincipal(bp) {
@@ -268,6 +268,39 @@ function resaltar_ficha() {
 document.addEventListener('DOMContentLoaded', resaltar_ficha);
 
 
+function caida() {
+    
+    fichaCaida = document.getElementById("fichac"+ficha_columna+"f"+ficha_fila)
+    
+    fichaCaida.disabled = true
+
+    fichaCaida.classList.add("caida")
+
+    setTimeout(() => {
+        fichaCaida.classList.remove("caida")
+        fichaCaida.disabled = false
+    }, 500)
+
+    return false
+}
+
+function retirada () {
+
+    fichaCaida = document.getElementById("fichac"+ficha_columna+"f"+ficha_fila)
+    
+    fichaCaida.disabled = true
+
+    fichaCaida.classList.add("retirada")
+
+    setTimeout(() => {
+        fichaCaida.classList.remove("retirada")
+        fichaCaida.disabled = false
+    }, 1000)
+
+    return false
+}
+
+
 function cambiar_color() {
     if (color == "yellow") {
         color = "red"
@@ -313,11 +346,11 @@ function deshacer_jugada() {
 
     resaltar_botonPrincipal(2)
 
-    if (deshacer_columna !== null && deshacer_fila !== null) {
-        document.getElementById("fichac"+deshacer_columna+"f"+deshacer_fila).style.backgroundColor = "";
+    if (ficha_columna !== null && ficha_fila !== null) {
+        document.getElementById("fichac"+ficha_columna+"f"+ficha_fila).style.backgroundColor = "";
 
-        // Decrementar el contador de la fila correspondiente
-        switch (deshacer_columna) {
+
+        switch (ficha_columna) {
             case 1:
                 c1fila--;
                 break;
@@ -341,9 +374,9 @@ function deshacer_jugada() {
                 break;
         }
 
-        // Limpiar las variables de deshacer
-        deshacer_columna = null;
-        deshacer_fila = null;
+        retirada()
+        ficha_columna = null;
+        ficha_fila = null;
     }
 
     ocultar_deshacer();

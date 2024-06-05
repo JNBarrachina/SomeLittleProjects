@@ -149,24 +149,42 @@ body {
     border: 6px black solid;
 }
 
+.caida {
+    animation: bounceInUp 0.5s;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(1000px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.retirada {
+    animation: fadeOutDownBig 0.2s;
+}
 
 .deshacer {
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: #4843b7;
+    width: 20%;
+    height: 60%;
 
     border: 2px #4843b7 solid;
-    border-radius: 2rem;
+    border-radius: 1rem;
     background-color: white;
-
-    padding: 0.4rem;
 
     display: none;
 }
 
 .deshacer:hover {
-    background-color: #4843b7;
+    background-color: black;
     color: white;
+}
+
+.undo {
+    width: 3rem;
+    height: 3rem;
 }
 
 
