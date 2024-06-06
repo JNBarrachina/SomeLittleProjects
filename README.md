@@ -13,7 +13,7 @@ Pequeños proyectos desarrollados en pequeños pasos.
 
     - 1.5. Cae la ficha: simular la caída de la ficha que va a ser pintada (o la entrada de la misma en el tablero de juego ;D). Añadir una animación para la retirada de la ficha. <span style="color:green;"> (HECHO) </span>
 
-    - 1.6. Empate: detectar cuando una partida se resuelve con empate técnico.
+    - 1.6. ¡Jaque!: detectar cuándo se produce una situación de jaque o de jaque mate (en cualquiera de las posiciones posibles).
 
     - 2.0. Estadisticas de los jugadores. Se tendrá que mostrar dicho listado a través de un botón y al final de cada partida (partidas jugadas, partidas ganadas, empates). Cuando alguno de los jugadores gane la partida, se mostrará su posición en una clasificación. Si el usuario ya ha jugado más veces, el programa deberá sumarle una victoria a las que ya hubiera obtenido.
 

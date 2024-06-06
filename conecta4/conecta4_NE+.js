@@ -4,6 +4,8 @@ let tiempo
 let c1fila = 1, c2fila = 1, c3fila = 1, c4fila = 1, c5fila = 1, c6fila = 1, c7fila = 1
 let ficha_columna = null
 let ficha_fila = null
+let tableroCompleto = 0
+let cuentaJaque = 0
 
 function jugada(columna) {
 
@@ -181,6 +183,12 @@ function jugada(columna) {
     caida()
     mostrar_deshacer()
     resaltar_botonPrincipal(1)
+
+    tableroCompleto++
+
+    if (tableroCompleto == 42) {
+        empate()
+    }
 }
 
 
@@ -377,6 +385,7 @@ function deshacer_jugada() {
         retirada()
         ficha_columna = null;
         ficha_fila = null;
+        tableroCompleto--
     }
 
     ocultar_deshacer();
@@ -444,6 +453,25 @@ function victoria() {
 }
 
 
+function empate() {
+
+    ocultar_deshacer()
+    reset_temporizador()
+    tiempo = undefined
+
+    document.getElementById("jugar").innerHTML = "¿Otra?"
+    document.getElementById("jugar").style.backgroundColor = "black"
+    document.getElementById("jugar").style.color = "white"
+
+    setTimeout(function() {
+        document.getElementById("victoria").style.visibility = "visible"
+        
+        document.getElementById("victoria").innerHTML = " <span style='color: black;'>" + "EMPATE TÉCNICO. BIEN JUGADO..." + "</span>"
+    }, 800);
+    
+}
+
+
 function vvertical() {
     contador = 1
         
@@ -462,9 +490,9 @@ function vvertical() {
                 contador++
             }
 
-            // if (contador == 3) {
-            //     jaque(1)
-            // }
+            if (contador == 3) {
+                jaque(1)
+            }
 
             if (contador == 4) {
                 victoria()
@@ -494,10 +522,10 @@ function vhorizontal() {
                 contador++
             }
 
-            // if (contador == 3) {
-            //     y_jaque = y + 1
-            //     jaque(2)
-            // }
+            if (contador == 3) {
+                y_jaque = y + 1
+                jaque(2)
+            }
 
             if (contador == 4) {
                 victoria()
@@ -559,9 +587,9 @@ function vdiagonal_descendente() {
                     contador++
                 }
 
-                // if (contador == 3) {
-                //     jaque(3)
-                // }
+                if (contador == 3) {
+                    jaque(3)
+                }
 
                 if (contador == 4) {
                     victoria()
@@ -626,9 +654,9 @@ function vdiagonal_ascendente() {
                     contador++
                 }
 
-                // if (contador == 3) {
-                //     jaque(4)
-                // }
+                if (contador == 3) {
+                    jaque(4)
+                }
 
                 if (contador == 4) {
                     victoria()
@@ -695,45 +723,43 @@ function alertas() {
 }
 
 
-// function jaque(j) {
-//     switch (j) {
-//         case 1:  //Si el jaque es horizontal
-//             alert("La ficha de jaque es la" + x)
-//             document.getElementById("jugar").style.color = color
-//             document.getElementById("jugar").innerHTML = "¡Jaque!"
-//             break
-//         case 2:  //Si el jaque es vertical
-//             alert("La ficha de jaque es la:" + " " + y_jaque)
-//             ficha_jaque = (document.getElementById("fichac"+y_jaque+"f"+x).style.backgroundColor)
-//             alert(ficha_jaque)
+function jaque(j) {
 
-//             if (y_jaque == 3) {
-//                 if (document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor != ficha_jaque) {
-//                     document.getElementById("jugar").style.color = color
-//                     document.getElementById("jugar").innerHTML = "¡Jaque!"
-//                 }
-//             }
+    switch (j) {
+        case 1:  //Si el jaque es vertical
+            alert("La ficha de jaque vertical es la" + (x + 1))
+            document.getElementById("jugar").style.color = color
+            document.getElementById("jugar").innerHTML = "¡Jaque!"
+            break
+        case 2:  //Si el jaque es horizontal
+            alert("La ficha de jaque es horizontal es la:" + " " + y_jaque)
+            ficha_jaque = (document.getElementById("fichac"+y_jaque+"f"+x).style.backgroundColor)
+            alert(ficha_jaque)
 
-//             if (3 < y_jaque < 7) {
-//                 if (document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor != ficha_jaque) {
-//                     document.getElementById("jugar").style.color = color
-//                     document.getElementById("jugar").innerHTML = "¡Jaque!"
-//                 }
-//             }
+            if (y_jaque == 3) {
+                if (document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor != ficha_jaque) {
+                   
+                }
+            }
 
-//             if (y_jaque == 7) {
-//                 if (document.getElementById("fichac"+(y_jaque - 3)+"f"+x).style.backgroundColor != ficha_jaque) {
-//                     document.getElementById("jugar").style.color = color
-//                     document.getElementById("jugar").innerHTML = "¡Jaque!"
-//                 }
-//             }
+            if (3 < y_jaque < 7) {
+                if (document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor != ficha_jaque) {
+                    
+                }
+            }
 
-//         case 3:  //Si el jaque es diagonal descendente
-//             alert("Jaque diagonal descendente")
-//             break
-//         case 4:  //Si el jaque es diagonal ascendente
-//             alert("Jaque diagonal ascendente")
-//             break
+            if (y_jaque == 7) {
+                if (document.getElementById("fichac"+(y_jaque - 3)+"f"+x).style.backgroundColor != ficha_jaque) {
+                    
+                }
+            }
+
+        case 3:  //Si el jaque es diagonal descendente
+            alert("Jaque diagonal descendente")
+            break
+        case 4:  //Si el jaque es diagonal ascendente
+            alert("Jaque diagonal ascendente")
+            break
       
-//     }
-// }
+    }
+}

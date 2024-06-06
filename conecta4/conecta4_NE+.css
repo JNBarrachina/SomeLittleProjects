@@ -172,14 +172,13 @@ body {
 
     border: 2px #4843b7 solid;
     border-radius: 1rem;
-    background-color: white;
+    background-color: black;
 
     display: none;
 }
 
 .deshacer:hover {
-    background-color: black;
-    color: white;
+    background-color: white;
 }
 
 .undo {
