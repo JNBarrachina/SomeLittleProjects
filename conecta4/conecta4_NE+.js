@@ -490,10 +490,6 @@ function vvertical() {
                 contador++
             }
 
-            // if (contador == 3) {
-            //     jaque(1)
-            // }
-
             if (contador == 4) {
                 victoria()
             }
@@ -521,11 +517,6 @@ function vhorizontal() {
 
                 contador++
             }
-
-            // if (contador == 3) {
-            //     y_jaque = y + 1
-            //     jaque(2)
-            // }
 
             if (contador == 4) {
                 victoria()
@@ -586,10 +577,6 @@ function vdiagonal_descendente() {
 
                     contador++
                 }
-
-                // if (contador == 3) {
-                //     jaque(3)
-                // }
 
                 if (contador == 4) {
                     victoria()
@@ -654,10 +641,6 @@ function vdiagonal_ascendente() {
                     contador++
                 }
 
-                // if (contador == 3) {
-                //     jaque(4)
-                // }
-
                 if (contador == 4) {
                     victoria()
                 }
@@ -721,126 +704,3 @@ function alertas() {
     }
 
 }
-
-
-// function jaque(j) {
-
-//     switch (j) {
-
-//         case 1:  //Si el jaque es vertical (en la columna)
-//             alert("Jaque columna")
-
-//             cuentaJaque++
-//             break
-
-//         case 2:  //Si el jaque es horizontal (en la fila)
-//             alert("La ficha de jaque es horizontal es la:" + " " + y_jaque)
-//             ficha_jaque = (document.getElementById("fichac"+y_jaque+"f"+x).style.backgroundColor)
-//             alert(ficha_jaque)
-
-//             if (y_jaque == 3) {  //El jaque solo tiene fichas disponibles a su derecha 
-//                 if (x == 1) {  //Jaque en la primera fila (fichas libres siempre disponibles)
-
-//                     alert(document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor)
-                    
-//                     if (document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor == "") {
-
-//                         cuentaJaque++
-
-//                         alert("Jaque fila inicio")
-//                     }
-//                 }
-
-//                 else if (x > 1) {  //Jaque en cualquier otra fila (se debe comprobar el estado de la columna en aquellas fichas disponibles antes de declarar un jaque)
-//                     alert(document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor)
-                    
-//                     if ((document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor == "") && ((document.getElementById("fichac"+(y_jaque + 1)+"f"+(x - 1)).style.backgroundColor == "red") || (document.getElementById("fichac"+(y_jaque + 1)+"f"+(x - 1)).style.backgroundColor == "yellow"))) {
-
-//                     alert("Jaque fila inicio")
-                    
-//                         cuentaJaque++
-//                     }
-//                 }
-//             }
-
-//             if (3 < y_jaque < 7) {  //El jaque tiene fichas disponmibles a ambos lados
-//                 if (x == 1) {  //Jaque en la primera fila (fichas libres siempre disponibles)
-                    
-//                     if (document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor == "") {
-                    
-//                         alert("Jaque fila intermedio adelante")
-//                         cuentaJaque++
-//                     }
-
-//                     if (document.getElementById("fichac"+(y_jaque - 3)+"f"+x).style.backgroundColor == "") {
-                    
-//                         alert("Jaque fila intermedio atrás")
-//                         cuentaJaque++
-//                     }
-//                 }
-
-//                 else if (x > 1) {  //Jaque en cualquier otra fila (se debe comprobar el estado de la columna en aquellas fichas disponibles antes de declarar un jaque)
-                    
-//                     if ((document.getElementById("fichac"+(y_jaque + 1)+"f"+x).style.backgroundColor == "") && ((document.getElementById("fichac"+(y_jaque + 1)+"f"+(x - 1)).style.backgroundColor == "red") || (document.getElementById("fichac"+(y_jaque + 1)+"f"+(x - 1)).style.backgroundColor == "yellow"))) {
-
-//                         alert("Jaque fila intermedio adelante")
-                    
-//                         cuentaJaque++
-//                     }
-
-//                     if ((document.getElementById("fichac"+(y_jaque - 3)+"f"+x).style.backgroundColor == "") && ((document.getElementById("fichac"+(y_jaque - 3)+"f"+(x - 1)).style.backgroundColor == "red") || (document.getElementById("fichac"+(y_jaque - 3)+"f"+(x - 1)).style.backgroundColor == "yellow"))) {
-
-//                         alert("Jaque fila intermedio atrás")
-                    
-//                         cuentaJaque++
-//                     }
-//                 }
-//             }
-
-//             if (y_jaque == 7) {  //El jaque tiene fichas disponibles a su izquierda (no a su derecha)
-//                 if (x == 1) {  //Jaque en la primera fila (fichas libres siempre disponibles)
-
-//                     if (document.getElementById("fichac"+(y_jaque - 3)+"f"+x).style.backgroundColor == "") {
-                    
-//                         alert("Jaque fila final")
-
-//                         cuentaJaque++
-//                     }
-//                 }
-
-//                 else if (x > 1) {  //Jaque en cualquier otra fila (se debe comprobar el estado de la columna en aquellas fichas disponibles antes de declarar un jaque)
-
-//                     if ((document.getElementById("fichac"+(y_jaque - 3)+"f"+x).style.backgroundColor == "") && ((document.getElementById("fichac"+(y_jaque - 3)+"f"+(x - 1)).style.backgroundColor == "red") || (document.getElementById("fichac"+(y_jaque - 3)+"f"+(x - 1)).style.backgroundColor == "yellow"))) {
-
-//                         alert("Jaque fila final")
-                    
-//                         cuentaJaque++
-//                     }
-//                 }
-//             }
-        
-//             break
-
-//         case 3:  //Si el jaque es en una diagonal descendente
-//             alert("Jaque diagonal descendente")
-//             break
-
-//         case 4:  //Si el jaque es en una diagonal ascendente
-//             alert("Jaque diagonal ascendente")
-//             break
-      
-//     }
-
-//     // mensajeJaque()
-// }
-
-
-// function mensajeJaque() {
-//     if (cuentaJaque == 1) {
-//         alert("Jaque!")
-//     }
-
-//     if (cuentaJaque >= 2) {
-//         alert("Jaque mate!")
-//     }
-// }
