@@ -5,6 +5,7 @@ let c1fila = 1, c2fila = 1, c3fila = 1, c4fila = 1, c5fila = 1, c6fila = 1, c7fi
 let ficha_columna = null
 let ficha_fila = null
 let tableroCompleto = 0
+let buscajaque
 let cuentaJaque = 0
 
 function jugada(columna) {
@@ -189,6 +190,8 @@ function jugada(columna) {
     if (tableroCompleto == 42) {
         empate()
     }
+
+    jaque(1, c1fila)
 }
 
 
@@ -704,3 +707,35 @@ function alertas() {
     }
 
 }
+
+function jaque(c, posicion) {
+
+    alert("A ver si hay jaque en la columna: " +c+ ". Parte de la posicion: " +posicion+ "." )
+
+    buscajaque = (posicion - 1)
+
+    while (buscajaque >= 1) {
+
+        if (document.getElementById("fichac"+c+"f"+buscajaque).style.backgroundColor == document.getElementById("fichac"+c+"f"+(buscajaque - 1)).style.backgroundColor) {
+                    
+            cuentaJaque++
+            alert("El cuentaJaque es: " +cuentaJaque)
+
+            buscajaque--
+        }
+
+        if (cuentaJaque == 2) {
+            alert("¡JAQUE en la columna: " +columna+ "!")
+    
+            cuentaJaque = 0
+        }
+
+        else {
+            cuentaJaque = 0
+        }
+    }
+}
+
+
+
+    

@@ -131,7 +131,7 @@ body {
 }
 
 .alerta3 {
-    animation: flip 1s;
+    animation: flip 1.2s;
 }
 
 
@@ -182,8 +182,8 @@ body {
 }
 
 .undo {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 
@@ -207,4 +207,3 @@ body {
     justify-content: center;
     align-items: center;
 }
-
