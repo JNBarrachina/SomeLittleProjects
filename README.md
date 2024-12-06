@@ -26,3 +26,6 @@ Pequeños proyectos desarrollados en pequeños pasos.
     - Añadir a cada tarea la fecha en la que se introduce en el programa.
     - Añadir y completar varias tareas al mismo tiempo.
     - Organizar las tareas de algún modo (por día, mes...)
+
+
+3. Mascota para el escritorio: Una mascota para el escritorio.
