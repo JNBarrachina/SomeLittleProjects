@@ -28,4 +28,5 @@ Pequeños proyectos desarrollados en pequeños pasos.
     - Organizar las tareas de algún modo (por día, mes...)
 
 
-3. Mascota para el escritorio: Una mascota para el escritorio.
+3. Mascota para el escritorio: Una mascota para el escritorio, desarrollada en Python.
+    - 
