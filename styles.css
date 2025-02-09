@@ -90,6 +90,7 @@ p {
 
 .project:hover {
     background-color: #1f1f2b;
+    border: 2px white solid;
 }
 
 a {
@@ -125,5 +126,4 @@ a:hover {
     }
     
 }
-
 
