@@ -106,6 +106,24 @@ a:hover {
 }
 
 
+@media screen and (max-width: 650px) {
+    h1 {
+        font-size: 1.6rem;
+    }
 
+    p {
+        font-size: 0.8rem;
+    }
+    
+    .project {
+        width: 100%;
+    }
+
+    a {
+        padding: 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+}
 
 
