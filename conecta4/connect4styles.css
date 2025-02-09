@@ -101,7 +101,6 @@ body {
 .jugar {
     font-size: 1.4rem;
     font-weight: 600;
-    font-style: italic;
 
     border: 2px #4843b7 solid;
     border-radius: 4rem;
@@ -209,4 +208,18 @@ body {
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (max-width: 650px) {
+    .tablero {
+        width: 95%;
+        height: 50%;
+    }
+
+    .jugar {
+        font-size: 1rem;
+        font-weight: 600;
+    
+        padding: 0.8rem;
+    }
 }
