@@ -11,8 +11,6 @@ let c1fila = 1,
 let ficha_columna = null;
 let ficha_fila = null;
 let tableroCompleto = 0;
-let buscajaque;
-let cuentaJaque = 0;
 
 function jugada(columna) {
     if (!alertas()) {
