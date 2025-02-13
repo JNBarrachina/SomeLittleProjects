@@ -198,8 +198,6 @@ function jugada(columna) {
     }
 
     caida();
-    mostrar_deshacer();
-    resaltar_botonPrincipal(1);
 
     tableroCompleto++;
 
@@ -207,20 +205,14 @@ function jugada(columna) {
         empate();
     }
 
-    jaque(1, c1fila);
+    cambiar_color();
+    reset_temporizador();
+    temporizador();
 }
 
 function botonPrincipal() {
     if (tiempo != undefined) {
-        // Cuando el botón es pulsado durante la partida
-        ocultar_deshacer();
-        resaltar_botonPrincipal(2);
         alertas();
-
-        cambiar_color();
-        guiar_color();
-        reset_temporizador();
-        temporizador();
     }
 
     if (document.getElementById("jugar").innerHTML == "¡JUGAR!") {
@@ -242,16 +234,6 @@ function botonPrincipal() {
     if (document.getElementById("jugar").innerHTML == "¿Otra?") {
         // REINICIAR PARTIDA
         location.reload();
-    }
-}
-
-function resaltar_botonPrincipal(bp) {
-    if (bp == 1) {
-        document.getElementById("jugar").style.padding = "1.4rem";
-        document.getElementById("jugar").style.border = "6px rgb(137, 30, 116) solid";
-    } else if (bp == 2) {
-        document.getElementById("jugar").style.padding = "1rem";
-        document.getElementById("jugar").style.border = "2px rgb(137, 30, 116) solid";
     }
 }
 
@@ -309,96 +291,16 @@ function caida() {
     return false;
 }
 
-function retirada() {
-    fichaCaida = document.getElementById(
-        "fichac" + ficha_columna + "f" + ficha_fila
-    );
-
-    fichaCaida.disabled = true;
-
-    fichaCaida.classList.add("retirada");
-
-    setTimeout(() => {
-        fichaCaida.classList.remove("retirada");
-        fichaCaida.disabled = false;
-    }, 1000);
-
-    return false;
-}
-
 function cambiar_color() {
     if (color == "yellow") {
         color = "red";
+        document.getElementById("jugar").style.backgroundColor = "red";
+        document.getElementById("fichero").style.borderColor = "red";
     } else {
         color = "yellow";
-    }
-}
-
-function guiar_color() {
-    if (color == "yellow") {
+        document.getElementById("jugar").style.backgroundColor = "yellow";
         document.getElementById("fichero").style.borderColor = "yellow";
-    } else if (color == "red") {
-        document.getElementById("fichero").style.borderColor = "red";
     }
-}
-
-function mostrar_deshacer() {
-    if (color == "yellow") {
-        document.getElementById("deshacerp1").style.display = "block";
-    } else if (color == "red") {
-        document.getElementById("deshacerp2").style.display = "block";
-    }
-}
-
-function ocultar_deshacer() {
-    if (color == "yellow") {
-        document.getElementById("deshacerp1").style.display = "none";
-    }
-
-    if (color == "red") {
-        document.getElementById("deshacerp2").style.display = "none";
-    }
-}
-
-function deshacer_jugada() {
-    resaltar_botonPrincipal(2);
-
-    if (ficha_columna !== null && ficha_fila !== null) {
-        document.getElementById(
-            "fichac" + ficha_columna + "f" + ficha_fila
-        ).style.backgroundColor = "";
-
-        switch (ficha_columna) {
-            case 1:
-                c1fila--;
-                break;
-            case 2:
-                c2fila--;
-                break;
-            case 3:
-                c3fila--;
-                break;
-            case 4:
-                c4fila--;
-                break;
-            case 5:
-                c5fila--;
-                break;
-            case 6:
-                c6fila--;
-                break;
-            case 7:
-                c7fila--;
-                break;
-        }
-
-        retirada();
-        ficha_columna = null;
-        ficha_fila = null;
-        tableroCompleto--;
-    }
-
-    ocultar_deshacer();
 }
 
 function reset_temporizador() {
@@ -418,12 +320,9 @@ function temporizador() {
         document.getElementById("jugar").innerHTML = tiempo;
 
         if (tiempo === 0) {
-            ocultar_deshacer();
             alertas();
-            resaltar_botonPrincipal(2);
 
             cambiar_color();
-            guiar_color();
             document.getElementById("jugar").style.backgroundColor = color;
             tiempo = 11;
         }
@@ -431,8 +330,6 @@ function temporizador() {
 }
 
 function victoria() {
-    ocultar_deshacer();
-    reset_temporizador();
     tiempo = undefined;
 
     document.getElementById("jugar").innerHTML = "¿Otra?";
