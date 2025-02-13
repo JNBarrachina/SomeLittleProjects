@@ -231,8 +231,8 @@ function botonPrincipal() {
         document.getElementById("p1").innerHTML = player1.toUpperCase();
         document.getElementById("p2").innerHTML = player2.toUpperCase();
 
-        document.getElementById("jugador1").style.backgroundColor = "yellow";
-        document.getElementById("jugador2").style.backgroundColor = "red";
+        document.getElementById("jugador1").style.border = "2px yellow solid";
+        document.getElementById("jugador2").style.border = "2px red solid";
 
         document.getElementById("fichero").style.borderColor = "yellow";
 
@@ -248,10 +248,10 @@ function botonPrincipal() {
 function resaltar_botonPrincipal(bp) {
     if (bp == 1) {
         document.getElementById("jugar").style.padding = "1.4rem";
-        document.getElementById("jugar").style.border = "6px solid #4843b7";
+        document.getElementById("jugar").style.border = "6px rgb(137, 30, 116) solid";
     } else if (bp == 2) {
         document.getElementById("jugar").style.padding = "1rem";
-        document.getElementById("jugar").style.border = "2px solid #4843b7";
+        document.getElementById("jugar").style.border = "2px rgb(137, 30, 116) solid";
     }
 }
 

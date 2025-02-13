@@ -10,6 +10,21 @@
 </head>
 
 <body id="body">
+    <header>
+        <div class="jugadores">
+            <div class="jugador jugador1" id="jugador1">
+                <p class="p1" id="p1">PLAYER 1</p>
+                <button class="deshacer" id="deshacerp1" onclick="deshacer_jugada()"> <img src="img/undo.png"
+                        class="undo" alt=""> </button>
+            </div>
+            <button class="jugar" id="jugar" onclick="botonPrincipal()">¡JUGAR!</button>
+            <div class="jugador jugador2" id="jugador2">
+                <p class="p2" id="p2">PLAYER 2</p>
+                <button class="deshacer" id="deshacerp2" onclick="deshacer_jugada()"> <img src="img/undo.png"
+                        class="undo" alt=""> </button>
+            </div>
+        </div>
+    </header>
     <div class="tablero" id="tablero">
         <div class="fichero" id="fichero">
             <div class="columnas columna1" id="columna1" onclick="jugada(1)">
@@ -69,19 +84,6 @@
                 <div class="fichas fichas_c7 fichac7_6" id="fichac7f6"></div>
             </div>
             <div class="victoria" id="victoria"></div>
-        </div>
-        <div class="jugadores">
-            <div class="jugador jugador1" id="jugador1">
-                <p class="p1" id="p1">PLAYER 1</p>
-                <button class="deshacer" id="deshacerp1" onclick="deshacer_jugada()"> <img src="img/undo.png"
-                        class="undo" alt=""> </button>
-            </div>
-            <button class="jugar" id="jugar" onclick="botonPrincipal()">¡JUGAR!</button>
-            <div class="jugador jugador2" id="jugador2">
-                <p class="p2" id="p2">PLAYER 2</p>
-                <button class="deshacer" id="deshacerp2" onclick="deshacer_jugada()"> <img src="img/undo.png"
-                        class="undo" alt=""> </button>
-            </div>
         </div>
     </div>
     <script src="connect4scripts.js"></script>
