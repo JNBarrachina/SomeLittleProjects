@@ -1,6 +1,10 @@
 let color = "yellow";
 let turno;
 let tiempo;
+let jugar = document.getElementById("jugar");
+let fichero = document.getElementById("fichero");
+let vic = document.getElementById("victoria");
+
 let c1fila = 1,
     c2fila = 1,
     c3fila = 1,
@@ -212,10 +216,10 @@ function jugada(columna) {
 
 function botonPrincipal() {
     if (tiempo != undefined) {
-        alertas();
+        alertas();  
     }
 
-    if (document.getElementById("jugar").innerHTML == "¡JUGAR!") {
+    if (jugar.innerText == "¡JUGAR!") {
         // INICIAR PARTIDA
         player1 = prompt("¿Quién juega amarillo?", "Jugador 1");
         player2 = prompt("¿Quién juega rojo?", "Jugador 2");
@@ -226,12 +230,12 @@ function botonPrincipal() {
         document.getElementById("jugador1").style.border = "2px yellow solid";
         document.getElementById("jugador2").style.border = "2px red solid";
 
-        document.getElementById("fichero").style.borderColor = "yellow";
+        fichero.style.borderColor = "yellow";
 
         temporizador();
     }
 
-    if (document.getElementById("jugar").innerHTML == "¿Otra?") {
+    if (jugar.innerText == "¿Otra?") {
         // REINICIAR PARTIDA
         location.reload();
     }
@@ -294,12 +298,12 @@ function caida() {
 function cambiar_color() {
     if (color == "yellow") {
         color = "red";
-        document.getElementById("jugar").style.backgroundColor = "red";
-        document.getElementById("fichero").style.borderColor = "red";
+        jugar.style.backgroundColor = "red";
+        fichero.style.borderColor = "red";
     } else {
         color = "yellow";
-        document.getElementById("jugar").style.backgroundColor = "yellow";
-        document.getElementById("fichero").style.borderColor = "yellow";
+        jugar.style.backgroundColor = "yellow";
+        fichero.style.borderColor = "yellow";
     }
 }
 
@@ -310,20 +314,20 @@ function reset_temporizador() {
 function temporizador() {
     tiempo = 10;
 
-    document.getElementById("jugar").style.backgroundColor = color;
-    document.getElementById("jugar").style.color = "black";
-    document.getElementById("jugar").innerHTML = tiempo;
+    jugar.style.backgroundColor = color;
+    jugar.style.color = "black";
+    jugar.innerText = tiempo;
 
     turno = setInterval(function () {
         tiempo--;
 
-        document.getElementById("jugar").innerHTML = tiempo;
+        jugar.innerText = tiempo;
 
         if (tiempo === 0) {
             alertas();
 
             cambiar_color();
-            document.getElementById("jugar").style.backgroundColor = color;
+            jugar.style.backgroundColor = color;
             tiempo = 11;
         }
     }, 1000);
@@ -332,50 +336,48 @@ function temporizador() {
 function victoria() {
     tiempo = undefined;
 
-    document.getElementById("jugar").innerHTML = "¿Otra?";
-    document.getElementById("jugar").style.backgroundColor = "black";
-    document.getElementById("jugar").style.color = "white";
+    jugar.innerText = "¿Otra?";
+    jugar.style.backgroundColor = "black";
+    jugar.style.color = "white";
 
     if (ficha_bucle == "yellow") {
         setTimeout(function () {
-            document.getElementById("victoria").style.visibility = "visible";
+            vic.style.visibility = "visible";
 
-            document.getElementById("victoria").innerHTML =
+            vic.innerHTML =
                 " <span style='color: yellow;'>" +
                 "Ganaste" +
                 " " +
                 document.getElementById("p1").innerHTML +
                 "!!" +
                 "</span>";
-        }, 800);
+        }, 1000);
     } else if (ficha_bucle == "red") {
         setTimeout(function () {
             document.getElementById("victoria").style.visibility = "visible";
 
-            document.getElementById("victoria").innerHTML =
+            vic.innerHTML =
                 " <span style='color: red;'>" +
                 "Ganaste" +
                 " " +
                 document.getElementById("p2").innerHTML +
                 "!!" +
                 "</span>";
-        }, 800);
+        }, 1000);
     }
 }
 
 function empate() {
-    ocultar_deshacer();
-    reset_temporizador();
     tiempo = undefined;
 
-    document.getElementById("jugar").innerHTML = "¿Otra?";
-    document.getElementById("jugar").style.backgroundColor = "black";
-    document.getElementById("jugar").style.color = "white";
+    jugar.innerText = "¿Otra?";
+    jugar.style.backgroundColor = "black";
+    jugar.style.color = "white";
 
     setTimeout(function () {
-        document.getElementById("victoria").style.visibility = "visible";
+        vic.style.visibility = "visible";
 
-        document.getElementById("victoria").innerHTML =
+        vic.innerHTML =
             " <span style='color: black;'>" +
             "EMPATE TÉCNICO. BIEN JUGADO..." +
             "</span>";
@@ -567,11 +569,9 @@ function vdiagonal_ascendente() {
 }
 
 function alertas() {
-    jugar = document.getElementById("jugar");
-
     if (
-        document.getElementById("jugar").innerHTML == "¡JUGAR!" ||
-        document.getElementById("jugar").innerHTML == "¿Otra?"
+        jugar.innerText == "¡JUGAR!" ||
+        jugar.innerText == "¿Otra?"
     ) {
         jugar.disabled = true;
 
@@ -585,7 +585,7 @@ function alertas() {
         return false;
     }
 
-    if (document.getElementById("jugar").innerHTML == tiempo && tiempo === 0) {
+    if (jugar.innerHTML == tiempo && tiempo === 0) {
         jugar.disabled = true;
 
         jugar.classList.add("alerta3");
@@ -598,7 +598,7 @@ function alertas() {
         return true;
     }
 
-    if (document.getElementById("jugar").innerHTML == tiempo) {
+    if (jugar.innerHTML == tiempo) {
         jugar.disabled = true;
 
         jugar.classList.add("alerta2");
