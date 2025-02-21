@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnakeGame</title>
+    <link rel="stylesheet" href="snake.css">
+</head>
+
+<body>
+    <h1>SnakeGame</h1>
+    <p id="pInfo">Selecciona un punto donde iniciar la partida. </p>
+    <article class="snakeBox" id="sBox">
+        <div class="fila fila1">
+            <div class="columna columna00" id="0"></div>
+            <div class="columna columna01" id="1"></div>
+            <div class="columna columna02" id="2"></div>
+            <div class="columna columna03" id="3"></div>
+            <div class="columna columna04" id="4"></div>
+            <div class="columna columna05" id="5"></div>
+            <div class="columna columna06" id="6"></div>
+            <div class="columna columna07" id="7"></div>
+            <div class="columna columna08" id="8"></div>
+            <div class="columna columna09" id="9"></div>
+            <div class="columna columna10" id="10"></div>
+            <div class="columna columna11" id="11"></div>
+            <div class="columna columna12" id="12"></div>
+            <div class="columna columna13" id="13"></div>
+            <div class="columna columna14" id="14"></div>
+            <div class="columna columna15" id="15"></div>
+            <div class="columna columna16" id="16"></div>
+            <div class="columna columna17" id="17"></div>
+            <div class="columna columna18" id="18"></div>
+            <div class="columna columna19" id="19"></div>
+        </div>
+        <div class="fila fila2">
+            <div class="columna columna20" id="20"></div>
+            <div class="columna columna21" id="21"></div>
+            <div class="columna columna22" id="22"></div>
+            <div class="columna columna23" id="23"></div>
+            <div class="columna columna24" id="24"></div>
+            <div class="columna columna25" id="25"></div>
+            <div class="columna columna26" id="26"></div>
+            <div class="columna columna27" id="27"></div>
+            <div class="columna columna28" id="28"></div>
+            <div class="columna columna29" id="29"></div>
+            <div class="columna columna30" id="30"></div>
+            <div class="columna columna31" id="31"></div>
+            <div class="columna columna32" id="32"></div>
+            <div class="columna columna33" id="33"></div>
+            <div class="columna columna34" id="34"></div>
+            <div class="columna columna35" id="35"></div>
+            <div class="columna columna36" id="36"></div>
+            <div class="columna columna37" id="37"></div>
+            <div class="columna columna38" id="38"></div>
+            <div class="columna columna39" id="39"></div>
+        </div>
+        <div class="fila fila3">
+            <div class="columna columna40" id="40"></div>
+            <div class="columna columna41" id="41"></div>
+            <div class="columna columna42" id="42"></div>
+            <div class="columna columna43" id="43"></div>
+            <div class="columna columna44" id="44"></div>
+            <div class="columna columna45" id="45"></div>
+            <div class="columna columna46" id="46"></div>
+            <div class="columna columna47" id="47"></div>
+            <div class="columna columna48" id="48"></div>
+            <div class="columna columna49" id="49"></div>
+            <div class="columna columna50" id="50"></div>
+            <div class="columna columna51" id="51"></div>
+            <div class="columna columna52" id="52"></div>
+            <div class="columna columna53" id="53"></div>
+            <div class="columna columna54" id="54"></div>
+            <div class="columna columna55" id="55"></div>
+            <div class="columna columna56" id="56"></div>
+            <div class="columna columna57" id="57"></div>
+            <div class="columna columna58" id="58"></div>
+            <div class="columna columna59" id="59"></div>
+        </div>
+        <div class="fila fila4">
+            <div class="columna columna60" id="60"></div>
+            <div class="columna columna61" id="61"></div>
+            <div class="columna columna62" id="62"></div>
+            <div class="columna columna63" id="63"></div>
+            <div class="columna columna64" id="64"></div>
+            <div class="columna columna65" id="65"></div>
+            <div class="columna columna66" id="66"></div>
+            <div class="columna columna67" id="67"></div>
+            <div class="columna columna68" id="68"></div>
+            <div class="columna columna69" id="69"></div>
+            <div class="columna columna70" id="70"></div>
+            <div class="columna columna71" id="71"></div>
+            <div class="columna columna72" id="72"></div>
+            <div class="columna columna73" id="73"></div>
+            <div class="columna columna74" id="74"></div>
+            <div class="columna columna75" id="75"></div>
+            <div class="columna columna76" id="76"></div>
+            <div class="columna columna77" id="77"></div>
+            <div class="columna columna78" id="78"></div>
+            <div class="columna columna79" id="79"></div>
+        </div>
+        <div class="fila fila5">
+            <div class="columna columna80" id="80"></div>
+            <div class="columna columna81" id="81"></div>
+            <div class="columna columna82" id="82"></div>
+            <div class="columna columna83" id="83"></div>
+            <div class="columna columna84" id="84"></div>
+            <div class="columna columna85" id="85"></div>
+            <div class="columna columna86" id="86"></div>
+            <div class="columna columna87" id="87"></div>
+            <div class="columna columna88" id="88"></div>
+            <div class="columna columna89" id="89"></div>
+            <div class="columna columna90" id="90"></div>
+            <div class="columna columna91" id="91"></div>
+            <div class="columna columna92" id="92"></div>
+            <div class="columna columna93" id="93"></div>
+            <div class="columna columna94" id="94"></div>
+            <div class="columna columna95" id="95"></div>
+            <div class="columna columna96" id="96"></div>
+            <div class="columna columna97" id="97"></div>
+            <div class="columna columna98" id="98"></div>
+            <div class="columna columna99" id="99"></div>
+        </div>
+        <div class="fila fila6">
+            <div class="columna columna100" id="100"></div>
+            <div class="columna columna101" id="101"></div>
+            <div class="columna columna102" id="102"></div>
+            <div class="columna columna103" id="103"></div>
+            <div class="columna columna104" id="104"></div>
+            <div class="columna columna105" id="105"></div>
+            <div class="columna columna106" id="106"></div>
+            <div class="columna columna107" id="107"></div>
+            <div class="columna columna108" id="108"></div>
+            <div class="columna columna109" id="109"></div>
+            <div class="columna columna110" id="110"></div>
+            <div class="columna columna111" id="111"></div>
+            <div class="columna columna112" id="112"></div>
+            <div class="columna columna113" id="113"></div>
+            <div class="columna columna114" id="114"></div>
+            <div class="columna columna115" id="115"></div>
+            <div class="columna columna116" id="116"></div>
+            <div class="columna columna117" id="117"></div>
+            <div class="columna columna118" id="118"></div>
+            <div class="columna columna119" id="119"></div>
+        </div>
+        <div class="fila fila7">
+            <div class="columna columna120" id="120"></div>
+            <div class="columna columna121" id="121"></div>
+            <div class="columna columna122" id="122"></div>
+            <div class="columna columna123" id="123"></div>
+            <div class="columna columna124" id="124"></div>
+            <div class="columna columna125" id="125"></div>
+            <div class="columna columna126" id="126"></div>
+            <div class="columna columna127" id="127"></div>
+            <div class="columna columna128" id="128"></div>
+            <div class="columna columna129" id="129"></div>
+            <div class="columna columna130" id="130"></div>
+            <div class="columna columna131" id="131"></div>
+            <div class="columna columna132" id="132"></div>
+            <div class="columna columna133" id="133"></div>
+            <div class="columna columna134" id="134"></div>
+            <div class="columna columna135" id="135"></div>
+            <div class="columna columna136" id="136"></div>
+            <div class="columna columna137" id="137"></div>
+            <div class="columna columna138" id="138"></div>
+            <div class="columna columna139" id="139"></div>
+        </div>
+        <div class="fila fila8">
+            <div class="columna columna140" id="140"></div>
+            <div class="columna columna141" id="141"></div>
+            <div class="columna columna142" id="142"></div>
+            <div class="columna columna143" id="143"></div>
+            <div class="columna columna144" id="144"></div>
+            <div class="columna columna145" id="145"></div>
+            <div class="columna columna146" id="146"></div>
+            <div class="columna columna147" id="147"></div>
+            <div class="columna columna148" id="148"></div>
+            <div class="columna columna149" id="149"></div>
+            <div class="columna columna150" id="150"></div>
+            <div class="columna columna151" id="151"></div>
+            <div class="columna columna152" id="152"></div>
+            <div class="columna columna153" id="153"></div>
+            <div class="columna columna154" id="154"></div>
+            <div class="columna columna155" id="155"></div>
+            <div class="columna columna156" id="156"></div>
+            <div class="columna columna157" id="157"></div>
+            <div class="columna columna158" id="158"></div>
+            <div class="columna columna159" id="159"></div>
+        </div>
+        <div class="fila fila9">
+            <div class="columna columna160" id="160"></div>
+            <div class="columna columna161" id="161"></div>
+            <div class="columna columna162" id="162"></div>
+            <div class="columna columna163" id="163"></div>
+            <div class="columna columna164" id="164"></div>
+            <div class="columna columna165" id="165"></div>
+            <div class="columna columna166" id="166"></div>
+            <div class="columna columna167" id="167"></div>
+            <div class="columna columna168" id="168"></div>
+            <div class="columna columna169" id="169"></div>
+            <div class="columna columna170" id="170"></div>
+            <div class="columna columna171" id="171"></div>
+            <div class="columna columna172" id="172"></div>
+            <div class="columna columna173" id="173"></div>
+            <div class="columna columna174" id="174"></div>
+            <div class="columna columna175" id="175"></div>
+            <div class="columna columna176" id="176"></div>
+            <div class="columna columna177" id="177"></div>
+            <div class="columna columna178" id="178"></div>
+            <div class="columna columna179" id="179"></div>
+        </div>
+        <div class="fila fila10">
+            <div class="columna columna180" id="180"></div>
+            <div class="columna columna181" id="181"></div>
+            <div class="columna columna182" id="182"></div>
+            <div class="columna columna183" id="183"></div>
+            <div class="columna columna184" id="184"></div>
+            <div class="columna columna185" id="185"></div>
+            <div class="columna columna186" id="186"></div>
+            <div class="columna columna187" id="187"></div>
+            <div class="columna columna188" id="188"></div>
+            <div class="columna columna189" id="189"></div>
+            <div class="columna columna190" id="190"></div>
+            <div class="columna columna191" id="191"></div>
+            <div class="columna columna192" id="192"></div>
+            <div class="columna columna193" id="193"></div>
+            <div class="columna columna194" id="194"></div>
+            <div class="columna columna195" id="195"></div>
+            <div class="columna columna196" id="196"></div>
+            <div class="columna columna197" id="197"></div>
+            <div class="columna columna198" id="198"></div>
+            <div class="columna columna199" id="199"></div>
+        </div>
+        <div class="fila fila11">
+            <div class="columna columna200" id="200"></div>
+            <div class="columna columna201" id="201"></div>
+            <div class="columna columna202" id="202"></div>
+            <div class="columna columna203" id="203"></div>
+            <div class="columna columna204" id="204"></div>
+            <div class="columna columna205" id="205"></div>
+            <div class="columna columna206" id="206"></div>
+            <div class="columna columna207" id="207"></div>
+            <div class="columna columna208" id="208"></div>
+            <div class="columna columna209" id="209"></div>
+            <div class="columna columna210" id="210"></div>
+            <div class="columna columna211" id="211"></div>
+            <div class="columna columna212" id="212"></div>
+            <div class="columna columna213" id="213"></div>
+            <div class="columna columna214" id="214"></div>
+            <div class="columna columna215" id="215"></div>
+            <div class="columna columna216" id="216"></div>
+            <div class="columna columna217" id="217"></div>
+            <div class="columna columna218" id="218"></div>
+            <div class="columna columna219" id="219"></div>
+        </div>
+        <div class="fila fila12">
+            <div class="columna columna220" id="220"></div>
+            <div class="columna columna221" id="221"></div>
+            <div class="columna columna222" id="222"></div>
+            <div class="columna columna223" id="223"></div>
+            <div class="columna columna224" id="224"></div>
+            <div class="columna columna225" id="225"></div>
+            <div class="columna columna226" id="226"></div>
+            <div class="columna columna227" id="227"></div>
+            <div class="columna columna228" id="228"></div>
+            <div class="columna columna229" id="229"></div>
+            <div class="columna columna230" id="230"></div>
+            <div class="columna columna231" id="231"></div>
+            <div class="columna columna232" id="232"></div>
+            <div class="columna columna233" id="233"></div>
+            <div class="columna columna234" id="234"></div>
+            <div class="columna columna235" id="235"></div>
+            <div class="columna columna236" id="236"></div>
+            <div class="columna columna237" id="237"></div>
+            <div class="columna columna238" id="238"></div>
+            <div class="columna columna239" id="239"></div>
+        </div>
+        <div class="fila fila13">
+            <div class="columna columna240" id="240"></div>
+            <div class="columna columna241" id="241"></div>
+            <div class="columna columna242" id="242"></div>
+            <div class="columna columna243" id="243"></div>
+            <div class="columna columna244" id="244"></div>
+            <div class="columna columna245" id="245"></div>
+            <div class="columna columna246" id="246"></div>
+            <div class="columna columna247" id="247"></div>
+            <div class="columna columna248" id="248"></div>
+            <div class="columna columna249" id="249"></div>
+            <div class="columna columna250" id="250"></div>
+            <div class="columna columna251" id="251"></div>
+            <div class="columna columna252" id="252"></div>
+            <div class="columna columna253" id="253"></div>
+            <div class="columna columna254" id="254"></div>
+            <div class="columna columna255" id="255"></div>
+            <div class="columna columna256" id="256"></div>
+            <div class="columna columna257" id="257"></div>
+            <div class="columna columna258" id="258"></div>
+            <div class="columna columna259" id="259"></div>
+        </div>
+        <div class="fila fila14">
+            <div class="columna columna260" id="260"></div>
+            <div class="columna columna261" id="261"></div>
+            <div class="columna columna262" id="262"></div>
+            <div class="columna columna263" id="263"></div>
+            <div class="columna columna264" id="264"></div>
+            <div class="columna columna265" id="265"></div>
+            <div class="columna columna266" id="266"></div>
+            <div class="columna columna267" id="267"></div>
+            <div class="columna columna268" id="268"></div>
+            <div class="columna columna269" id="269"></div>
+            <div class="columna columna270" id="270"></div>
+            <div class="columna columna271" id="271"></div>
+            <div class="columna columna272" id="272"></div>
+            <div class="columna columna273" id="273"></div>
+            <div class="columna columna274" id="274"></div>
+            <div class="columna columna275" id="275"></div>
+            <div class="columna columna276" id="276"></div>
+            <div class="columna columna277" id="277"></div>
+            <div class="columna columna278" id="278"></div>
+            <div class="columna columna279" id="279"></div>
+        </div>
+        <div class="fila fila15">
+            <div class="columna columna280" id="280"></div>
+            <div class="columna columna281" id="281"></div>
+            <div class="columna columna282" id="282"></div>
+            <div class="columna columna283" id="283"></div>
+            <div class="columna columna284" id="284"></div>
+            <div class="columna columna285" id="285"></div>
+            <div class="columna columna286" id="286"></div>
+            <div class="columna columna287" id="287"></div>
+            <div class="columna columna288" id="288"></div>
+            <div class="columna columna289" id="289"></div>
+            <div class="columna columna290" id="290"></div>
+            <div class="columna columna291" id="291"></div>
+            <div class="columna columna292" id="292"></div>
+            <div class="columna columna293" id="293"></div>
+            <div class="columna columna294" id="294"></div>
+            <div class="columna columna295" id="295"></div>
+            <div class="columna columna296" id="296"></div>
+            <div class="columna columna297" id="297"></div>
+            <div class="columna columna298" id="298"></div>
+            <div class="columna columna299" id="299"></div>
+        </div>
+        <div class="fila fila16">
+            <div class="columna columna300" id="300"></div>
+            <div class="columna columna301" id="301"></div>
+            <div class="columna columna302" id="302"></div>
+            <div class="columna columna303" id="303"></div>
+            <div class="columna columna304" id="304"></div>
+            <div class="columna columna305" id="305"></div>
+            <div class="columna columna306" id="306"></div>
+            <div class="columna columna307" id="307"></div>
+            <div class="columna columna308" id="308"></div>
+            <div class="columna columna309" id="309"></div>
+            <div class="columna columna310" id="310"></div>
+            <div class="columna columna311" id="311"></div>
+            <div class="columna columna312" id="312"></div>
+            <div class="columna columna313" id="313"></div>
+            <div class="columna columna314" id="314"></div>
+            <div class="columna columna315" id="315"></div>
+            <div class="columna columna316" id="316"></div>
+            <div class="columna columna317" id="317"></div>
+            <div class="columna columna318" id="318"></div>
+            <div class="columna columna319" id="319"></div>
+        </div>
+        <div class="fila fila17">
+            <div class="columna columna320" id="320"></div>
+            <div class="columna columna321" id="321"></div>
+            <div class="columna columna322" id="322"></div>
+            <div class="columna columna323" id="323"></div>
+            <div class="columna columna324" id="324"></div>
+            <div class="columna columna325" id="325"></div>
+            <div class="columna columna326" id="326"></div>
+            <div class="columna columna327" id="327"></div>
+            <div class="columna columna328" id="328"></div>
+            <div class="columna columna329" id="329"></div>
+            <div class="columna columna330" id="330"></div>
+            <div class="columna columna331" id="331"></div>
+            <div class="columna columna332" id="332"></div>
+            <div class="columna columna333" id="333"></div>
+            <div class="columna columna334" id="334"></div>
+            <div class="columna columna335" id="335"></div>
+            <div class="columna columna336" id="336"></div>
+            <div class="columna columna337" id="337"></div>
+            <div class="columna columna338" id="338"></div>
+            <div class="columna columna339" id="339"></div>
+        </div>
+        <div class="fila fila18">
+            <div class="columna columna340" id="340"></div>
+            <div class="columna columna341" id="341"></div>
+            <div class="columna columna342" id="342"></div>
+            <div class="columna columna343" id="343"></div>
+            <div class="columna columna344" id="344"></div>
+            <div class="columna columna345" id="345"></div>
+            <div class="columna columna346" id="346"></div>
+            <div class="columna columna347" id="347"></div>
+            <div class="columna columna348" id="348"></div>
+            <div class="columna columna349" id="349"></div>
+            <div class="columna columna350" id="350"></div>
+            <div class="columna columna351" id="351"></div>
+            <div class="columna columna352" id="352"></div>
+            <div class="columna columna353" id="353"></div>
+            <div class="columna columna354" id="354"></div>
+            <div class="columna columna355" id="355"></div>
+            <div class="columna columna356" id="356"></div>
+            <div class="columna columna357" id="357"></div>
+            <div class="columna columna358" id="358"></div>
+            <div class="columna columna359" id="359"></div>
+        </div>
+        <div class="fila fila19">
+            <div class="columna columna360" id="360"></div>
+            <div class="columna columna361" id="361"></div>
+            <div class="columna columna362" id="362"></div>
+            <div class="columna columna363" id="363"></div>
+            <div class="columna columna364" id="364"></div>
+            <div class="columna columna365" id="365"></div>
+            <div class="columna columna366" id="366"></div>
+            <div class="columna columna367" id="367"></div>
+            <div class="columna columna368" id="368"></div>
+            <div class="columna columna369" id="369"></div>
+            <div class="columna columna370" id="370"></div>
+            <div class="columna columna371" id="371"></div>
+            <div class="columna columna372" id="372"></div>
+            <div class="columna columna373" id="373"></div>
+            <div class="columna columna374" id="374"></div>
+            <div class="columna columna375" id="375"></div>
+            <div class="columna columna376" id="376"></div>
+            <div class="columna columna377" id="377"></div>
+            <div class="columna columna378" id="378"></div>
+            <div class="columna columna379" id="379"></div>
+        </div>
+        <div class="fila fila20">
+            <div class="columna columna380" id="380"></div>
+            <div class="columna columna381" id="381"></div>
+            <div class="columna columna382" id="382"></div>
+            <div class="columna columna383" id="383"></div>
+            <div class="columna columna384" id="384"></div>
+            <div class="columna columna385" id="385"></div>
+            <div class="columna columna386" id="386"></div>
+            <div class="columna columna387" id="387"></div>
+            <div class="columna columna388" id="388"></div>
+            <div class="columna columna389" id="389"></div>
+            <div class="columna columna390" id="390"></div>
+            <div class="columna columna391" id="391"></div>
+            <div class="columna columna392" id="392"></div>
+            <div class="columna columna393" id="393"></div>
+            <div class="columna columna394" id="394"></div>
+            <div class="columna columna395" id="395"></div>
+            <div class="columna columna396" id="396"></div>
+            <div class="columna columna397" id="397"></div>
+            <div class="columna columna398" id="398"></div>
+            <div class="columna columna399" id="399"></div>
+        </div>
+    </article>
+    <script src="snake.js"></script>
+</body>
+
+</html>
