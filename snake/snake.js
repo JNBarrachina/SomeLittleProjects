@@ -9,6 +9,7 @@ let maxFood = 400;
 let food = [];
 let snakeColor = "greenyellow";
 let prevDir = "ArrowRight";
+let movementID = null;
 
 function startGame(event) {
     let initID = parseInt(event.target.id);
@@ -22,15 +23,15 @@ function startGame(event) {
 
 function movement(snake) {
 
-    setInterval(() => {
+    movementID = setInterval(() => {
         deleteSnake(snake);
+
         for (let e = snake.length - 1; e > 0; e--){
             snake[e] = snake[e - 1];
         }
         snake[0] = snake [0] + mHead;
 
         checkLimits(snake);
-        autokill(snake);
         paintSnake(snake);
         eatFood(snake, food);
     }, speed);
@@ -49,9 +50,9 @@ function paintSnake(snake) {
         document.getElementById(snake[p]).style.backgroundColor = snakeColor;
     }
     
+    autokill(snake);
     return;
 }
-
 
 function direction(event){
     let dir = event.key;
@@ -147,9 +148,10 @@ function checkLimits(snake){
     }
 }
 
-function autokill(snake, mHead){
+function autokill(snake){
     for (let k = 0; k < snake.length - 1; k++){
         if ((snake[0] + mHead) == snake[k]){
+            clearInterval(movementID);
             gameover();
         }
     }
@@ -161,6 +163,8 @@ function score(){
 }
 
 function gameover(){
-    alert("YOU LOOSE\nPoints: " + points);
-    location.reload();
+    setInterval(() => {
+        alert("YOU LOOSE\nPoints: " + points);
+        location.reload();
+    } , 200); 
 }
