@@ -163,8 +163,6 @@ function score(){
 }
 
 function gameover(){
-    setInterval(() => {
-        alert("YOU LOOSE\nPoints: " + points);
-        location.reload();
-    } , 200); 
+    alert("YOU LOOSE\nPoints: " + points);
+    location.reload();
 }
