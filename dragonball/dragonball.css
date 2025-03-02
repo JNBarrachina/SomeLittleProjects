@@ -284,9 +284,9 @@ p{
 
 }
 
-@media only screen and (max-width: 400px) { 
+@media only screen and (max-width: 600px) { 
     header{
-        padding: 0.6rem;
+        padding: 0.2rem;
     }
 
     .itemNav{
