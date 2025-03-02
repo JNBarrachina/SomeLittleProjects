@@ -18,9 +18,12 @@ Pequeños proyectos desarrollados en pequeños pasos.
     - 2.0. Estadisticas de los jugadores. Se tendrá que mostrar dicho listado a través de un botón y al final de cada partida (partidas jugadas, partidas ganadas, empates). Cuando alguno de los jugadores gane la partida, se mostrará su posición en una clasificación. Si el usuario ya ha jugado más veces, el programa deberá sumarle una victoria a las que ya hubiera obtenido.
 
     - 3.0. (A futuro) Personalización del tablero y fichas, IA...
-    
 
-2. Lista de tareas: Este pequeño proyecto nace de mis primeros pasos con Python. Su nombre ya describe por sí solo cuál es su propósito, y si bien ya es funcional, es tan solo un esqueleto sobre el que se podrán ir añadiendo nuevas mejoras. 
+2. DragonBall Frontend: Working with an API.
+
+3. SnakeGame: Classic snakegame.
+
+4. Lista de tareas: Este pequeño proyecto nace de mis primeros pasos con Python. Su nombre ya describe por sí solo cuál es su propósito, y si bien ya es funcional, es tan solo un esqueleto sobre el que se podrán ir añadiendo nuevas mejoras. 
 
     - Poder eliminar todas las tareas completadas al mismo tiempo.
     - Añadir a cada tarea la fecha en la que se introduce en el programa.

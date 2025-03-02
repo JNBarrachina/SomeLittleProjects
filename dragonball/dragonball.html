@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DragonBall</title>
+    <link rel="stylesheet" href="dragonball.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+    <header>
+        <a href="dragonball.html" class="linkBall"><img src="dblogo.webp" alt="" class="imgball" id="imgDB"></a>
+        <input type="search" placeholder="Busca un personaje..." class="inDB" id="inputDB">
+        <nav class="navDB" id="nDB">
+            <ul class="ulDB">
+                <li class="itemNav" id="itemNavRace"> Race
+                    <ul class="ulNav ulRace">
+                        <li class="subitemNav navRace">Human</li>
+                        <li class="subitemNav navRace">Saiyan</li>
+                        <li class="subitemNav navRace">Namekian</li>
+                        <li class="subitemNav navRace">Majin</li>
+                        <li class="subitemNav navRace">Frieza</li>
+                        <li class="subitemNav navRace">Android</li>
+                        <li class="subitemNav navRace">Jiren</li>
+                        <li class="subitemNav navRace">God Angel</li>
+                        <li class="subitemNav navRace">Evil</li>
+                        <li class="subitemNav navRace">Nucleico</li>
+                        <li class="subitemNav navRace">Nucleico benigno</li>
+                        <li class="subitemNav navRace">Unknown</li>
+                    </ul>
+                </li>
+                <li class="itemNav" id="itemNavGen">Gender
+                    <ul class="ulNav ulGen">
+                        <li class="subitemNav navGen" id="filterMale">Male</li>
+                        <li class="subitemNav navGen" id="filterFemale">Female</li>
+                        <li class="subitemNav navGen" id="filterUnknown">Unknown</li>
+                    </ul>
+                </li>
+                <li class="itemNav" id="itemNavAfi">Affiliation
+                    <ul class="ulNav ulAfi">
+                        <li class="subitemNav navAfi">Z Fighter</li>
+                        <li class="subitemNav navAfi">Red Ribbon Army</li>
+                        <li class="subitemNav navAfi">Namekian Warrior</li>
+                        <li class="subitemNav navAfi">Freelancer</li>
+                        <li class="subitemNav navAfi">Army of Frieza</li>
+                        <li class="subitemNav navAfi">Pride Troopers</li>
+                        <li class="subitemNav navAfi">Assistant of Vermoud</li>
+                        <li class="subitemNav navAfi">Assistant of Beerus</li>
+                        <li class="subitemNav navAfi">Villain</li>
+                        <li class="subitemNav navAfi">Other</li>
+                    </ul>
+                </li>
+                <li class="itemNav" id="itemNavPlanet">Planets
+                    <ul class="ulNav ulPlanet">
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article class="dbList" id="dbList">
+        </article>
+        <section class="pageButtons">
+            <button class="pageBut" id="prevB">
+                << Prev Page</button>
+                    <button class="pageBut" id="nextB">Next page >></button>
+        </section>
+    </main>
+    <footer></footer>
+    <script src="dragonball.js"></script>
+</body>
+
+</html>
