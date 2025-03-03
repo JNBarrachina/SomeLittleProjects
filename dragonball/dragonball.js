@@ -6,6 +6,9 @@ let pages = {
     next: "",
 };
 
+
+showCharacters();
+
 function showCharacters(){
     fetch(pages.current)
     .then((response) => response.json())
@@ -26,8 +29,6 @@ function showCharacters(){
         console.error("Error en la solicitud:", error);
     });
 }
-
-showCharacters();
 
 function createCharac(character) {
     const boxChar = document.createElement("article");
@@ -115,29 +116,61 @@ function searchCharacters(){
     }
 }
 
-let filterRace = ["/characters?race=Human", "/characters?race=Saiyan", "/characters?race=Namekian", "/characters?race=Majin", "/characters?race=Frieza", "/characters?race=Android", "/characters?race=Jiren", "/characters?race=God Angel", "/characters?race=Evil", "/characters?race=Nucleico", "/characters?race=Nucleico benigno", "/characters?race=Unknown"];
-let filterGender = ["/characters?gender=Male", "/characters?gender=Female", "/characters?gender=Unknown"];
 
-let idRace = 0;
-const raceFilter = document.querySelectorAll(".navRace");
-raceFilter.forEach(race => {
-    race.addEventListener("click", filterCharacters);
-    idRace++;
-})
+let filterRace = [];
+let filterGen = [];
+let filterAffi = [];
 
-function filterCharacters(filter){
 
-    fetch(API_URL + filter)
+function saveFilters(){
+    fetch("https://dragonball-api.com/api/characters?limit=1000")
     .then((response) => response.json())
     .then((data) => {
-        charactersGrid.innerHTML = "";
-        upPage();
         
-        data.forEach(character => {
-            createCharac(character);
+        data.items.forEach(character => {
+            if ((filterRace.includes(character.race) == false)){
+                filterRace.push(character.race);
+            }
+
+            if ((filterGen.includes(character.gender) == false)){
+                filterGen.push(character.gender);
+            }
+
+            if ((filterAffi.includes(character.affiliation) == false)){
+                filterAffi.push(character.affiliation);
+            }
         });
     });
 }
+
+saveFilters();
+
+function createFilters(){
+    filterRace.forEach(race => {
+        console.log(race);
+        const allRaces = document.getElementById("filterListRace");
+        const singleRace = document.createElement("li");
+        singleRace.setAttribute("class", "subitemNav");
+        singleRace.innerText = race;
+        allRaces.appendChild(singleRace);   
+    });
+}
+
+createFilters();
+
+// function filterCharacters(filter){
+
+//     fetch(API_URL + filter)
+//     .then((response) => response.json())
+//     .then((data) => {
+//         charactersGrid.innerHTML = "";
+//         upPage();
+        
+//         data.forEach(character => {
+//             createCharac(character);
+//         });
+//     });
+// }
 
 let characterDescription = document.createElement("p");
 characterDescription.setAttribute("class", "pDescription");
