@@ -19,7 +19,7 @@ header{
 
     background-color: black;
 
-    gap: 1.6rem;
+    gap: 1rem;
     padding: 0.6rem;
 
     position: sticky;
@@ -44,14 +44,6 @@ header{
 .imgball:hover{
     transform: scale(1.2);
     transition: 1.4s;
-}
-
-h1{
-    text-align: center;
-
-    color: orange;
-    font-weight: bold;
-    font-size: 1.2rem;
 }
 
 .inDB{
@@ -83,12 +75,12 @@ h1{
     justify-content: space-evenly;
     align-items: flex-start;
 
-    gap: 2rem;
+    gap: 1rem;
     padding: 0;
 
     color: white;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 16px;
 
     animation: fadeInUp 1s;
 }
@@ -145,7 +137,7 @@ main {
 
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: flex-start;
 }
 
@@ -160,17 +152,16 @@ main {
 }
 
 .dbCharacter{
-    width: 30%;
-    min-width: 250px;
+    width: 32%;
+    min-width: 360px;
 
     display: flex;
-    flex-flow: column wrap;
-    justify-content: space-evenly;
+    flex-flow: row nowrap;
+    justify-content: space-around;
     align-items: space-evenly;
-    flex-grow: 1;
 
     gap: 1rem;
-    padding: 2rem;
+    padding: 0.6rem;
 
     border: 2px solid orange;
     background-color: rgb(54, 53, 53);
@@ -179,45 +170,59 @@ main {
 }
 
 p{
-    text-align: center;
     font-weight: bold;
     color: white;
 }
 
 .characterName{
-    align-self: center;
-
-    padding: 1rem;
+    padding: 0.2rem;
+    text-align: center;
 
     color: orange;
-    background-color: black;
-    border-radius: 1rem;
+
 }
 
 .characterName:hover{
     cursor: pointer;
-    transform: scale(1.2);
+    transform: scale(1.05);
     transition: 1s;
     box-shadow: 0px 0px 10px 0px orange;
 }
 
 .imgCharacter{
+    padding: 0.4rem;
+    height: 180px;
     align-self: center;
-    height: 250px;
 }
 
 .imgCharacter:hover{
     transition: 1s;
-    transform: scale(1.3);
+    transform: scale(1.2);
 }
 
-.characterDescription{
-    width: 48%;
+.boxnameimg{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.moreinfoBox{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    gap: 0.8rem;
+    padding: 0.2rem;
+
+    font-size: 0.8rem;
+    text-align: end;
 }
 
 .characterInfo{
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: row wrap;
     align-items: center;
 
     background-color: black;
@@ -231,12 +236,20 @@ p{
     bottom: 0px;
 }
 
+.characterDescription{
+    width: 48%;
+
+    font-size: 0.8rem;
+}
+
 .planetInfo{
     width: 48%;
 
     display: flex;
     flex-flow: column wrap;
     align-items: center;
+
+    font-size: 0.8rem;
 
     gap: 1rem;
 }
@@ -309,6 +322,10 @@ p{
 @media only screen and (max-width: 600px) { 
     header{
         padding: 0.2rem;
+    }
+
+    .dbCharacter{
+        width: 100%;
     }
 
     .itemNav{

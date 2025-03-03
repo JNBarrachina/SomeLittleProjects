@@ -33,10 +33,12 @@ function createCharac(character) {
     const boxChar = document.createElement("article");
     boxChar.setAttribute("class", "dbCharacter");
 
+    const boxNameImg = document.createElement("section");
+    boxNameImg.setAttribute("class", "boximginfo");
+
     const charImg = document.createElement("img");
     charImg.setAttribute("class", "imgCharacter");
     charImg.src = character.image;
-
     const charName = document.createElement("p");
     charName.setAttribute("id", character.id);
     charName.setAttribute("class", "characterName");
@@ -44,15 +46,24 @@ function createCharac(character) {
     charName.addEventListener("mouseover", showDescription);
     charName.addEventListener("mouseout", hideDescription);
 
+    boxNameImg.append(charName, charImg);
+
+
+    const moreInfo = document.createElement("section");
+    moreInfo.setAttribute("class", "moreinfoBox");
     
-    const charKi = document.createElement("p");
-    charKi.innerText = character.ki;
     const charRace = document.createElement("p");
     charRace.innerText = character.race;
-    const charGen = document.createElement("p");
-    charGen.innerText = character.gender;
+    const charAffiliation = document.createElement("p")
+    charAffiliation.innerText = character.affiliation;
+    const charKi = document.createElement("p");
+    charKi.innerText = "KI: " + character.ki;
+    const charmaxKi = document.createElement("p");
+    charmaxKi.innerText = "maxKI: " + character.maxKi;
 
-    boxChar.append(charName, charImg);
+    moreInfo.append(charRace, charAffiliation, charKi, charmaxKi);
+
+    boxChar.append(boxNameImg, moreInfo);
     charactersGrid.append(boxChar);
 }
 
@@ -112,6 +123,8 @@ function searchCharacters(){
                 createCharac(character);
         });
         });
+
+        document.getElementById("paginationButtons").style.visibility = "collapse";
     }
 }
 
@@ -184,6 +197,8 @@ function filterCharacters(filter){
         data.forEach(character => {
             createCharac(character);
         });
+
+        document.getElementById("paginationButtons").style.visibility = "collapse";
     });
 }
 
