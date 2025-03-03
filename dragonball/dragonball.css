@@ -37,6 +37,10 @@ header{
     animation: fadeInDown 2s;
 }
 
+.imgplanet{
+    height: 200px;
+}
+
 .imgball:hover{
     transform: scale(1.2);
     transition: 1.4s;
@@ -207,16 +211,34 @@ p{
     transform: scale(1.3);
 }
 
-.pDescription{
-    padding: 1rem;
+.characterDescription{
+    width: 48%;
+}
+
+.characterInfo{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
 
     background-color: black;
 
     animation: fadeInUp 1s;
     visibility: hidden;
     
+    padding: 1rem;
+    gap: 1rem;
     position: fixed;
     bottom: 0px;
+}
+
+.planetInfo{
+    width: 48%;
+
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+
+    gap: 1rem;
 }
 
 .pageButtons{

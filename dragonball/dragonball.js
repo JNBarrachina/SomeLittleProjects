@@ -6,7 +6,6 @@ let pages = {
     next: "",
 };
 
-
 showCharacters();
 
 function showCharacters(){
@@ -53,7 +52,7 @@ function createCharac(character) {
     const charGen = document.createElement("p");
     charGen.innerText = character.gender;
 
-    boxChar.append(charName, charImg, charKi, charRace, charGen);
+    boxChar.append(charName, charImg);
     charactersGrid.append(boxChar);
 }
 
@@ -121,7 +120,6 @@ let filterRace = [];
 let filterGen = [];
 let filterAffi = [];
 
-
 function saveFilters(){
     fetch("https://dragonball-api.com/api/characters?limit=1000")
     .then((response) => response.json())
@@ -140,58 +138,93 @@ function saveFilters(){
                 filterAffi.push(character.affiliation);
             }
         });
+        createFilters();
     });
 }
 
 saveFilters();
 
 function createFilters(){
+    const allRaces = document.getElementById("filterListRace");
+    const allGenders = document.getElementById("filterListGen");
+    const allAffi = document.getElementById("filterListAffi");
+
     filterRace.forEach(race => {
-        console.log(race);
-        const allRaces = document.getElementById("filterListRace");
         const singleRace = document.createElement("li");
         singleRace.setAttribute("class", "subitemNav");
         singleRace.innerText = race;
+        singleRace.addEventListener("click", () => filterCharacters("/characters?race=" + race))
         allRaces.appendChild(singleRace);   
+    });
+
+    filterGen.forEach(gender => {
+        const singleGender = document.createElement("li");
+        singleGender.setAttribute("class", "subitemNav");
+        singleGender.innerText = gender;
+        singleGender.addEventListener("click", () => filterCharacters("/characters?gender=" + gender))
+        allGenders.appendChild(singleGender);   
+    });
+
+    filterAffi.forEach(affiliation => {
+        const singleAffi = document.createElement("li");
+        singleAffi.setAttribute("class", "subitemNav");
+        singleAffi.innerText = affiliation;
+        singleAffi.addEventListener("click", () => filterCharacters("/characters?affiliation=" + affiliation))
+        allAffi.appendChild(singleAffi);   
     });
 }
 
-createFilters();
-
-// function filterCharacters(filter){
-
-//     fetch(API_URL + filter)
-//     .then((response) => response.json())
-//     .then((data) => {
-//         charactersGrid.innerHTML = "";
-//         upPage();
+function filterCharacters(filter){
+    fetch(API_URL + filter)
+    .then((response) => response.json())
+    .then((data) => {
+        charactersGrid.innerHTML = "";
+        upPage();
         
-//         data.forEach(character => {
-//             createCharac(character);
-//         });
-//     });
-// }
+        data.forEach(character => {
+            createCharac(character);
+        });
+    });
+}
 
-let characterDescription = document.createElement("p");
-characterDescription.setAttribute("class", "pDescription");
+let characterInfo = document.createElement("section");
+characterInfo.setAttribute("class", "characterInfo");
 
 function showDescription(event){ 
     const idDescription = event.target.id;
     
-    characterDescription.innerText = "";
-
+    characterInfo.innerHTML = "";
+    
     fetch("https://dragonball-api.com/api/characters/" + idDescription)
         .then((response) => response.json())
         .then((data) => {
-            characterDescription.innerText = data.description;
+            let chDescription = document.createElement("p");
+            chDescription.setAttribute("class", "characterDescription");
+
+
+            let planetName = document.createElement("p");
+            let planetDescription = document.createElement("p");
+            let planetImage = document.createElement("img");
+            planetImage.setAttribute("class", "imgplanet");
+
+            chDescription.innerText = data.description
+            planetName.innerText = data.originPlanet.name;
+            planetDescription.innerText = data.originPlanet.description;
+            planetImage.src = data.originPlanet.image;
+
+            let planetInfo = document.createElement("section");
+            planetInfo.setAttribute("class", "planetInfo")
+            planetInfo.append(planetName, planetDescription, planetImage)
+
+            characterInfo.append(chDescription, planetInfo)
         });
 
-    charactersGrid.append(characterDescription);
-    characterDescription.style.visibility = "visible";
+    charactersGrid.append(characterInfo);
+    characterInfo.style.visibility = "visible";
 }
     
 function hideDescription(){
-    characterDescription.style.visibility = "hidden";
+    characterInfo.style.visibility = "hidden";
 }
 
 function upPage(){
