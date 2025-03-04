@@ -29,7 +29,7 @@ function showCharacters(){
     });
 }
 
-function createCharac(character) {
+async function createCharac(character) {
     const boxChar = document.createElement("article");
     boxChar.setAttribute("class", "dbCharacter");
 
@@ -48,7 +48,6 @@ function createCharac(character) {
 
     boxNameImg.append(charName, charImg);
 
-
     const moreInfo = document.createElement("section");
     moreInfo.setAttribute("class", "moreinfoBox");
     
@@ -61,10 +60,29 @@ function createCharac(character) {
     const charmaxKi = document.createElement("p");
     charmaxKi.innerText = "maxKI: " + character.maxKi;
 
-    moreInfo.append(charRace, charAffiliation, charKi, charmaxKi);
+    let planetInfo = document.createElement("section");
+    planetInfo.setAttribute("class", "planetInfo");
 
+    await characterOriginPlanet(character, planetInfo);
+
+    moreInfo.append(charRace, charAffiliation, charKi, charmaxKi, planetInfo);
     boxChar.append(boxNameImg, moreInfo);
     charactersGrid.append(boxChar);
+}
+
+function characterOriginPlanet(character, planetInfo){
+    return fetch("https://dragonball-api.com/api/characters/" + character.id)
+        .then((response) => response.json())
+        .then((data) => {
+            let planetName = document.createElement("p");
+            planetName.innerText = data.originPlanet.name;
+            planetName.setAttribute("class", "planetName");
+            let planetImage = document.createElement("img");
+            planetImage.setAttribute("class", "imgplanet");
+            planetImage.src = data.originPlanet.image;
+            
+            planetInfo.append(planetName, planetImage);
+        });
 }
 
 
@@ -166,7 +184,7 @@ function createFilters(){
         const singleRace = document.createElement("li");
         singleRace.setAttribute("class", "subitemNav");
         singleRace.innerText = race;
-        singleRace.addEventListener("click", () => filterCharacters("/characters?race=" + race))
+        singleRace.addEventListener("click", () => createUrlFilterTail("race=" + race))
         allRaces.appendChild(singleRace);   
     });
 
@@ -174,7 +192,7 @@ function createFilters(){
         const singleGender = document.createElement("li");
         singleGender.setAttribute("class", "subitemNav");
         singleGender.innerText = gender;
-        singleGender.addEventListener("click", () => filterCharacters("/characters?gender=" + gender))
+        singleGender.addEventListener("click", () => createUrlFilterTail("gender=" + gender))
         allGenders.appendChild(singleGender);   
     });
 
@@ -182,13 +200,32 @@ function createFilters(){
         const singleAffi = document.createElement("li");
         singleAffi.setAttribute("class", "subitemNav");
         singleAffi.innerText = affiliation;
-        singleAffi.addEventListener("click", () => filterCharacters("/characters?affiliation=" + affiliation))
+        singleAffi.addEventListener("click", () => createUrlFilterTail("affiliation=" + affiliation))
         allAffi.appendChild(singleAffi);   
     });
 }
 
-function filterCharacters(filter){
-    fetch(API_URL + filter)
+let filtersArray = [];
+let urlTail = "";
+
+function createUrlFilterTail(singleFilter){
+    filtersArray.push(singleFilter);
+
+    if (filtersArray.indexOf(singleFilter) != (filtersArray.length - 1)){
+            urlTail += singleFilter
+    }
+    else{
+        urlTail += saveFilters + "&";
+    }
+
+    console.log(filtersArray);
+    console.log(urlTail);
+
+    filterCharacters(urlTail)
+}
+
+function filterCharacters(urlTail){
+    fetch(API_URL + "/characters?" + urlTail)
     .then((response) => response.json())
     .then((data) => {
         charactersGrid.innerHTML = "";
