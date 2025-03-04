@@ -24,7 +24,7 @@ header{
 
     position: sticky;
     top: 0px;
-    z-index: 1;
+    z-index: 2;
 }
 
 
@@ -164,7 +164,7 @@ main {
 }
 
 .dbCharacter{
-    width: 32%;
+    width: fit-content;
     min-width: 360px;
 
     display: flex;
@@ -184,26 +184,53 @@ main {
 
 p{
     font-weight: bold;
-    color: white;
+    color: orange
 }
 
 .characterName{
-    padding: 0.2rem;
+    width: 100%;
+    
     text-align: center;
 
-    color: orange;
-
+    color: black;
 }
 
-.characterName:hover{
+.nameBox{
+    width: 100%;
+    position: relative;
+
+    padding: 0.4rem;
+
+    background-color: orange;
+    border-radius: 1rem;
+}
+
+.nameBox:hover{
     cursor: pointer;
-    transform: scale(1.05);
-    transition: 1s;
-    box-shadow: 0px 0px 10px 0px orange;
+    transition: 0.4s;
+    transform: scale(1.1);
+}
+
+.characterDescriptionBox{
+    position: absolute;
+    z-index: 1;
+
+    top: -15px;
+    left: 80px;
+
+    width: 240px;
+
+    font-size: 1rem;
+    text-align: center;
+    padding: 1rem;
+
+    color: white;
+    background-color: black;
+    border: 2px solid orange;
+    border-radius: 1rem;
 }
 
 .imgCharacter{
-    padding: 0.4rem;
     height: 180px;
     align-self: center;
 }
@@ -216,8 +243,8 @@ p{
 .boxnameimg{
     display: flex;
     flex-flow: column wrap;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .moreinfoBox{
@@ -233,32 +260,6 @@ p{
     text-align: end;
 }
 
-.characterInfo{
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-
-    background-color: black;
-
-    animation: fadeInUp 1s;
-    visibility: hidden;
-    
-    padding: 1rem;
-    gap: 1rem;
-    position: fixed;
-    bottom: 0px;
-}
-
-.characterDescription{
-    width: 48%;
-
-    font-size: 0.8rem;
-}
-
-.imgplanet{
-    height: 80px;
-}
-
 .planetInfo{
     display: flex;
     flex-flow: column wrap;
@@ -269,16 +270,28 @@ p{
     font-size: 0.8rem;
 
     background-color: black;
-    border-radius: 1rem;
+    border: 2px lightcoral solid;
+    border-radius: 0.6rem;
 
     gap: 0.4rem;
     padding: 0.8rem;
+}
+
+.planetInfo:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.6s;
+    box-shadow: 0px 0px 10px 0px orange;
 }
 
 .planetName{
     text-align: center;
 
     color: orangered;
+}
+
+.imgplanet{
+    height: 80px;
 }
 
 .pageButtons{
@@ -351,6 +364,10 @@ p{
         padding: 0.2rem;
     }
 
+    .itemNav{
+        font-size: 0.8rem;
+    }
+
     .imgball{
         height: 30px;
     }
@@ -359,7 +376,7 @@ p{
         width: 100%;
     }
 
-    .itemNav{
+    .characterDescriptionBox{
         font-size: 0.8rem;
     }
 }

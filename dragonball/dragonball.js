@@ -34,19 +34,25 @@ async function createCharac(character) {
     boxChar.setAttribute("class", "dbCharacter");
 
     const boxNameImg = document.createElement("section");
-    boxNameImg.setAttribute("class", "boximginfo");
+    boxNameImg.setAttribute("class", "boxnameimg");
+
+    const nameBox = document.createElement("section");
+    nameBox.setAttribute("class", "nameBox");
+    nameBox.setAttribute("id", `namebox${character.id}`);
+
+    const charName = document.createElement("p");
+    charName.addEventListener("mouseover", showDescription);
+    charName.addEventListener("mouseout", hideDescription);
+    charName.setAttribute("id", character.id);
+    charName.setAttribute("class", "characterName");
+    charName.innerText = character.name;
+    nameBox.append(charName);
 
     const charImg = document.createElement("img");
     charImg.setAttribute("class", "imgCharacter");
     charImg.src = character.image;
-    const charName = document.createElement("p");
-    charName.setAttribute("id", character.id);
-    charName.setAttribute("class", "characterName");
-    charName.innerText = character.name;
-    charName.addEventListener("mouseover", showDescription);
-    charName.addEventListener("mouseout", hideDescription);
-
-    boxNameImg.append(charName, charImg);
+    
+    boxNameImg.append(nameBox, charImg);
 
     const moreInfo = document.createElement("section");
     moreInfo.setAttribute("class", "moreinfoBox");
@@ -239,44 +245,47 @@ function filterCharacters(urlTail){
     });
 }
 
-let characterInfo = document.createElement("section");
-characterInfo.setAttribute("class", "characterInfo");
+let characterDescript = document.createElement("section");
+characterDescript.setAttribute("class", "characterDescriptionBox");
 
 function showDescription(event){ 
     const idDescription = event.target.id;
     
-    characterInfo.innerHTML = "";
+    characterDescript.innerHTML = "";
     
-    fetch("https://dragonball-api.com/api/characters/" + idDescription)
+    fetch(API_URL + "/characters/" + idDescription)
         .then((response) => response.json())
         .then((data) => {
             let chDescription = document.createElement("p");
-            chDescription.setAttribute("class", "characterDescription");
-
-
-            let planetName = document.createElement("p");
-            let planetDescription = document.createElement("p");
-            let planetImage = document.createElement("img");
-            planetImage.setAttribute("class", "imgplanet");
-
-            chDescription.innerText = data.description
-            planetName.innerText = data.originPlanet.name;
-            planetDescription.innerText = data.originPlanet.description;
-            planetImage.src = data.originPlanet.image;
-
-            let planetInfo = document.createElement("section");
-            planetInfo.setAttribute("class", "planetInfo")
-            planetInfo.append(planetName, planetDescription, planetImage)
-
-            characterInfo.append(chDescription, planetInfo)
+            chDescription.innerText = data.description;
+            characterDescript.append(chDescription);
         });
 
-    charactersGrid.append(characterInfo);
-    characterInfo.style.visibility = "visible";
+    const inboxDescription = document.getElementById(`namebox${idDescription}`);
+    inboxDescription.append(characterDescript);
+
+    characterDescript.style.visibility = "visible";
 }
+
+// function showPlanetDescription(event){ 
+
+            // let planetName = document.createElement("p");
+            // let planetDescription = document.createElement("p");
+            // let planetImage = document.createElement("img");
+            // planetImage.setAttribute("class", "imgplanet");
+
+            // chDescription.innerText = data.description
+            // planetName.innerText = data.originPlanet.name;
+            // planetDescription.innerText = data.originPlanet.description;
+            // planetImage.src = data.originPlanet.image;
+
+            // let planetInfo = document.createElement("section");
+            // planetInfo.setAttribute("class", "planetInfo")
+            // planetInfo.append(planetName, planetDescription, planetImage)
+// }
     
 function hideDescription(){
-    characterInfo.style.visibility = "hidden";
+    characterDescript.style.visibility = "hidden";
 }
 
 function upPage(){
