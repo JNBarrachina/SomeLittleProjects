@@ -40,13 +40,18 @@ async function createCharac(character) {
     nameBox.setAttribute("class", "nameBox");
     nameBox.setAttribute("id", `namebox${character.id}`);
 
+    const iconDescription = document.createElement("img");
+    iconDescription.setAttribute("class", "iconDescription");
+    iconDescription.src = "descriptionicon.svg";
     const charName = document.createElement("p");
-    charName.addEventListener("mouseover", showDescription);
+    charName.addEventListener("click", showDescription);
     charName.addEventListener("mouseout", hideDescription);
     charName.setAttribute("id", character.id);
+    charName.setAttribute("tabindex", "0");
     charName.setAttribute("class", "characterName");
     charName.innerText = character.name;
-    nameBox.append(charName);
+
+    nameBox.append(iconDescription, charName);
 
     const charImg = document.createElement("img");
     charImg.setAttribute("class", "imgCharacter");
