@@ -83,9 +83,9 @@ function characterOriginPlanet(character, planetInfo){
         .then((data) => {
             let planetName = document.createElement("p");
             planetName.innerText = data.originPlanet.name;
-            planetName.setAttribute("class", "planetName");
+            planetName.setAttribute("class", "characterPlanetName");
             let planetImage = document.createElement("img");
-            planetImage.setAttribute("class", "imgplanet");
+            planetImage.setAttribute("class", "characterPlanetImage");
             planetImage.src = data.originPlanet.image;
             
             planetInfo.append(planetName, planetImage);
@@ -181,6 +181,9 @@ function saveFilters(){
 }
 
 saveFilters();
+const prefixRace = "race=";
+const prefixGen = "gender=";
+const prefixAffi = "affiliation=";
 
 function createFilters(){
     const allRaces = document.getElementById("filterListRace");
@@ -191,7 +194,7 @@ function createFilters(){
         const singleRace = document.createElement("li");
         singleRace.setAttribute("class", "subitemNav"); 
         singleRace.innerText = race;
-        singleRace.addEventListener("click", () => createUrlFilterTail("race=" + race))
+        singleRace.addEventListener("click", () => createUrlFilterTail(prefixRace + race))
         allRaces.appendChild(singleRace);   
     });
 
@@ -199,7 +202,7 @@ function createFilters(){
         const singleGender = document.createElement("li");
         singleGender.setAttribute("class", "subitemNav");  
         singleGender.innerText = gender;
-        singleGender.addEventListener("click", () => createUrlFilterTail("gender=" + gender))
+        singleGender.addEventListener("click", () => createUrlFilterTail(prefixGen + gender))
         allGenders.appendChild(singleGender);   
     });
 
@@ -207,7 +210,7 @@ function createFilters(){
         const singleAffi = document.createElement("li");
         singleAffi.setAttribute("class", "subitemNav");
         singleAffi.innerText = affiliation;
-        singleAffi.addEventListener("click", () => createUrlFilterTail("affiliation=" + affiliation))
+        singleAffi.addEventListener("click", () => createUrlFilterTail(prefixAffi + affiliation))
         allAffi.appendChild(singleAffi);   
     });
 }
@@ -218,17 +221,31 @@ let urlTail = "";
 function createUrlFilterTail(singleFilter){
     filtersArray.push(singleFilter);
 
-    if (filtersArray.indexOf(singleFilter) != (filtersArray.length - 1)){
-            urlTail += singleFilter
-    }
-    else{
-        urlTail += saveFilters + "&";
-    }
+    filtersArray.forEach(filter => {
+        if (filter == filtersArray[0]){
+            urlTail = filter;
+        }
+        else {
+            urlTail += "&" + filter;
+        }
+    });
 
-    console.log(filtersArray);
-    console.log(urlTail);
+    showFilters();
+};
 
-    filterCharacters(urlTail)
+function showFilters(){
+    const filtersBox = document.getElementById("filtersBox");
+    filtersBox.innerHTML = "";
+
+    filtersArray.forEach(filter => {
+        const singleFilter = document.createElement("button");
+        singleFilter.setAttribute("class", "singlefilterBox");
+        singleFilter.innerText = filter
+        filtersBox.appendChild(singleFilter);
+    });
+
+    filtersBox.style.visibility = "visible";
+    filterCharacters(urlTail);
 }
 
 function filterCharacters(urlTail){
@@ -237,6 +254,10 @@ function filterCharacters(urlTail){
     .then((data) => {
         charactersGrid.innerHTML = "";
         upPage();
+
+        if (data.length == 0){
+            noResults();
+        }
         
         data.forEach(character => {
             createCharac(character);
@@ -244,6 +265,18 @@ function filterCharacters(urlTail){
 
         document.getElementById("paginationButtons").style.visibility = "collapse";
     });
+}
+
+function noResults(){
+    const noResults = document.createElement("p");
+    noResults.style.color = "white";
+    noResults.style.textAlign = "center";
+    noResults.innerText = "No se han encontrado resultados con esos filtros. Volviendo a la página principal...";
+    charactersGrid.appendChild(noResults);
+
+    setTimeout(() => {
+        location.reload();
+    }, 4000);
 }
 
 let characterDescript = document.createElement("section");
@@ -280,25 +313,7 @@ function showDescription(event){
 
 function hideDescription(){
     characterDescript.style.visibility = "hidden";
-}
-
-// function showPlanetDescription(event){ 
-
-            // let planetName = document.createElement("p");
-            // let planetDescription = document.createElement("p");
-            // let planetImage = document.createElement("img");
-            // planetImage.setAttribute("class", "imgplanet");
-
-            // chDescription.innerText = data.description
-            // planetName.innerText = data.originPlanet.name;
-            // planetDescription.innerText = data.originPlanet.description;
-            // planetImage.src = data.originPlanet.image;
-
-            // let planetInfo = document.createElement("section");
-            // planetInfo.setAttribute("class", "planetInfo")
-            // planetInfo.append(planetName, planetDescription, planetImage)
-// }
-    
+}   
 
 function upPage(){
     window.scrollTo({top:0, behavior:"smooth"});

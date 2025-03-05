@@ -31,6 +31,11 @@ header{
     align-self: center;
 }
 
+.linkPlanet{
+    text-decoration: none;
+    color: white;
+}
+
 .imgball{
     height: 40px;
     animation: fadeInDown 2s;
@@ -85,13 +90,20 @@ header{
     padding: 0.6rem;
 }
 
+#itemNavPlanet:hover {
+    background-color: rgb(115, 170, 233);
+
+    a{
+        color: black;
+    }
+}
+
 .itemNav:hover .ulNav {
     display: block;
     color: white;
 
     animation: flipInY 0.6s;;
     border: 2px solid rgb(54, 53, 53);
-
 }
 
 .ulNav {    
@@ -154,7 +166,7 @@ main {
     background-color: red;
 }
 
-.dbList{
+.dbList, .dbPlanetsList{
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
@@ -163,6 +175,7 @@ main {
     gap: 1rem;
     padding: 1rem;
 }
+
 
 .dbCharacter{
     width: fit-content;
@@ -325,14 +338,67 @@ p{
     box-shadow: 0px 0px 10px 0px orange;
 }
 
-.planetName{
+.characterPlanetName{
     text-align: center;
 
     color: orange;
 }
 
-.imgplanet{
+.characterPlanetImage{
     height: 80px;
+}
+
+.dbPlanet{
+    width: 48%;
+    min-width: 360px;
+    height: 400px;
+
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    text-align: center;
+
+    gap: 1rem;
+    padding: 1rem;
+
+    border: 2px solid orange;
+    border-radius: 0.6rem;
+    background-color: rgb(54, 53, 53);
+
+    animation: fadeInRight 1s;
+}
+
+.filtersBox{
+    width: 100%;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1rem;
+    padding: 0.6rem;
+
+    visibility: collapse;
+}
+
+.singlefilterBox{
+    text-align: center ;
+    font-weight: bolder;
+    color: black;
+
+    padding: 0.4rem;
+
+    background-color: rgb(182, 182, 182);    
+}
+
+.singlefilterBox:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    
+    background-color: red;
 }
 
 .pageButtons{
@@ -419,5 +485,3 @@ p{
         font-size: 0.8rem;
     }
 }
-
-
