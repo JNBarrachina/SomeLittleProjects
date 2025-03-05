@@ -36,28 +36,24 @@ async function createCharac(character) {
     const boxNameImg = document.createElement("section");
     boxNameImg.setAttribute("class", "boxnameimg");
 
-    const nameBox = document.createElement("section");
-    nameBox.setAttribute("class", "nameBox");
-    nameBox.setAttribute("id", `namebox${character.id}`);
-
     const iconDescription = document.createElement("img");
     iconDescription.setAttribute("class", "iconDescription");
     iconDescription.src = "descriptionicon.svg";
-    const charName = document.createElement("p");
+    const charName = document.createElement("button");
     charName.addEventListener("click", showDescription);
-    charName.addEventListener("mouseout", hideDescription);
     charName.setAttribute("id", character.id);
     charName.setAttribute("tabindex", "0");
+    charName.setAttribute("aria-label", "Descripción de " + character.name);
     charName.setAttribute("class", "characterName");
     charName.innerText = character.name;
 
-    nameBox.append(iconDescription, charName);
+    charName.append(iconDescription);
 
     const charImg = document.createElement("img");
     charImg.setAttribute("class", "imgCharacter");
     charImg.src = character.image;
     
-    boxNameImg.append(nameBox, charImg);
+    boxNameImg.append(charName, charImg);
 
     const moreInfo = document.createElement("section");
     moreInfo.setAttribute("class", "moreinfoBox");
@@ -193,7 +189,7 @@ function createFilters(){
 
     filterRace.forEach(race => {
         const singleRace = document.createElement("li");
-        singleRace.setAttribute("class", "subitemNav");
+        singleRace.setAttribute("class", "subitemNav"); 
         singleRace.innerText = race;
         singleRace.addEventListener("click", () => createUrlFilterTail("race=" + race))
         allRaces.appendChild(singleRace);   
@@ -201,7 +197,7 @@ function createFilters(){
 
     filterGen.forEach(gender => {
         const singleGender = document.createElement("li");
-        singleGender.setAttribute("class", "subitemNav");
+        singleGender.setAttribute("class", "subitemNav");  
         singleGender.innerText = gender;
         singleGender.addEventListener("click", () => createUrlFilterTail("gender=" + gender))
         allGenders.appendChild(singleGender);   
@@ -252,24 +248,40 @@ function filterCharacters(urlTail){
 
 let characterDescript = document.createElement("section");
 characterDescript.setAttribute("class", "characterDescriptionBox");
+characterDescript.addEventListener("click", hideDescription);
 
 function showDescription(event){ 
     const idDescription = event.target.id;
-    
-    characterDescript.innerHTML = "";
+
+    if (characterDescript.style.visibility == "visible"){
+        characterDescript.style.visibility = "hidden";
+    }
+    else{
+        characterDescript.innerHTML = "";
     
     fetch(API_URL + "/characters/" + idDescription)
         .then((response) => response.json())
         .then((data) => {
             let chDescription = document.createElement("p");
             chDescription.innerText = data.description;
-            characterDescript.append(chDescription);
+            let alerttoHide = document.createElement("p");
+            alerttoHide.setAttribute("class", "alerttoHide");
+            alerttoHide.innerText = "Click to hide";
+            chDescription.append(alerttoHide);
+            characterDescript.append(alerttoHide, chDescription);
         });
 
-    const inboxDescription = document.getElementById(`namebox${idDescription}`);
+    const inboxDescription = document.getElementById(idDescription);
     inboxDescription.append(characterDescript);
 
     characterDescript.style.visibility = "visible";
+    }
+    
+    
+}
+
+function hideDescription(){
+    characterDescript.style.visibility = "hidden";
 }
 
 // function showPlanetDescription(event){ 
@@ -289,9 +301,6 @@ function showDescription(event){
             // planetInfo.append(planetName, planetDescription, planetImage)
 // }
     
-function hideDescription(){
-    characterDescript.style.visibility = "hidden";
-}
 
 function upPage(){
     window.scrollTo({top:0, behavior:"smooth"});

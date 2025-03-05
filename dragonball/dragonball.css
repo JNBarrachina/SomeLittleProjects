@@ -132,7 +132,7 @@ main {
 
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: flex-start;
 
     padding: 1rem;
@@ -176,8 +176,8 @@ main {
     gap: 1rem;
     padding: 0.6rem;
 
-    border-radius: 1rem;
-    box-shadow: 0px 0px 10px 0px orange;    
+    border: 2px solid orange;
+    border-radius: 0.6rem;
     background-color: rgb(54, 53, 53);
 
     animation: fadeInRight 1s;
@@ -185,63 +185,64 @@ main {
 
 p{
     font-weight: bold;
-    color: orange
-}
-
-.iconDescription{
-    height: 1rem;
+    color: white;
 }
 
 .characterName{
     width: 100%;
-    
-    text-align: center;
-
-    color: black;
-}
-
-.nameBox{
-    width: 100%;
     position: relative;
+    z-index: 1;
+
+    text-align: center;
+    font-weight: bolder;
 
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
     align-items: center;
 
-    padding: 0.3rem;
     gap: 0.4rem;
+    cursor: pointer;
 
+    color: black;
     background-color: orange;
+    padding: 0.4rem;
+    border: 1px solid orange;
     border-radius: 1rem;
 }
 
-.nameBox:hover{
-    cursor: pointer;
-    padding: 0.4rem;
-    transition: 0.4s;
-    background-color: white;
-
-    .iconDescription{
-        transition: 0.4s;
-        transform: rotate(90deg);
-    }
+.iconDescription{
+    height: 1rem;
+    color: white;
 }
 
-.nameBox:active{
-    cursor: pointer;
+.characterName:hover, .characterName:focus{
     transition: 0.4s;
-    transform: scale(1.1);
+    transform: scale(1.05);
+
+    background-color: white;
+}
+
+.characterName:hover > .iconDescription, .characterName:focus > .iconDescription{
+    transition: 0.4s;
+    transform: rotate(90deg);
+}
+
+.characterName:active{
+    transform: scale(0.9);
 }
 
 .characterDescriptionBox{
+    box-sizing: border-box;
     position: absolute;
-    z-index: 1;
 
     top: -15px;
     left: 80px;
 
-    width: 240px;
+    width: 230px;
+    max-height: 230px;
+    overflow-y: auto;
+    scrollbar-color: orange black;
 
     font-size: 0.8rem;
     text-align: center;
@@ -251,6 +252,23 @@ p{
     background-color: black;
     border: 2px solid orange;
     border-radius: 1rem;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    gap: 0.6rem;
+}
+
+.alerttoHide{
+    width: 100%;
+
+    background-color: black;
+    color: white;
+    font-size: 0.6rem;
+
+    padding: 0.2rem;
 }
 
 .imgCharacter{
@@ -293,7 +311,7 @@ p{
     font-size: 0.8rem;
 
     background-color: black;
-    border: 2px lightcoral solid;
+    border: 2px grey solid;
     border-radius: 0.6rem;
 
     gap: 0.4rem;
@@ -310,7 +328,7 @@ p{
 .planetName{
     text-align: center;
 
-    color: orangered;
+    color: orange;
 }
 
 .imgplanet{
@@ -378,8 +396,6 @@ p{
         padding: 0.4rem;
         font-weight: bolder;
     }
-
-
 }
 
 @media only screen and (max-width: 600px) { 
