@@ -276,8 +276,6 @@ function showDescription(event){
 
     characterDescript.style.visibility = "visible";
     }
-    
-    
 }
 
 function hideDescription(){
