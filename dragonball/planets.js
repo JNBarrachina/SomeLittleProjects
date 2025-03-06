@@ -40,39 +40,50 @@ async function createPlanet(planet) {
     boxPlanet.style.backgroundImage = `url(${planetImg.src})`;
     boxPlanet.style.backgroundSize = "cover";
 
+    const planetNameDescription = document.createElement("section");
+    planetNameDescription.setAttribute("class", "planetNameDescription");
     const planetName = document.createElement("p");
     planetName.setAttribute("class", "planetName");
     planetName.innerText = planet.name;
-
     const planetDescription = document.createElement("p");
     planetDescription.setAttribute("class", "planetDescription");
     planetDescription.innerText = planet.description;
+    planetNameDescription.append(planetName, planetDescription);
 
     const charactersPlanet = document.createElement("section");
     charactersPlanet.setAttribute("class", "charactersPlanet");
 
-    // await planetOriginCharacters(planet, charactersPlanet); 
+    await planetOriginCharacters(planet, charactersPlanet); 
 
-    boxPlanet.append(planetName, planetDescription, charactersPlanet);
+    boxPlanet.append(planetNameDescription);
     planetsGrid.append(boxPlanet);
 }
 
 showPlanets();
 
-// function planetOriginCharacters(planet, charactersPlanet){
-//     return fetch("https://dragonball-api.com/api/characters")
-//         .then((response) => response.json())
-//         .then((data) => {
-//             let characterName = document.createElement("p");
-//             planetName.innerText = data.originPlanet.name;
-//             planetName.setAttribute("class", "characterPlanetName");
-//             let planetImage = document.createElement("img");
-//             planetImage.setAttribute("class", "characterPlanetImage");
-//             planetImage.src = data.originPlanet.image;
+function planetOriginCharacters(planet, charactersPlanet){
+    return fetch("https://dragonball-api.com/api/planets/" + planet.id)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+
+            // data.forEach((data) => {
+
+            //     let singleCharacterPlanet = document.createElement("article");
+            //     singleCharacterPlanet.setAttribute("class", "singleCharacterPlanet");
+
+            //     let characterName = document.createElement("p");
+            //     characterName.innerText = data.characters.name;
+            //     let characterImage = document.createElement("img");
+            //     characterImage.src = data.characters.image;
+                
+            //     singleCharacterPlanet.append(characterName, characterImage);
             
-//             planetInfo.append(planetName, planetImage);
-//         });
-// }
+            //     charactersPlanet.append(singleCharacterPlanet);
+            // });
+            
+        });
+}
 
 function toNextPage(){
     pages.current = pages.next;

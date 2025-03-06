@@ -68,7 +68,7 @@ async function createCharac(character) {
     charmaxKi.innerText = "maxKI: " + character.maxKi;
 
     let planetInfo = document.createElement("section");
-    planetInfo.setAttribute("class", "planetInfo");
+    planetInfo.setAttribute("class", "characterPlanetInfo");
 
     await characterOriginPlanet(character, planetInfo);
 
@@ -76,6 +76,8 @@ async function createCharac(character) {
     boxChar.append(boxNameImg, moreInfo);
     charactersGrid.append(boxChar);
 }
+
+const charactersGrid = document.getElementById("dbList");
 
 function characterOriginPlanet(character, planetInfo){
     return fetch("https://dragonball-api.com/api/characters/" + character.id)
@@ -93,8 +95,6 @@ function characterOriginPlanet(character, planetInfo){
 }
 
 
-const charactersGrid = document.getElementById("dbList");
-
 const searchInput = document.getElementById("inputDB");
 searchInput.addEventListener("input", searchCharacters);
 
@@ -102,6 +102,7 @@ const nextPageButton = document.getElementById("nextB")
 nextPageButton.addEventListener("click", toNextPage);
 const prevPageButton = document.getElementById("prevB")
 prevPageButton.addEventListener("click", toPrevPage);
+const paginationButtonsVisibility = document.getElementById("paginationButtons").style;
 
 function toNextPage(){
     pages.current = pages.next;
@@ -116,6 +117,8 @@ function toPrevPage(){
 }
 
 function disablePageButtons(){
+    paginationButtonsVisibility.visibility = "visible";
+
     if (pages.prev == ""){
         prevPageButton.setAttribute("disabled", true);
     }
@@ -149,7 +152,7 @@ function searchCharacters(){
         });
         });
 
-        document.getElementById("paginationButtons").style.visibility = "collapse";
+        paginationButtonsVisibility.visibility = "collapse";
     }
 }
 
@@ -194,7 +197,7 @@ function createFilters(){
         const singleRace = document.createElement("li");
         singleRace.setAttribute("class", "subitemNav"); 
         singleRace.innerText = race;
-        singleRace.addEventListener("click", () => createUrlFilterTail(prefixRace + race))
+        singleRace.addEventListener("click", () => checkFilters(prefixRace, race))
         allRaces.appendChild(singleRace);   
     });
 
@@ -202,7 +205,7 @@ function createFilters(){
         const singleGender = document.createElement("li");
         singleGender.setAttribute("class", "subitemNav");  
         singleGender.innerText = gender;
-        singleGender.addEventListener("click", () => createUrlFilterTail(prefixGen + gender))
+        singleGender.addEventListener("click", () => checkFilters(prefixGen, gender))
         allGenders.appendChild(singleGender);   
     });
 
@@ -210,43 +213,86 @@ function createFilters(){
         const singleAffi = document.createElement("li");
         singleAffi.setAttribute("class", "subitemNav");
         singleAffi.innerText = affiliation;
-        singleAffi.addEventListener("click", () => createUrlFilterTail(prefixAffi + affiliation))
+        singleAffi.addEventListener("click", () => checkFilters(prefixAffi, affiliation))
         allAffi.appendChild(singleAffi);   
     });
 }
 
 let filtersArray = [];
 let urlTail = "";
+const filtersBox = document.getElementById("filtersBox");
+const alertBox = document.getElementById("filterAlertBox");
+const alertFilters = document.createElement("p");
+alertFilters.setAttribute("class", "filtersAlert")
+alertBox.appendChild(alertFilters);
 
-function createUrlFilterTail(singleFilter){
-    filtersArray.push(singleFilter);
+function checkFilters(prefix, singleFilter){
+    if (filtersArray.length == 0){
+        addNewFilter(prefix, singleFilter);
+    }
+    else{
+        if (filtersArray.some(activeFilter => activeFilter.includes(prefix))){
+            alertFilters.innerText = "Ya has usado ese tipo de filtro";
+        }
+        else{
+            alertFilters.innerText = "";
+            addNewFilter(prefix, singleFilter);
+        }
+    };
+}
 
-    filtersArray.forEach(filter => {
-        if (filter == filtersArray[0]){
-            urlTail = filter;
+function addNewFilter(prefix, singleFilter){
+    const newfilter = prefix + singleFilter;
+    filtersArray.push(newfilter);
+
+    
+    createUrlTail();
+}
+
+function createUrlTail(){
+    filtersArray.forEach(activeFilter => {
+        if (activeFilter == filtersArray[0]){
+            urlTail = activeFilter;
         }
         else {
-            urlTail += "&" + filter;
+            urlTail += "&" + activeFilter;
         }
     });
 
     showFilters();
-};
+}
+
+function removeFilter(removedFilter){
+
+    const filterIndex = filtersArray.findIndex(filter => filter.includes(removedFilter));
+    filtersArray.splice(filterIndex, 1);
+
+
+    if (filtersArray.length == 0){
+        filtersBox.innerHTML = "";
+        showCharacters();
+    }
+    else{
+        createUrlTail();
+    }
+}
+
 
 function showFilters(){
-    const filtersBox = document.getElementById("filtersBox");
     filtersBox.innerHTML = "";
 
     filtersArray.forEach(filter => {
         const singleFilter = document.createElement("button");
         singleFilter.setAttribute("class", "singlefilterBox");
-        singleFilter.innerText = filter
+        singleFilter.addEventListener("click", () => removeFilter(filter));
+        singleFilter.innerText = filter.split("=")[1];
         filtersBox.appendChild(singleFilter);
     });
 
     filtersBox.style.visibility = "visible";
     filterCharacters(urlTail);
 }
+
 
 function filterCharacters(urlTail){
     fetch(API_URL + "/characters?" + urlTail)
@@ -263,7 +309,7 @@ function filterCharacters(urlTail){
             createCharac(character);
         });
 
-        document.getElementById("paginationButtons").style.visibility = "collapse";
+        paginationButtonsVisibility.visibility = "collapse";
     });
 }
 
@@ -276,7 +322,7 @@ function noResults(){
 
     setTimeout(() => {
         location.reload();
-    }, 4000);
+    }, 3000);
 }
 
 let characterDescript = document.createElement("section");
