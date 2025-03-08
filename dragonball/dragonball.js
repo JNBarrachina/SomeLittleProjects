@@ -19,6 +19,7 @@ function showCharacters(){
         upPage();
 
         charactersGrid.innerHTML = "";
+        planetsGrid.innerHTML = "";
         data.items.forEach(character => {
             createCharac(character);
         });
@@ -43,7 +44,7 @@ async function createCharac(character) {
     charName.addEventListener("click", showDescription);
     charName.setAttribute("id", character.id);
     charName.setAttribute("tabindex", "0");
-    charName.setAttribute("aria-label", "Descripción de " + character.name);
+    charName.setAttribute("aria-label", `Descripción de ${character.name}`);
     charName.setAttribute("class", "characterName");
     charName.innerText = character.name;
 
@@ -51,6 +52,7 @@ async function createCharac(character) {
 
     const charImg = document.createElement("img");
     charImg.setAttribute("class", "imgCharacter");
+    charImg.setAttribute("alt", `Imagen de ${character.name}`)
     charImg.src = character.image;
     
     boxNameImg.append(charName, charImg);
@@ -145,6 +147,8 @@ function searchCharacters(){
         .then((response) => response.json())
         .then((data) => {
             charactersGrid.innerHTML = "";
+            planetsGrid.innerHTML = "";
+            
             upPage();
             
             data.forEach(character => {
@@ -221,21 +225,20 @@ function createFilters(){
 let filtersArray = [];
 let urlTail = "";
 const filtersBox = document.getElementById("filtersBox");
-const alertBox = document.getElementById("filterAlertBox");
-const alertFilters = document.createElement("p");
-alertFilters.setAttribute("class", "filtersAlert")
-alertBox.appendChild(alertFilters);
 
 function checkFilters(prefix, singleFilter){
     if (filtersArray.length == 0){
+        planetsGrid.innerHTML = "";
         addNewFilter(prefix, singleFilter);
     }
     else{
         if (filtersArray.some(activeFilter => activeFilter.includes(prefix))){
-            alertFilters.innerText = "Ya has usado ese tipo de filtro";
+            const updateFilter = filtersArray.findIndex(activeFilter => activeFilter.includes(prefix));
+            filtersArray[updateFilter] = prefix + singleFilter;
+
+            createUrlTail();
         }
         else{
-            alertFilters.innerText = "";
             addNewFilter(prefix, singleFilter);
         }
     };
@@ -245,7 +248,6 @@ function addNewFilter(prefix, singleFilter){
     const newfilter = prefix + singleFilter;
     filtersArray.push(newfilter);
 
-    
     createUrlTail();
 }
 
@@ -267,7 +269,6 @@ function removeFilter(removedFilter){
     const filterIndex = filtersArray.findIndex(filter => filter.includes(removedFilter));
     filtersArray.splice(filterIndex, 1);
 
-
     if (filtersArray.length == 0){
         filtersBox.innerHTML = "";
         showCharacters();
@@ -285,7 +286,7 @@ function showFilters(){
         const singleFilter = document.createElement("button");
         singleFilter.setAttribute("class", "singlefilterBox");
         singleFilter.addEventListener("click", () => removeFilter(filter));
-        singleFilter.innerText = filter.split("=")[1];
+        singleFilter.innerHTML = `<p> ${filter.split("=")[1]}</p> <img src="iconclose.svg" class="closefilterIcon">`;
         filtersBox.appendChild(singleFilter);
     });
 
@@ -315,14 +316,11 @@ function filterCharacters(urlTail){
 
 function noResults(){
     const noResults = document.createElement("p");
-    noResults.style.color = "white";
     noResults.style.textAlign = "center";
-    noResults.innerText = "No se han encontrado resultados con esos filtros. Volviendo a la página principal...";
+    noResults.style.color = "white";
+    noResults.style.fontWeight = "bolder";
+    noResults.innerText = "No se han encontrado resultados.";
     charactersGrid.appendChild(noResults);
-
-    setTimeout(() => {
-        location.reload();
-    }, 3000);
 }
 
 let characterDescript = document.createElement("section");
@@ -363,4 +361,57 @@ function hideDescription(){
 
 function upPage(){
     window.scrollTo({top:0, behavior:"smooth"});
+}
+
+const linkPlanets = document.getElementById("itemNavPlanet");
+linkPlanets.addEventListener("click", showPlanets);
+const planetsGrid = document.getElementById("dbPlanetsList");
+
+function showPlanets(){
+    fetch(`${API_URL}/planets?limit=20`)
+    .then((response) => response.json())
+    .then((data) => {
+
+        upPage();
+
+        paginationButtonsVisibility.visibility = "collapse";
+        charactersGrid.innerHTML = "";
+        planetsGrid.innerHTML = "";
+
+        data.items.forEach(planet => {
+            createPlanet(planet);
+        });
+    })
+
+    .catch((error) => {
+        console.error("Error en la solicitud:", error);
+    });
+}
+
+
+function createPlanet(planet) {
+    const boxPlanet = document.createElement("article");
+    boxPlanet.setAttribute("class", "dbPlanet");
+
+    const planetImg = document.createElement("img");
+    planetImg.setAttribute("class", "imgBackgroundPlanet");
+    planetImg.src = planet.image;
+    boxPlanet.style.backgroundImage = `url(${planetImg.src})`;
+    boxPlanet.style.backgroundSize = "cover";
+
+    const planetNameDescription = document.createElement("section");
+    planetNameDescription.setAttribute("class", "planetNameDescription");
+    const planetName = document.createElement("p");
+    planetName.setAttribute("class", "planetName");
+    planetName.innerText = planet.name;
+    const planetDescription = document.createElement("p");
+    planetDescription.setAttribute("class", "planetDescription");
+    planetDescription.innerText = planet.description;
+    planetNameDescription.append(planetName, planetDescription);
+
+    const charactersPlanet = document.createElement("section");
+    charactersPlanet.setAttribute("class", "charactersPlanet");
+
+    boxPlanet.append(planetNameDescription);
+    planetsGrid.append(boxPlanet);
 }
