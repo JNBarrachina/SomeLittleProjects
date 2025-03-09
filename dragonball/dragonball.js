@@ -31,6 +31,7 @@ function showCharacters(){
 }
 
 async function createCharac(character) {
+
     const boxChar = document.createElement("article");
     boxChar.setAttribute("class", "dbCharacter");
 
@@ -68,31 +69,40 @@ async function createCharac(character) {
     charKi.innerText = "KI: " + character.ki;
     const charmaxKi = document.createElement("p");
     charmaxKi.innerText = "maxKI: " + character.maxKi;
+    let planetName = document.createElement("p");
+    planetName.setAttribute("class", "characterPlanetName");
 
-    let planetInfo = document.createElement("section");
-    planetInfo.setAttribute("class", "characterPlanetInfo");
+    let characterTransforms = document.createElement("section");
+    characterTransforms.setAttribute("class", "charactersTransBox");
 
-    await characterOriginPlanet(character, planetInfo);
+    await characterPlanetTransforms(character, planetName, characterTransforms);
 
-    moreInfo.append(charRace, charAffiliation, charKi, charmaxKi, planetInfo);
+    moreInfo.append(charRace, charAffiliation, charKi, charmaxKi, planetName, characterTransforms);
+
     boxChar.append(boxNameImg, moreInfo);
     charactersGrid.append(boxChar);
 }
 
 const charactersGrid = document.getElementById("dbList");
 
-function characterOriginPlanet(character, planetInfo){
+function characterPlanetTransforms(character, planetName, characterTransforms){
     return fetch("https://dragonball-api.com/api/characters/" + character.id)
         .then((response) => response.json())
         .then((data) => {
-            let planetName = document.createElement("p");
-            planetName.innerText = data.originPlanet.name;
-            planetName.setAttribute("class", "characterPlanetName");
-            let planetImage = document.createElement("img");
-            planetImage.setAttribute("class", "characterPlanetImage");
-            planetImage.src = data.originPlanet.image;
+            planetName.innerText = `Origen: ${data.originPlanet.name}`;
+            planetName.style.textAlign = "end";
             
-            planetInfo.append(planetName, planetImage);
+            if (data.transformations.length == 0){
+                const noTransforms = document.createElement("p");
+                noTransforms.innerText = "Sin transformaciones"
+                characterTransforms.append(noTransforms);
+            }
+            else{
+                data.transformations.forEach(transform => {
+                    const singleTransform = document.createElement("img");
+                    singleTransform.setAttribute("class", "singleTransform");
+                });
+            }
         });
 }
 
@@ -228,7 +238,6 @@ const filtersBox = document.getElementById("filtersBox");
 
 function checkFilters(prefix, singleFilter){
     if (filtersArray.length == 0){
-        planetsGrid.innerHTML = "";
         addNewFilter(prefix, singleFilter);
     }
     else{
@@ -265,7 +274,6 @@ function createUrlTail(){
 }
 
 function removeFilter(removedFilter){
-
     const filterIndex = filtersArray.findIndex(filter => filter.includes(removedFilter));
     filtersArray.splice(filterIndex, 1);
 
@@ -299,6 +307,7 @@ function filterCharacters(urlTail){
     fetch(API_URL + "/characters?" + urlTail)
     .then((response) => response.json())
     .then((data) => {
+        planetsGrid.innerHTML = "";
         charactersGrid.innerHTML = "";
         upPage();
 
@@ -381,6 +390,8 @@ function showPlanets(){
         data.items.forEach(planet => {
             createPlanet(planet);
         });
+
+        filtersBox.style.visibility = "collapse";
     })
 
     .catch((error) => {
