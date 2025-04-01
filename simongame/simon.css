@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+main{
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1rem;
+}
+
+h1{
+    text-align: center;
+}
+
+.simonBoard{
+    width: 500px;
+    height: 500px;
+
+    display: flex;
+    flex-flow: row wrap;
+    
+    border: 6px solid black;
+    border-top-left-radius: 250px;
+    border-top-right-radius: 250px;
+    border-bottom-left-radius: 250px;
+    border-bottom-right-radius: 250px;
+}
+
+.boardColor{
+    width: 50%;
+
+    border: 3px solid black;
+}
+
+.boardColor:hover{
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.boardColor:active{
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.disabledColor{
+    pointer-events: none;
+}
+
+.greenColor{
+    background-color: green;
+    border-top-left-radius: 250px;
+
+}
+
+.redColor{
+    background-color: red;
+    border-top-right-radius: 250px;
+
+}
+
+.yellowColor{
+    background-color: yellow;
+    border-bottom-left-radius: 250px;
+}
+
+.blueColor{
+    background-color: rgb(35, 117, 188);
+    border-bottom-right-radius: 250px;
+}
+
+.showColor{
+    opacity: 0.4;
+}
+
+.initGame{
+    padding: 0.4rem;
+    background-color: orange;
+    font-weight: bolder;
+}
+
+.initGame:hover{
+    background-color: black;
+    color: white;
+}
+
+.readyInfo{
+    display: none;
+}
+
+.lvlInfo{
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
