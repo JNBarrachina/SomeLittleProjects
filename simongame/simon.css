@@ -94,6 +94,19 @@ h1{
     display: none;
 }
 
+.gameInfo{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    gap: 1rem;
+}
+
+.nameBox{
+    padding: 0.4rem;
+}
+
 .lvlInfo{
     font-size: 1.2rem;
     font-weight: bolder;
