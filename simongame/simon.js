@@ -6,7 +6,6 @@ const yellow = document.getElementById("btnyellow");
 yellow.addEventListener("click",  () => playerTurn(yellow.id));
 const blue = document.getElementById("btnblue");
 blue.addEventListener("click",  () => playerTurn(blue.id));
-
 const boardColors = document.getElementsByClassName("boardColor");
 
 const initGame = document.getElementById("initBtn");
@@ -24,9 +23,8 @@ let playerSequence = [];
 let lvl = 1;
 
 function createSequence(){
-    console.log(lvl);
     enableColorBtns();
-    lvlInfo.style.color = "black";
+    lvlInfo.style.color = "white";
     lvlInfo.innerText = `Nivel ${lvl} (${playerName})`;
 
     for (i=0; i<lvl; i++){
@@ -39,6 +37,7 @@ function createSequence(){
 }
 
 let showColor = 0;
+
 async function showSequence(){
     await showSingleColor(showColor)
     showColor++
@@ -147,17 +146,21 @@ function saveScore(){
 }
 
 function buildChart(){
-    boxScores.innerHTML = "<canvas id='miGrafico'></canvas>";
+    boxScores.innerHTML = " <canvas id='miGrafico'></canvas>";
     const ctx = document.getElementById('miGrafico').getContext('2d');
 
-    const playerScoreChart = JSON.parse(localStorage.getItem(playerName));
-    console.log(playerScoreChart);
+    const playerScoring = JSON.parse(localStorage.getItem(playerName));
+    const playerNumGames = [];
+    let numGame = 1;
+    playerScoring.forEach(playerScore => {
+        playerNumGames.push(`Partida ${numGame++}`);
+    });
 
     const datos = {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
+        labels: playerNumGames,
         datasets: [{
-            label: 'Ventas',
-            data: [65, 59, 80, 81, 56, 55, 40],
+            label: `Puntuación de ${playerName}`,
+            data: playerScoring,
             backgroundColor: 'green',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
@@ -180,6 +183,33 @@ function buildChart(){
             }
         }
     });
+
+    buildHighScoreList();
+}
+
+function buildHighScoreList(){
+    const scoreList = document.createElement("ol");
+    scoreList.classList.add("scoreList");
+    
+    const playerNames = Object.keys(localStorage);
+    const playerScores = Object.values(localStorage);
+    const scoreBoard = [];
+
+    for (i=0; i<playerNames.length; i++){
+        const playerHighScore = {};
+
+        playerHighScore.name = playerNames[i];
+        
+        let playerScore = playerScores[i];
+        console.log(Math.max(...playerScore));
+        playerHighScore.score = maxScore;
+
+        scoreBoard.push(playerHighScore);
+    }
+
+    console.log(scoreBoard);
+
+    boxScores.appendChild(scoreList);
 }
 
 disableColorBtns();

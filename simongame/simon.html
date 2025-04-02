@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SimonGame</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="simon.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
@@ -19,13 +20,13 @@
             <section class="boardColor blueColor" id="btnblue"></section>
             <p class="readyInfo" id="readyText"></p>
         </article>
-        <article class="scoreChart" id="scoreBox">
-        </article>
         <section class="gameInfo">
             <input type="text" name="" class="nameBox" id="inputName" placeholder="Introduce tu nombnre">
             <button class="initGame" id="initBtn">Iniciar partida</button>
             <p class="lvlInfo" id="lvlText"></p>
         </section>
+        <article class="scoreBox" id="scoreBox">
+        </article>
     </main>
     <script src="simon.js"></script>
 </body>
